@@ -73,7 +73,18 @@ services:
             #    - "./config/kibana.yml:/usr/share/kibana/config/kibana.yml"
     networks: 
       - stack
+    depends_on: ['elasticsearch']  
+
+
+  logstash:
+    image: logstash:7.3.0
+    container_name: logstash
+    volumes:
+      - ./config/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+    networks: 
+      - stack
     depends_on: ['elasticsearch']
+    ports: ['4560:4560']
     
  # rocket mq name server
   rmqnamesrv:
