@@ -38,25 +38,25 @@ services:
 
   buyer-ui:
     restart: always
-    image: registry.cn-beijing.aliyuncs.com/lili-images/buyer-ui-4.2.0:0.0.1
+    image: registry.cn-beijing.aliyuncs.com/lili-images/buyer-ui-4.2.0:0.0.2
     container_name: buyer-ui
     network_mode: host
       
   wap-ui:
     restart: always
-    image: registry.cn-beijing.aliyuncs.com/lili-images/wap-ui-4.2.0:0.0.1
+    image: registry.cn-beijing.aliyuncs.com/lili-images/wap-ui-4.2.0:0.0.2
     container_name: wap-ui
     network_mode: host
 
   seller-ui:
     restart: always
-    image: registry.cn-beijing.aliyuncs.com/lili-images/seller-ui-4.2.0:0.0.1
+    image: registry.cn-beijing.aliyuncs.com/lili-images/seller-ui-4.2.0:0.0.2
     container_name: seller-ui
     network_mode: host
 
   manager-ui:
     restart: always
-    image: registry.cn-beijing.aliyuncs.com/lili-images/manager-ui-4.2.0:0.0.1
+    image: registry.cn-beijing.aliyuncs.com/lili-images/manager-ui-4.2.0:0.0.2
     container_name: manager-ui
     network_mode: host
 
