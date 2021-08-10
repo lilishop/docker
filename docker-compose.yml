@@ -90,6 +90,7 @@ services:
   rmqnamesrv:
     image: foxiswho/rocketmq:server
     container_name: rocket-server
+    network_mode: host
     environment:
       JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
     ports:
@@ -102,6 +103,7 @@ services:
   rmqbroker:
     image: foxiswho/rocketmq:broker
     container_name: rocket-broker
+    network_mode: host
     ports:
       - 10909:10909
       - 10911:10911
@@ -120,6 +122,7 @@ services:
   rmqconsole:
     image: styletang/rocketmq-console-ng
     container_name: rocket-console
+    network_mode: host
     ports:
       - 8180:8180
     environment:
