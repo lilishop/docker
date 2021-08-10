@@ -1,8 +1,8 @@
 version: '3'
 services: 
   mysql:
-    restart: always
     image: mysql
+    restart: always
     container_name: mysql
     volumes:
       - ../volumes/data/mysqldata:/var/lib/mysql
@@ -38,8 +38,9 @@ services:
     command: redis-server --port 6379 --requirepass lilishop --appendonly yes
 
   elasticsearch:
-    container_name: elasticsearch
     image: elasticsearch:7.3.0
+    restart: always
+    container_name: elasticsearch
     volumes:
       - ../volumes/data/es7/logs:/usr/share/es7/logs:rw
       - ../volumes/data/es7/data:/usr/share/es7/data:rw
@@ -65,6 +66,7 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.3.0
+    restart: always
     container_name: kibana
     ports:
       - 5601:5601
@@ -77,6 +79,7 @@ services:
 
   logstash:
     image: logstash:7.3.0
+    restart: always
     container_name: logstash
     volumes:
       - ./config/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
@@ -89,51 +92,56 @@ services:
  # rocket mq name server
   rmqnamesrv:
     image: foxiswho/rocketmq:server
+    restart: always
     container_name: rocket-server
-    network_mode: host
     environment:
       JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
-    ports:
-      - 9876:9876
     volumes:
       - ../volumes/data/rocket/server/logs:/opt/logs
       - ../volumes/data/rocket/server/store:/opt/rmqstore
-
+    networks:
+      - rocketmq
+    ports:
+      - 9876:9876
   # rocket mq broker
   rmqbroker:
     image: foxiswho/rocketmq:broker
+    restart: always
     container_name: rocket-broker
-    network_mode: host
-    ports:
-      - 10909:10909
-      - 10911:10911
     volumes:
       - ../volumes/data/rocket/broker/logs:/opt/logs
       - ../volumes/data/rocket/broker/store:/opt/rmqstore
       - ./config/broker.conf:/etc/rocketmq/broker.conf
     environment:
-      - NAMESRV_ADDR=localhost:9876
+      - NAMESRV_ADDR=rmqnamesrv:9876
       - JAVA_OPTS:=-Duser.home=/opt
       - JAVA_OPT_EXT=-server -Xms64m -Xmx64m -Xmn64m
     command: mqbroker -c /etc/rocketmq/broker.conf
     depends_on:
       - rmqnamesrv
+    networks:
+      - rocketmq
+    ports:
+      - 10909:10909
+      - 10911:10911
   # rocket console 这个可以不需要
   rmqconsole:
     image: styletang/rocketmq-console-ng
+    restart: always
     container_name: rocket-console
-    network_mode: host
-    ports:
-      - 8180:8180
     environment:
-      - JAVA_OPTS=-Drocketmq.config.namesrvAddr=localhost:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
+      - JAVA_OPTS=-Drocketmq.config.namesrvAddr=rmqnamesrv:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
       - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
     depends_on:
       - rmqnamesrv
-
+    networks:
+      - rocketmq
+    ports:
+      - 8180:8180
   # xxl-job 分布式调度中心
-  rmqconsole:
+  xxl-job:
     image: xuxueli/xxl-job-admin:2.3.0
+    restart: always
     container_name: xxl-job
     network_mode: host
     environment:
@@ -143,5 +151,8 @@ services:
     volumes:
       - ../volumes/data/xxl-job:/data/applogs
 networks: 
+  rocketmq:
+    driver: bridge
   stack:
     driver: bridge
+
