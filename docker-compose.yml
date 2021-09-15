@@ -1,7 +1,7 @@
 version: '3'
 services: 
   mysql:
-    image: mysql
+    image: mysql:8.0.25
     restart: always
     container_name: mysql
     volumes:
@@ -14,9 +14,9 @@ services:
       - "MYSQL_DATABASE=lilishop"
       - "TZ=Asia/Shanghai"
     network_mode: host
-      
+
   mongo:
-    image: mongo
+    image: mongo:5.0.2
     restart: always
     container_name: 'mongo'
     environment:
@@ -28,7 +28,7 @@ services:
       - ../volumes/data/mongodata:/data/db
 
   redis:
-    image: redis
+    image: redis:6.2.5
     restart: always
     container_name: 'redis'
     ports:
@@ -91,7 +91,7 @@ services:
     
  # rocket mq name server
   rmqnamesrv:
-    image: foxiswho/rocketmq:server
+    image: foxiswho/rocketmq:server-4.7.0
     restart: always
     container_name: rocket-server
     environment:
@@ -105,7 +105,7 @@ services:
       - 9876:9876
   # rocket mq broker
   rmqbroker:
-    image: foxiswho/rocketmq:broker
+    image: foxiswho/rocketmq:broker-4.7.0
     restart: always
     container_name: rocket-broker
     volumes:
@@ -126,7 +126,7 @@ services:
       - 10911:10911
   # rocket console 这个可以不需要
   rmqconsole:
-    image: styletang/rocketmq-console-ng
+    image: styletang/rocketmq-console-ng:latest
     restart: always
     container_name: rocket-console
     environment:
