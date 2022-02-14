@@ -15,18 +15,6 @@ services:
       - "TZ=Asia/Shanghai"
     network_mode: host
 
-  mongo:
-    image: mongo:5.0.2
-    restart: always
-    container_name: 'mongo'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: lilishop
-    ports:
-      - 27017:27017
-    volumes: 
-      - ../volumes/data/mongodata:/data/db
-
   redis:
     image: redis:6.2.5
     restart: always
