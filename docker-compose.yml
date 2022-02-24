@@ -71,6 +71,7 @@ services:
     container_name: logstash
     volumes:
       - ./config/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+      - ./config/lili_goods.json:/usr/share/logstash/templates/lili_goods.json
     networks: 
       - stack
     depends_on: ['elasticsearch']
