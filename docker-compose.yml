@@ -13,7 +13,8 @@ services:
       - "MYSQL_ROOT_PASSWORD=lilishop"
       - "MYSQL_DATABASE=lilishop"
       - "TZ=Asia/Shanghai"
-    network_mode: host
+    ports:
+      - 3306:3306
 
   redis:
     image: redis:6.2.5
@@ -34,7 +35,6 @@ services:
       - ../volumes/data/es7/data:/usr/share/es7/data:rw
       - ./config/ik:/usr/share/elasticsearch/plugins/ik
         #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
-    restart: on-failure
     ports: 
       - "9200:9200"
       - "9300:9300"
@@ -139,6 +139,8 @@ services:
       - mysql
     volumes:
       - ../volumes/data/xxl-job:/data/applogs
+    ports:
+      - 9001:9001
 networks: 
   rocketmq:
     driver: bridge
