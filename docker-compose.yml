@@ -41,6 +41,7 @@ services:
     environment:
       cluster.name: elasticsearch
       discovery.type: single-node
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
     logging:
       driver: "json-file"
       options:
