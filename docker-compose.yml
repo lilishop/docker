@@ -31,8 +31,8 @@ services:
     restart: always
     container_name: elasticsearch
     volumes:
-      - ../volumes/data/es7/logs:/usr/share/es7/logs:rw
-      - ../volumes/data/es7/data:/usr/share/es7/data:rw
+      - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
+      - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
       - ./config/ik:/usr/share/elasticsearch/plugins/ik
         #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
     ports: 
