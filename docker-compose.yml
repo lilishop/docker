@@ -32,8 +32,8 @@ services:
     container_name: elasticsearch
     volumes:
       # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
-      - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
-      - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
+      # - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
+      # - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
       - ./config/ik:/usr/share/elasticsearch/plugins/ik
         #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
     ports: 
