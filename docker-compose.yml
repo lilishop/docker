@@ -1,12 +1,12 @@
 version: '3'
 services: 
   mysql:
-    image: mysql:8.0.25
+    image: mysql:8.0.28
     restart: always
     container_name: mysql
     volumes:
       - ../volumes/data/mysqldata:/var/lib/mysql
-      - ./config/my.cnf:/etc/my.cnf
+      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
       #      数据库还原目录 可将需要还原的sql文件放在这里
       - ./init/mysql:/docker-entrypoint-initdb.d
     environment:
