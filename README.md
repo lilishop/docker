@@ -275,3 +275,8 @@ PS:单独部署的话，数据库文件访问这里：https://gitee.com/beijing_
 
 **QQ群**：961316482
 
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
