@@ -1,7 +1,7 @@
 version: '3'
 services: 
   mysql:
-    image: mysql:8.0.28
+    image: mysql:8.0.30
     restart: always
     container_name: mysql
     volumes:
@@ -17,17 +17,17 @@ services:
       - 3306:3306
 
   redis:
-    image: redis:6.2.5
+    image: redis:7.0.4
     restart: always
     container_name: 'redis'
     ports:
       - 6379:6379
     volumes: 
       - ../volumes/data/redsidata:/data
-    command: redis-server --port 6379 --requirepass lilishop --appendonly yes
+    command: redis-server --port 6379 --requirepass lilishop --appendonly yes --protected-mode no
 
   elasticsearch:
-    image: elasticsearch:7.3.0
+    image: elasticsearch:7.17.6
     restart: always
     container_name: elasticsearch
     volumes:
@@ -35,14 +35,14 @@ services:
       # - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
       # - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
       - ./config/ik:/usr/share/elasticsearch/plugins/ik
-        #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+      #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
     ports: 
       - "9200:9200"
       - "9300:9300"
     environment:
-      cluster.name: elasticsearch
-      discovery.type: single-node
-      ES_JAVA_OPTS: -Xms256m -Xmx256m
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     logging:
       driver: "json-file"
       options:
@@ -55,7 +55,7 @@ services:
           hard: 65535
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.3.0
+    image: docker.elastic.co/kibana/kibana:7.17.6
     restart: always
     container_name: kibana
     ports:
@@ -68,7 +68,7 @@ services:
 
 
   logstash:
-    image: logstash:7.3.0
+    image: logstash:7.17.6
     restart: always
     container_name: logstash
     volumes:
@@ -81,32 +81,31 @@ services:
     
  # rocket mq name server
   rmqnamesrv:
-    image: foxiswho/rocketmq:server-4.7.0
+    image: apache/rocketmq:4.9.4
     restart: always
     container_name: rocket-server
-    environment:
-      JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
+    # environment:
+    #   JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
     volumes:
-      - ../volumes/data/rocket/server/logs:/opt/logs
-      - ../volumes/data/rocket/server/store:/opt/rmqstore
+      - ../volumes/data/rocket/server/logs:/home/rocketmq/logs
     networks:
       - rocketmq
     ports:
       - 9876:9876
+    command: sh mqnamesrv
   # rocket mq broker
   rmqbroker:
-    image: foxiswho/rocketmq:broker-4.7.0
+    image: apache/rocketmq:4.9.4
     restart: always
     container_name: rocket-broker
     volumes:
-      - ../volumes/data/rocket/broker/logs:/opt/logs
-      - ../volumes/data/rocket/broker/store:/opt/rmqstore
-      - ./config/broker.conf:/etc/rocketmq/broker.conf
+      - ../volumes/data/rocket/broker/logs:/home/rocketmq/logs
+      - ../volumes/data/rocket/broker/store:/home/rocketmq/store
+      - ./config/broker.conf:/opt/rocketmq-4.9.4/conf/broker.conf
     environment:
       - NAMESRV_ADDR=rmqnamesrv:9876
-      - JAVA_OPTS:=-Duser.home=/opt
+      # - JAVA_OPTS:=-Duser.home=/opt
       - JAVA_OPT_EXT=-server -Xms64m -Xmx64m -Xmn64m
-    command: mqbroker -c /etc/rocketmq/broker.conf
     depends_on:
       - rmqnamesrv
     networks:
@@ -114,14 +113,15 @@ services:
     ports:
       - 10909:10909
       - 10911:10911
+    command: sh mqbroker -c /opt/rocketmq-4.9.4/conf/broker.conf
   # rocket console 这个可以不需要
-  rmqconsole:
-    image: styletang/rocketmq-console-ng:latest
+  rmqdashboard:
+    image: apacherocketmq/rocketmq-dashboard:1.0.0
     restart: always
-    container_name: rocket-console
+    container_name: rocket-dashboard
     environment:
       - JAVA_OPTS=-Drocketmq.config.namesrvAddr=rmqnamesrv:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
-      - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
+      # - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
     depends_on:
       - rmqnamesrv
     networks:
@@ -133,9 +133,8 @@ services:
     image: xuxueli/xxl-job-admin:2.3.0
     restart: always
     container_name: xxl-job
-    network_mode: host
     environment:
-      - PARAMS=--spring.datasource.url=jdbc:mysql://127.0.0.1:3306/lilishop?Unicode=true&characterEncoding=UTF-8  --spring.datasource.username=root --spring.datasource.password=lilishop --server.port=9001
+      - PARAMS=--spring.datasource.url=jdbc:mysql://mysql:3306/lilishop?Unicode=true&characterEncoding=UTF-8  --spring.datasource.username=root --spring.datasource.password=lilishop --server.port=9001
     depends_on:
       - mysql
     volumes:
