@@ -27,7 +27,7 @@ services:
     command: redis-server --port 6379 --requirepass lilishop --appendonly yes --protected-mode no
 
   elasticsearch:
-    image: elasticsearch:7.17.6
+    image: elasticsearch:7.17.9
     restart: always
     container_name: elasticsearch
     volumes:
@@ -55,7 +55,7 @@ services:
           hard: 65535
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.6
+    image: docker.elastic.co/kibana/kibana:7.17.9
     restart: always
     container_name: kibana
     ports:
@@ -68,7 +68,7 @@ services:
 
 
   logstash:
-    image: logstash:7.17.6
+    image: logstash:7.17.9
     restart: always
     container_name: logstash
     volumes:
