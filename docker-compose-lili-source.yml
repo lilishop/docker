@@ -1,7 +1,7 @@
 version: '3'
 services: 
   mysql:
-    image: harbor.dllll.xyz/middleware/mysql:8.0.33
+    image: harbor.dllll.xyz/middleware/mysql:8.3.0
     restart: always
     container_name: mysql
     volumes:
@@ -17,7 +17,7 @@ services:
       - 3306:3306
 
   redis:
-    image: harbor.dllll.xyz/middleware/redis:7.0.8
+    image: harbor.dllll.xyz/middleware/redis:7.2.4
     restart: always
     container_name: 'redis'
     ports:
@@ -27,7 +27,7 @@ services:
     command: redis-server --port 6379 --requirepass lilishop --appendonly yes --protected-mode no
 
   elasticsearch:
-    image: harbor.dllll.xyz/middleware/elasticsearch:7.17.9
+    image: harbor.dllll.xyz/middleware/elasticsearch:7.17.19
     restart: always
     container_name: elasticsearch
     volumes:
@@ -55,7 +55,7 @@ services:
           hard: 65535
 
   kibana:
-    image: harbor.dllll.xyz/middleware/kibana:7.17.9
+    image: harbor.dllll.xyz/middleware/kibana:7.17.19
     restart: always
     container_name: kibana
     ports:
@@ -68,7 +68,7 @@ services:
 
 
   logstash:
-    image: harbor.dllll.xyz/middleware/logstash:7.17.9
+    image: harbor.dllll.xyz/middleware/logstash:7.17.19
     restart: always
     container_name: logstash
     volumes:
@@ -116,20 +116,6 @@ services:
       - 10909:10909
       - 10911:10911
     command: sh mqbroker -c /opt/rocketmq-4.9.7/conf/broker.conf
-  # rocket console 这个可以不需要
-  rmqdashboard:
-    image: harbor.dllll.xyz/middleware/apacherocketmq/rocketmq-dashboard:1.0.0
-    restart: always
-    container_name: rocket-dashboard
-    environment:
-      - JAVA_OPTS=-Drocketmq.config.namesrvAddr=rmqnamesrv:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
-      # - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
-    depends_on:
-      - rmqnamesrv
-    networks:
-      - rocketmq
-    ports:
-      - 8180:8180
   # xxl-job 分布式调度中心
   xxl-job:
     image: harbor.dllll.xyz/middleware/xuxueli/xxl-job-admin:2.3.0
