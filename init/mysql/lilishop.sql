@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 26/06/2024 14:35:35
+ Date: 27/06/2024 17:08:13
 */
 
 SET NAMES utf8mb4;
@@ -51345,7 +51345,7 @@ INSERT INTO `li_store_menu` VALUES (1348810864748945408, NULL, '2022-01-11 22:35
 INSERT INTO `li_store_menu` VALUES (1349237129847005184, NULL, '2022-01-11 22:35:40.000000', b'0', NULL, '2022-01-11 22:36:59', NULL, 'goods-operation', 'ios-american-football', 2, 'goods-operation', '1348810864748945408', '/goods-operation', '1.11', '商品发布', '/store/goods/category*,/store/goods/categorySpec*,/store/goods/categoryParameters*,/store/goods/draftGoods*,/store/goods/label*,/store/goods/goods*,/store/goods/goodsUnit*,/store/goods/spec*');
 INSERT INTO `li_store_menu` VALUES (1349237207378714624, NULL, '2022-01-11 22:35:42.000000', b'0', NULL, '2022-01-11 22:37:02', NULL, 'goods/goods-seller/goods', 'ios-american-football', 2, 'goods', '1348810864748945408', 'goods', '1.12', '商品列表', NULL);
 INSERT INTO `li_store_menu` VALUES (1349237928434098176, NULL, '2022-01-11 22:35:45.000000', b'0', NULL, '2022-01-11 22:37:05', NULL, 'goods/goods-seller/draftGoods', 'ios-american-football', 2, 'template-goods', '1348810864748945408', 'template-goods', '1.13', '商品模板', NULL);
-INSERT INTO `li_store_menu` VALUES (1349237928434098177, NULL, '2022-01-11 22:35:45.000000', b'0', NULL, '2022-01-11 22:37:05', NULL, 'goods/goods-seller/alertQuantity', 'ios-american-football', 2, 'alert-goods-quantity', '1348810864748945408', 'alert-goods-quantity', '1.14', '库存预警', NULL);
+INSERT INTO `li_store_menu` VALUES (1349237928434098177, 'null', '2022-01-11 22:35:45.000000', b'0', 'admin', '2024-06-27 17:01:31', NULL, 'goods/goods-seller/alertQuantity', 'ios-american-football', 2, 'alert-goods-quantity', '1348810864748945408', 'alert-goods-quantity', '1.14', '库存管理', 'null');
 INSERT INTO `li_store_menu` VALUES (1349246048900243456, NULL, '2022-01-11 22:35:48.000000', b'0', NULL, '2022-01-11 22:37:08', NULL, 'goods/goods-manage/category', 'ios-american-football', 2, 'category', '1348810864748945408', 'category', '1.14', '店铺分类', NULL);
 INSERT INTO `li_store_menu` VALUES (1349246347597602816, NULL, '2022-01-11 22:35:51.000000', b'0', NULL, '2022-01-11 22:37:11', NULL, 'Main', 'ios-american-football', 0, 'order', '0', '/', '2', '订单', NULL);
 INSERT INTO `li_store_menu` VALUES (1349246468775239680, NULL, '2022-01-11 22:38:28.000000', b'0', NULL, '2022-01-11 22:38:31', NULL, 'Main', 'ios-american-football', 1, 'Main', '1349246347597602816', '/', '2.1', '订单管理', NULL);
