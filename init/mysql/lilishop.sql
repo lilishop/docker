@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 27/06/2024 17:08:13
+ Date: 28/06/2024 09:28:18
 */
 
 SET NAMES utf8mb4;
@@ -50312,7 +50312,7 @@ INSERT INTO `li_setting` VALUES ('QQ_CONNECT', 'admin', '2021-03-02 09:16:44.000
 INSERT INTO `li_setting` VALUES ('SECKILL_SETTING', 'admin', '2021-09-27 10:33:38.000000', NULL, 'admin', '2021-09-27 10:30:42.917000', '{\"hours\":\"1,2\",\"seckillRule\":\"秒杀规则\"}');
 INSERT INTO `li_setting` VALUES ('SMS_SETTING', 'admin', '2021-01-23 02:18:03.299000', b'0', 'admin', '2021-09-15 11:57:11.962000', '{\"accessKeyId\":\"test\",\"signName\":\"lili\",\"accessSecret\":\"test\",\"regionId\":\"test\"}');
 INSERT INTO `li_setting` VALUES ('WECHAT_CONNECT', 'admin', '2021-03-02 09:17:10.000000', b'0', 'admin', '2021-03-05 02:26:43.348000', '{\"wechatConnectSettingItems\":[{\"clientType\":\"PC\",\"appId\":\"\",\"appSecret\":\"\"},{\"clientType\":\"H5\",\"appId\":\"\",\"appSecret\":\"\"},{\"clientType\":\"WECHAT_MP\",\"appId\":\"\",\"appSecret\":\"\"}]}');
-INSERT INTO `li_setting` VALUES ('WECHAT_PAYMENT', 'admin', '2021-02-27 07:18:13.767000', b'0', 'admin', '2021-04-27 16:09:19.724000', '{\"appId\":\"\",\"mchId\":\"\",\"apiclient_key\":\"\",\"apiclient_cert_pem\":\"\",\"apiclient_cert_p12\":\"\",\"serialNumber\":\"\",\"apiKey3\":\"\"}');
+INSERT INTO `li_setting` VALUES ('WECHAT_PAYMENT', 'admin', '2021-02-27 07:18:13.767000', b'0', 'admin', '2021-04-27 16:09:19.724000', '{\"nativeAppId\":\"\",\"jsapiAppId\":\"\",\"mchId\":\"\",\"apiclient_key\":\"\",\"serialNumber\":\"\",\"mpAppId\":\"\",\"appAppId\":\"\",\"apiKey3\":\"\",\"apiclient_cert_pem\":\"\",\"apiclient_cert_p12\":\"\",\"h5AppId\":\"\"}');
 INSERT INTO `li_setting` VALUES ('WITHDRAWAL_SETTING', 'admin', '2021-02-21 09:34:41.153000', b'0', 'admin', '2021-02-26 08:54:01.267000', '{\"apply\":true}');
 
 -- ----------------------------
