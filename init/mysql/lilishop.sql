@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 28/06/2024 09:28:18
+ Date: 02/07/2024 14:53:05
 */
 
 SET NAMES utf8mb4;
@@ -2132,6 +2132,7 @@ CREATE TABLE `li_distribution`  (
   `settlement_bank_account_name` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `settlement_bank_account_num` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `settlement_bank_branch_name` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `distribution_order_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '分销订单金额',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -2156,6 +2157,11 @@ CREATE TABLE `li_distribution_cash`  (
   `pay_time` datetime(6) NULL DEFAULT NULL COMMENT '支付时间',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '分销佣金',
   `sn` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分销佣金编号',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '会员姓名',
+  `id_number` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '身份证号',
+  `settlement_bank_account_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '结算银行开户行名称',
+  `settlement_bank_account_num` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '结算银行开户账号',
+  `settlement_bank_branch_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '结算银行开户支行名称',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -2213,6 +2219,7 @@ CREATE TABLE `li_distribution_order`  (
   `specs` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `store_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `refund_num` int NULL DEFAULT NULL COMMENT '退款商品数量',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -51193,6 +51200,10 @@ CREATE TABLE `li_store_flow`  (
   `point_settlement_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '积分商品结算金额',
   `kanjia_settlement_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '砍价商品结算金额',
   `order_promotion_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
+  `bill_time` datetime(6) NULL DEFAULT NULL COMMENT '结算时间',
+  `full_refund` bit(1) NULL DEFAULT NULL COMMENT '是否全部退款',
+  `profit_sharing_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '分账状态',
+  `profit_sharing` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '分账详情',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
 
