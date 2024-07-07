@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 02/07/2024 14:53:05
+ Date: 07/07/2024 13:58:02
 */
 
 SET NAMES utf8mb4;
@@ -50304,8 +50304,9 @@ CREATE TABLE `li_setting`  (
 -- ----------------------------
 -- Records of li_setting
 -- ----------------------------
-INSERT INTO `li_setting` VALUES ('ALIPAY_PAYMENT', 'admin', '2021-02-27 07:20:11.914000', b'0', 'admin', '2021-09-15 11:57:38.683000', '{\"privateKey\":\"privateKey\",\"alipayPublicCertPath\":\"/home/crt/lili-alipay/alipayCertPublicKey_RSA2.crt\",\"certPath\":\"/home/crt/lili-alipay/appCertPublicKey_2021002107649773.crt\",\"appId\":\"appId\",\"rootCertPath\":\"/home/crt/lili-alipay/alipayRootCert.crt\"}');
+INSERT INTO `li_setting` VALUES ('ALIPAY_PAYMENT', 'admin', '2021-02-27 07:20:11.914000', b'0', 'admin', '2024-07-07 13:57:52.882000', '{\"privateKey\":\"privateKey\",\"alipayPublicCertPath\":\"/home/crt/lili-alipay/alipayCertPublicKey_RSA2.crt\",\"callbackUrl\":\"https://buyer-api.pickmall.cn\",\"certPath\":\"/home/crt/lili-alipay/appCertPublicKey_2021002107649773.crt\",\"appId\":\"appId\",\"rootCertPath\":\"/home/crt/lili-alipay/alipayRootCert.crt\"}');
 INSERT INTO `li_setting` VALUES ('BASE_SETTING', 'admin', '2021-01-21 13:46:35.348000', b'0', 'admin', '2022-10-12 19:10:04.355000', '{\"staticPageAddress\":\"https://pickmall.cn/1\",\"storeSideLogo\":\"https://cdn.pickmall.cn/cdn/logo/logo2.png\",\"icp\":\"icp\",\"domainLogo\":\"https://cdn.pickmall.cn/cdn/logo/logo2.png\",\"siteName\":\"lilishop\",\"buyerSideLogo\":\"https://cdn.pickmall.cn/cdn/logo/logo2.png\",\"staticPageWapAddress\":\"https://m.pickmall.cn/\"}');
+INSERT INTO `li_setting` VALUES ('CONNECT_SETTING', 'admin', '2024-07-07 13:55:38.686000', b'0', NULL, NULL, '{\"callbackUrl\":\"https://buyer-api.pickmall.cn\",\"pc\":\"https://pc-b2b2c.pickmall.cn\",\"wap\":\"https://m-b2b2c.pickmall.cn\"}');
 INSERT INTO `li_setting` VALUES ('DISTRIBUTION_SETTING', 'admin', '2021-01-22 02:56:44.099000', b'0', 'admin', '2021-09-24 15:39:46.245000', '{\"distributionDay\":94,\"isOpen\":true,\"cashDay\":1}');
 INSERT INTO `li_setting` VALUES ('ES_SIGN', 'admin', '2021-01-22 02:56:44.099000', b'0', 'admin', '2021-01-22 02:56:44.099000', '{\"secretKey\":\"111\"}');
 INSERT INTO `li_setting` VALUES ('GOODS_SETTING', 'admin', '2020-12-14 10:48:04.000000', b'0', 'admin', '2021-03-25 20:44:38.514000', '{\"goodsCheck\":\"true\",\"smallPictureWidth\":\"200\",\"smallPictureHeight\":\"200\",\"abbreviationPictureWidth\":\"400\",\"abbreviationPictureHeight\":\"400\",\"originalPictureWidth\":\"800\",\"originalPictureHeight\":\"800\"}');
@@ -50317,7 +50318,7 @@ INSERT INTO `li_setting` VALUES ('PAYMENT_SUPPORT', 'admin', '2021-03-01 10:07:4
 INSERT INTO `li_setting` VALUES ('POINT_SETTING', 'admin', '2021-02-26 07:57:39.629000', b'0', 'admin', '2021-09-26 16:03:56.043000', '{\"money\":1,\"signIn\":2,\"comment\":24,\"pointSettingItems\":[],\"register\":10}');
 INSERT INTO `li_setting` VALUES ('QQ_CONNECT', 'admin', '2021-03-02 09:16:44.000000', b'0', 'admin', '2021-03-05 02:25:51.615000', '{\"qqConnectSettingItemList\":[{\"clientType\":\"PC\",\"appId\":\"\",\"appKey\":\"\"},{\"clientType\":\"H5\",\"appId\":\"\",\"appKey\":\"\"}]}');
 INSERT INTO `li_setting` VALUES ('SECKILL_SETTING', 'admin', '2021-09-27 10:33:38.000000', NULL, 'admin', '2021-09-27 10:30:42.917000', '{\"hours\":\"1,2\",\"seckillRule\":\"秒杀规则\"}');
-INSERT INTO `li_setting` VALUES ('SMS_SETTING', 'admin', '2021-01-23 02:18:03.299000', b'0', 'admin', '2021-09-15 11:57:11.962000', '{\"accessKeyId\":\"test\",\"signName\":\"lili\",\"accessSecret\":\"test\",\"regionId\":\"test\"}');
+INSERT INTO `li_setting` VALUES ('SMS_SETTING', 'admin', '2021-01-23 02:18:03.299000', b'0', 'admin', '2024-07-07 13:53:44.732000', '{\"accessKeyId\":\"test\",\"tencentSdkAppId\":\"null\",\"registerTemplateCode\":\"SMS_205755298\",\"huaweiSender\":\"null\",\"signName\":\"lili\",\"tencentSecretId\":\"null\",\"huaweiAppKey\":\"null\",\"isTestModel\":\"true\",\"tencentSecretKey\":\"null\",\"type\":\"ALI\",\"accessSecret\":\"test\",\"tencentSignName\":\"null\",\"huaweiSignature\":\"null\",\"payPasswordTemplateCode\":\"SMS_205755301\",\"walletPasswordTemplateCode\":\"SMS_205755297\",\"findPasswordTemplateCode\":\"SMS_205755301\",\"huaweiAppSecret\":\"null\",\"loginTemplateCode\":\"SMS_205755300\"}');
 INSERT INTO `li_setting` VALUES ('WECHAT_CONNECT', 'admin', '2021-03-02 09:17:10.000000', b'0', 'admin', '2021-03-05 02:26:43.348000', '{\"wechatConnectSettingItems\":[{\"clientType\":\"PC\",\"appId\":\"\",\"appSecret\":\"\"},{\"clientType\":\"H5\",\"appId\":\"\",\"appSecret\":\"\"},{\"clientType\":\"WECHAT_MP\",\"appId\":\"\",\"appSecret\":\"\"}]}');
 INSERT INTO `li_setting` VALUES ('WECHAT_PAYMENT', 'admin', '2021-02-27 07:18:13.767000', b'0', 'admin', '2021-04-27 16:09:19.724000', '{\"nativeAppId\":\"\",\"jsapiAppId\":\"\",\"mchId\":\"\",\"apiclient_key\":\"\",\"serialNumber\":\"\",\"mpAppId\":\"\",\"appAppId\":\"\",\"apiKey3\":\"\",\"apiclient_cert_pem\":\"\",\"apiclient_cert_p12\":\"\",\"h5AppId\":\"\"}');
 INSERT INTO `li_setting` VALUES ('WITHDRAWAL_SETTING', 'admin', '2021-02-21 09:34:41.153000', b'0', 'admin', '2021-02-26 08:54:01.267000', '{\"apply\":true}');
