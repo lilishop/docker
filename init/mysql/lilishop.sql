@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 07/07/2024 13:58:02
+ Date: 18/07/2024 14:34:00
 */
 
 SET NAMES utf8mb4;
@@ -51409,6 +51409,8 @@ INSERT INTO `li_store_menu` VALUES (1367048967635861506, NULL, '2022-02-18 16:25
 INSERT INTO `li_store_menu` VALUES (1367048967635861507, NULL, '2022-02-18 16:27:28.000000', b'0', NULL, '2022-02-18 16:27:30', NULL, 'shop/system/role/storeRoleManage', 'ios-american-football', 2, 'storeRoleManage', '1367048967635861503', 'storeRoleManage', '6.33', '角色权限', '/store/role*');
 INSERT INTO `li_store_menu` VALUES (1367048967635861510, NULL, '2022-03-07 14:45:10.000000', b'0', NULL, '2022-03-07 14:45:13', NULL, 'shop/floorList', 'ios-american-football', 2, 'floorList', '1367046266214678528', 'floorList', '6.23', 'PC端', '/store/other/pageData*');
 INSERT INTO `li_store_menu` VALUES (1367048967635861511, NULL, '2022-03-07 15:13:52.000000', b'0', NULL, '2022-03-07 15:13:55', NULL, 'shop/wap/wapList', 'ios-american-football', 2, 'wapList', '1367046266214678528', 'wapList', '6.24', '移动端', '/store/other/pageData*');
+INSERT INTO `li_store_menu` VALUES (1813816832017088513, 'admin', '2024-07-18 14:03:26.500000', b'0', NULL, NULL, NULL, 'Main', NULL, 1, 'oss', '1367045630710513664', '/', '5.0', '资源管理', '');
+INSERT INTO `li_store_menu` VALUES (1813816945808556034, 'admin', '2024-07-18 14:03:53.633000', b'0', NULL, NULL, NULL, 'sys/oss-manage/ossManage', NULL, 2, 'oss-manage', '1813816832017088513', 'oss-manage', '1.0', '资源管理', '');
 
 -- ----------------------------
 -- Table structure for li_store_menu_role
