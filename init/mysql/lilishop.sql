@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : 192.168.31.100
+ Source Server         : 局域网
  Source Server Type    : MySQL
- Source Server Version : 80300 (8.3.0)
+ Source Server Version : 80300
  Source Host           : 192.168.31.100:3306
  Source Schema         : lilishop_new
 
  Target Server Type    : MySQL
- Target Server Version : 80300 (8.3.0)
+ Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 16/04/2026 17:59:53
+ Date: 14/05/2026 19:12:28
 */
 
 SET NAMES utf8mb4;
@@ -4374,6 +4374,32 @@ INSERT INTO `li_member_address` VALUES (1464305901209186305, '13011111111', '202
 INSERT INTO `li_member_address` VALUES (1466246586711756802, '13011111111', '2021-12-02 11:23:22.474000', b'0', NULL, NULL, NULL, '1401797451790156446,1401797451798544836,1401797451798545015,1401797451798545026', '江西省,上饶市,鄱阳县,田畈街镇', '庙下', b'1', '29.319165', '116.889374', '1376417684140326912', '18162305819', '王八蛋');
 
 -- ----------------------------
+-- Table structure for li_member_benefit
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_benefit`;
+CREATE TABLE `li_member_benefit`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `benefit_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '权益名称',
+  `benefit_logo` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权益LOGO',
+  `benefit_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权益类型',
+  `benefit_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权益说明',
+  `benefit_sort` int NOT NULL DEFAULT 1 COMMENT '排序',
+  `benefit_state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'OPEN' COMMENT '状态 OPEN/CLOSE',
+  `benefit_config` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '扩展配置(JSON)',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_li_member_benefit_state_sort`(`benefit_state` ASC, `benefit_sort` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户权益' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_benefit
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for li_member_coupon
 -- ----------------------------
 DROP TABLE IF EXISTS `li_member_coupon`;
@@ -4468,25 +4494,88 @@ CREATE TABLE `li_member_evaluation`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for li_member_experience_log
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_experience_log`;
+CREATE TABLE `li_member_experience_log`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '客户ID',
+  `member_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '客户名称',
+  `rule_key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '规则编码',
+  `biz_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '业务ID',
+  `experience` bigint NOT NULL DEFAULT 0 COMMENT '当前经验值',
+  `before_experience` bigint NOT NULL DEFAULT 0 COMMENT '变动前经验值',
+  `variable_experience` bigint NOT NULL DEFAULT 0 COMMENT '变动经验值',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_li_member_experience_log_member_rule_biz`(`member_id` ASC, `rule_key` ASC, `biz_id` ASC) USING BTREE,
+  INDEX `idx_li_member_experience_log_member_rule`(`member_id` ASC, `rule_key` ASC) USING BTREE,
+  INDEX `idx_li_member_experience_log_create_time`(`create_time` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户经验值流水' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_experience_log
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for li_member_grade
 -- ----------------------------
 DROP TABLE IF EXISTS `li_member_grade`;
 CREATE TABLE `li_member_grade`  (
-  `id` bigint NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `delete_flag` bit(1) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `experience_value` int NOT NULL,
-  `grade_image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `grade_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `is_default` bit(1) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `grade_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '等级名称',
+  `is_default` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否默认等级',
+  `grade_image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '等级图标URL',
+  `grade_background` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '等级背景图URL',
+  `grade_font_color` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '等级字体颜色',
+  `required_experience` int NOT NULL COMMENT '所需经验值',
+  `grade_sort` int NOT NULL DEFAULT 1 COMMENT '等级排序',
+  `grade_state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'OPEN' COMMENT '等级开关 OPEN/CLOSE',
+  `benefit_ids` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '会员权益ID列表',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_li_member_grade_name`(`grade_name` ASC) USING BTREE,
+  UNIQUE INDEX `uk_li_member_grade_required_experience`(`required_experience` ASC) USING BTREE,
+  INDEX `idx_li_member_grade_state_sort`(`grade_state` ASC, `grade_sort` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户等级' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_grade
+-- ----------------------------
+INSERT INTO `li_member_grade` VALUES (2053052134349000706, 'admin', '2026-05-09 17:59:07.351000', b'0', 'admin', '2026-05-14 18:31:55.976000', '青铜会员', b'1', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/faff58991aa843cfb82736df62a01be5.png', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/6ce081d844bf4eca91e22375f4eb8250.png', '', 1, 1, 'OPEN', '2054486882581671938,2054490052556947458');
+INSERT INTO `li_member_grade` VALUES (2054025986981900289, 'admin', '2026-05-12 10:28:51.912000', b'0', 'admin', '2026-05-14 18:33:17.942000', '白银客户', b'0', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/28b03dc7f07a4ce0bf5597c9407a2395.png', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/51a3870f22fb40e0b5882dedb6bee011.png', '#566671', 500, 2, 'OPEN', '2054490052556947458,2054504770944266241,2054486882581671938');
+INSERT INTO `li_member_grade` VALUES (2054125386035027969, 'admin', '2026-05-12 17:03:50.494000', b'0', 'admin', '2026-05-14 18:34:27.212000', '黄金客户', b'0', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/ba25bbcc5b674c4c950ec381fa94b7b0.png', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/fcc8894b9fea42fba47799f46e3d2a5c.png', '', 2000, 3, 'OPEN', '');
+INSERT INTO `li_member_grade` VALUES (2054873406041178113, 'admin', '2026-05-14 18:36:12.360000', b'0', NULL, NULL, '铂金客户', b'0', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/3138f452a2574a62912529cb5f141fe9.png', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MANAGER/undefined/85ce70f0f41f4489a6c4c9874998d188.png', '', 5000, 4, 'OPEN', NULL);
+
+-- ----------------------------
+-- Table structure for li_member_grade_benefit_grant
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_grade_benefit_grant`;
+CREATE TABLE `li_member_grade_benefit_grant`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '会员ID',
+  `grade_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '等级ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_member_grade_benefit_grant`(`member_id` ASC, `grade_id` ASC) USING BTREE,
+  INDEX `idx_grade_id`(`grade_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '等级权益发放记录（每个会员每个等级最多一条）' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_grade_benefit_grant
 -- ----------------------------
 
 -- ----------------------------
@@ -4671,6 +4760,107 @@ CREATE TABLE `li_member_receipt`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for li_member_share_buy_log
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_share_buy_log`;
+CREATE TABLE `li_member_share_buy_log`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `inviter_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '分享人ID',
+  `invitee_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '被分享购买用户ID',
+  `order_sn` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '订单编号',
+  `order_amount` double NULL DEFAULT NULL COMMENT '订单金额',
+  `reward_experience` bigint NOT NULL DEFAULT 0 COMMENT '奖励经验值',
+  `reward_status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '奖励状态 SUCCESS/SKIPPED',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_li_member_share_buy_log_order_sn`(`order_sn` ASC) USING BTREE,
+  INDEX `idx_li_member_share_buy_log_inviter`(`inviter_id` ASC) USING BTREE,
+  INDEX `idx_li_member_share_buy_log_create_time`(`create_time` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '分享购买奖励记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_share_buy_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for li_member_share_code
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_share_code`;
+CREATE TABLE `li_member_share_code`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '会员ID',
+  `share_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '分享码',
+  `state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'OPEN' COMMENT '状态 OPEN/CLOSE',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_li_member_share_code_member`(`member_id` ASC) USING BTREE,
+  UNIQUE INDEX `uk_li_member_share_code_code`(`share_code` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '会员分享码' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_share_code
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for li_member_share_log
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_share_log`;
+CREATE TABLE `li_member_share_log`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '会员ID',
+  `share_scene` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分享场景',
+  `share_page` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分享页面',
+  `related_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '关联业务ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_li_member_share_log_member`(`member_id` ASC) USING BTREE,
+  INDEX `idx_li_member_share_log_create_time`(`create_time` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '会员分享记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_share_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for li_member_share_register_log
+-- ----------------------------
+DROP TABLE IF EXISTS `li_member_share_register_log`;
+CREATE TABLE `li_member_share_register_log`  (
+  `id` bigint NOT NULL COMMENT 'ID',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
+  `inviter_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '分享人ID',
+  `invitee_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '被分享注册用户ID',
+  `invitee_mobile` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '被分享注册用户手机号',
+  `share_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分享码',
+  `reward_experience` bigint NOT NULL DEFAULT 0 COMMENT '奖励经验值',
+  `reward_status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '奖励状态 SUCCESS/SKIPPED',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_li_member_share_register_log_invitee`(`invitee_id` ASC) USING BTREE,
+  INDEX `idx_li_member_share_register_log_inviter`(`inviter_id` ASC) USING BTREE,
+  INDEX `idx_li_member_share_register_log_create_time`(`create_time` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '分享注册奖励记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of li_member_share_register_log
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for li_member_sign
 -- ----------------------------
 DROP TABLE IF EXISTS `li_member_sign`;
@@ -4833,11 +5023,10 @@ INSERT INTO `li_menu` VALUES (1367045529720061952, 'admin', '2021-03-03 09:33:47
 INSERT INTO `li_menu` VALUES (1367045630710513664, 'admin', '2021-03-03 09:34:11', b'0', 'admin', '2021-07-27 15:38:56', NULL, 'goods/goods-info/goodsApply', 'ios-alert', 2, 'applyGoods', '1367044376391319552', 'applyGoods', 1.00, '商品审核', NULL, 'null');
 INSERT INTO `li_menu` VALUES (1367045794284175360, 'admin', '2021-03-03 09:34:50', b'0', 'admin', '2021-07-27 16:04:18', NULL, 'goods/goods-manage/category', 'md-alert', 2, 'goodsCategory', '1367044657296441344', 'goodsCategory', 0.00, '商品分类', NULL, '/manager/goods/category*,/manager/goods/brand*,/manager/goods/spec*,/manager/goods/parameters*');
 INSERT INTO `li_menu` VALUES (1367045921434501120, 'admin', '2021-03-03 09:35:21', b'0', 'admin', '2021-07-27 16:04:23', NULL, 'goods/goods-manage/brand', 'md-alert', 2, 'goodsBrand', '1367044657296441344', 'goodsBrand', 1.00, '品牌列表', NULL, '/manager/goods/brand*');
-INSERT INTO `li_menu` VALUES (1367046068369358848, 'admin', '2021-03-03 09:35:56', b'0', 'admin', '2021-07-27 16:04:27', NULL, 'goods/goods-manage/spec', 'md-aperture', 2, 'goodsSpec', '1367044657296441344', 'goodsSpec', 2.00, '规格列表', NULL, '/manager/goods/spec*');
 INSERT INTO `li_menu` VALUES (1367046266214678528, 'admin', '2021-03-03 09:36:43', b'0', 'admin', '2021-07-27 16:04:32', NULL, 'goods-unit/index', 'md-alert', 2, 'goodsUnit', '1367044657296441344', 'goodsUnit', 4.00, '计量单位', NULL, '/manager/goods/goodsUnit*');
 INSERT INTO `li_menu` VALUES (1367048084701315072, 'admin', '2021-03-03 09:43:57', b'0', 'admin', '2021-03-03 09:52:17', 'null', 'null', 'ios-pricetags', 0, 'shop', '0', 'null', 0.40, '店铺', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1367048684339986432, 'admin', '2021-03-03 09:46:20', b'0', NULL, NULL, NULL, 'Main', 'md-aperture', 1, 'shopManager', '1367048084701315072', '/', 0.00, '店铺管理', NULL, NULL);
-INSERT INTO `li_menu` VALUES (1367048754229673984, 'admin', '2021-03-03 09:46:36', b'0', NULL, NULL, NULL, 'Main', 'md-aperture', 1, 'bill', '1367048084701315072', '/', 0.00, ' 店铺结算', NULL, NULL);
+INSERT INTO `li_menu` VALUES (1367048754229673984, 'admin', '2021-03-03 09:46:36', b'0', NULL, NULL, NULL, 'Main', 'md-aperture', 1, 'bill', '1367048084701315072', '/', 0.00, '店铺结算', NULL, NULL);
 INSERT INTO `li_menu` VALUES (1367048832210173952, 'admin', '2021-03-03 09:46:55', b'0', 'admin', '2021-07-27 16:05:30', NULL, 'seller/shop/shopList', 'md-aperture', 2, 'shopList', '1367048684339986432', 'shopList', 0.00, '店铺列表', NULL, '/manager/order/order*,/manager/store*');
 INSERT INTO `li_menu` VALUES (1367048967635861504, 'admin', '2021-03-03 09:47:27', b'0', 'admin', '2021-07-27 16:05:32', NULL, 'seller/shop/shopAuditList', 'md-alert', 2, 'shopAuth', '1367048684339986432', 'shopAuth', 1.00, '店铺审核', NULL, '/manager/store*');
 INSERT INTO `li_menu` VALUES (1367049068122996736, 'admin', '2021-03-03 09:47:51', b'0', 'admin', '2021-07-27 16:05:36', NULL, 'seller/bill/bill', 'md-alert', 2, 'billList', '1367048754229673984', 'billList', 0.00, '店铺结算', NULL, '/manager/order/bill*');
@@ -4888,6 +5077,11 @@ INSERT INTO `li_menu` VALUES (1410862675914764290, 'admin', '2021-07-02 15:27:29
 INSERT INTO `li_menu` VALUES (1419926569920536578, 'admin', '2021-07-27 15:44:10', b'0', 'admin', '2022-10-21 11:03:41', NULL, 'custom-words/index', NULL, 2, 'custom-words', '1367050250249830400', 'custom-words', 4.00, 'ES分词', NULL, '/manager/manager/custom-words*');
 INSERT INTO `li_menu` VALUES (1430799171593535490, 'admin', '2021-08-26 15:48:00', b'0', 'admin', '2021-12-02 20:21:34', NULL, 'promotions/kanjia/kanjia-activity-goods', NULL, 2, 'promotions/kanjia', '1367049214198022144', 'promotions/kanjia', 6.00, '砍价活动', NULL, '/manager/promotion/kanJiaGoods*');
 INSERT INTO `li_menu` VALUES (2037351341234118657, 'admin', '2026-03-27 10:09:47', b'0', NULL, NULL, NULL, 'member/group/index', NULL, 2, 'member-group', '1367041332861730816', 'member-group', 0.00, '会员分组', NULL, '');
+INSERT INTO `li_menu` VALUES (2053037117402689538, 'admin', '2026-05-09 16:59:27', b'0', NULL, NULL, NULL, 'Main', NULL, 1, 'member-grade', '1367038467288072192', '/', 10.00, '客户等级', NULL, '');
+INSERT INTO `li_menu` VALUES (2053037215004143617, 'admin', '2026-05-09 16:59:50', b'0', NULL, NULL, NULL, 'member-grade', NULL, 2, 'member-grade', '2053037117402689538', 'member-grade', 1.00, '等级列表', NULL, '');
+INSERT INTO `li_menu` VALUES (2053042774654746625, 'admin', '2026-05-09 17:21:56', b'0', 'admin', '2026-05-12 18:39:16', NULL, 'member-grade-experience', NULL, 2, 'member-grade-experience', '2053037117402689538', 'member-grade-experience', 2.00, '经验值设置', NULL, '');
+INSERT INTO `li_menu` VALUES (2053060244543295489, 'admin', '2026-05-09 18:31:21', b'0', 'admin', '2026-05-09 18:31:39', NULL, 'member-grade-experience-log', NULL, 2, 'member-grade-experience-log', '2053037117402689538', 'member-grade-experience-log', 3.00, '经验值记录', NULL, '');
+INSERT INTO `li_menu` VALUES (2054458120364294145, 'admin', '2026-05-13 15:06:01', b'0', 'admin', '2026-05-14 18:25:54', NULL, 'member-benefit', NULL, 2, 'member-benefit', '2053037117402689538', 'member-benefit', 4.00, '客户权益', NULL, '');
 
 -- ----------------------------
 -- Table structure for li_message
@@ -50411,6 +50605,7 @@ INSERT INTO `li_setting` VALUES ('BASE_SETTING', 'admin', '2021-01-21 13:46:35.3
 INSERT INTO `li_setting` VALUES ('CONNECT_SETTING', 'admin', '2024-07-07 13:55:38.686000', b'0', NULL, NULL, '{\"callbackUrl\":\"https://buyer-api.pickmall.cn\",\"pc\":\"https://pc-b2b2c.pickmall.cn\",\"wap\":\"https://m-b2b2c.pickmall.cn\"}');
 INSERT INTO `li_setting` VALUES ('DISTRIBUTION_SETTING', 'admin', '2021-01-22 02:56:44.099000', b'0', 'admin', '2021-09-24 15:39:46.245000', '{\"distributionDay\":94,\"isOpen\":true,\"cashDay\":1}');
 INSERT INTO `li_setting` VALUES ('ES_SIGN', 'admin', '2021-01-22 02:56:44.099000', b'0', 'admin', '2021-01-22 02:56:44.099000', '{\"secretKey\":\"111\"}');
+INSERT INTO `li_setting` VALUES ('EXPERIENCE_SETTING', 'admin', '2026-05-09 17:48:35.153000', b'0', 'admin', '2026-05-14 18:37:25.848000', '{\"items\":[{\"ruleKey\":\"CONSUME\",\"ruleName\":\"消费\",\"enabled\":false,\"value\":1,\"maxValue\":null},{\"ruleKey\":\"REGISTER\",\"ruleName\":\"注册\",\"enabled\":false,\"value\":10,\"maxValue\":null},{\"ruleKey\":\"SIGN_IN\",\"ruleName\":\"签到\",\"enabled\":false,\"value\":10,\"maxValue\":null},{\"ruleKey\":\"COMMENT\",\"ruleName\":\"评价\",\"enabled\":false,\"value\":5,\"maxValue\":null},{\"ruleKey\":\"SHARE\",\"ruleName\":\"分享商城\",\"enabled\":false,\"value\":1,\"maxValue\":100},{\"ruleKey\":\"PROFILE\",\"ruleName\":\"完善信息\",\"enabled\":false,\"value\":10,\"maxValue\":null},{\"ruleKey\":\"FOLLOW_STORE\",\"ruleName\":\"关注店铺\",\"enabled\":false,\"value\":1,\"maxValue\":100},{\"ruleKey\":\"BIND_WECHAT\",\"ruleName\":\"绑定微信\",\"enabled\":false,\"value\":100,\"maxValue\":null},{\"ruleKey\":\"ADD_ADDRESS\",\"ruleName\":\"添加收货地址\",\"enabled\":false,\"value\":10,\"maxValue\":null},{\"ruleKey\":\"SHARE_REGISTER\",\"ruleName\":\"分享注册\",\"enabled\":false,\"value\":1,\"maxValue\":100},{\"ruleKey\":\"SHARE_BUY\",\"ruleName\":\"分享购买\",\"enabled\":false,\"value\":1,\"maxValue\":100}],\"description\":\"签到领京豆活动规则\\n • 活动说明 参与活动前请认真阅读活动规则，参与本次活动即视为用户同意并接受本规则的全部内容。\\n • 活动举办方 本活动由京东举办。\\n • 活动时间（本活动所有时间均以北京时间为准） 1. 活动时间：2024年11月15日12:00:00至2025年12月31日23:59:59\\n • 活动玩法 1. 活动条件：符合【京东注册】条件的用户可参与本次签到领京豆活动。本次活动仅限京东普通个人用户参与，企业用户、渠道经销商、专卖店、批发商用户、异常用户不予参与。 2. 签到玩法：活动期间内，用户可通过【京东首页-京豆ICON-签到领京豆】或者【京东首页-我的-京豆】入口来访签到，可获得签到奖励。每位京东用户【每天】仅可参与【1】次本活动，超过前述次数限制的将被视为无效。3. 连签玩法：当连续签到至规定天数时，当天签到可额外获得京豆奖励。过程中任意一天中断签到，则本轮次连续签到周期从头开始计算奖励（例如：后天可领取第7天的签到奖励，但第6天时没有签到，则第7天签到时不可领取奖励，将从第1天开始计算签到进程和奖励）。完成一个轮次的连续签到后，循环下一个连签奖励周期重新开始（例\"}');
 INSERT INTO `li_setting` VALUES ('GOODS_SETTING', 'admin', '2020-12-14 10:48:04.000000', b'0', 'admin', '2021-03-25 20:44:38.514000', '{\"goodsCheck\":\"true\",\"smallPictureWidth\":\"200\",\"smallPictureHeight\":\"200\",\"abbreviationPictureWidth\":\"400\",\"abbreviationPictureHeight\":\"400\",\"originalPictureWidth\":\"800\",\"originalPictureHeight\":\"800\"}');
 INSERT INTO `li_setting` VALUES ('IM_SETTING', 'admin', '2021-09-17 12:00:41.085000', b'0', 'admin', '2022-11-18 10:25:16.804000', '{\"httpUrl\":\"https://www.baidu.com\"}');
 INSERT INTO `li_setting` VALUES ('KUAIDI_SETTING', 'admin', '2021-01-18 03:30:53.430000', b'0', 'admin', '2021-09-15 11:57:07.495000', '{\"ebusinessID\":\"test\",\"appKey\":\"test\",\"reqURL\":\"test\"}');
