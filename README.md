@@ -92,6 +92,63 @@ Lilishop 由 4 个独立仓库组成，均同步托管于 GitHub 与 Gitee：
 -   **手动方式**: 如果您选择手动部署，SQL脚本位于以下地址。请确保获取与您代码版本一致的SQL文件。
     [**数据库脚本 (Gitee)**](https://gitee.com/beijing_hongye_huicheng/docker/tree/master/init/mysql)
 
+#### 一键启动本地全环境
+
+在 `opensource` 聚合目录下，脚本会启动 Docker 中间件、后端 `lilishop-all`、买家 PC、商家端、运营端、IM Web 和 uniapp H5。
+
+macOS:
+
+```bash
+./docker/start-dev.sh
+```
+
+Windows:
+
+```bat
+docker\start-dev.cmd
+```
+
+首次执行会提示输入本机对外访问的 IP/域名，以及各端访问地址；直接回车会使用本地默认端口。脚本生成的运行时文件位于 `docker/.runtime/`，前端本地覆盖配置位于各项目的 `config.local.js` 或 `.env.development.local`，这些文件不会提交到仓库。
+
+常用命令：
+
+```bash
+node docker/scripts/dev-env.mjs config --defaults
+node docker/scripts/dev-env.mjs start --reconfigure
+node docker/scripts/dev-env.mjs start --dry-run
+node docker/scripts/dev-env.mjs status
+node docker/scripts/dev-env.mjs stop
+```
+
+默认端口：
+
+| 服务 | 地址 |
+| :--- | :--- |
+| 后端 API | `http://127.0.0.1:8080` |
+| 买家 PC | `http://127.0.0.1:10000` |
+| uniapp H5 | `http://127.0.0.1:10001` |
+| 商家端 | `http://127.0.0.1:10002` |
+| 运营端 | `http://127.0.0.1:10003` |
+| IM Web | `http://127.0.0.1:8000` |
+
+#### 单镜像单容器全量环境
+
+如果希望用户只下载一条脚本，然后启动一个全量镜像，可使用 `docker/all-in-one`：
+
+macOS / Linux:
+
+```bash
+./docker/install/install-lilishop.sh
+```
+
+Windows PowerShell:
+
+```powershell
+.\docker\install\install-lilishop.ps1
+```
+
+该模式会启动一个很重的单容器，容器内包含 nginx、后端、PC/商家/运营/IM 前端资源、uni-app H5 运行服务、MariaDB(MySQL 协议兼容)、Redis、Elasticsearch、RocketMQ 和 XXL-Job。Elasticsearch 是后端必需组件，安装脚本固定启用；Kibana、Logstash、RocketMQ Dashboard 可选。建议 Docker Desktop 分配 `4+ CPU`、`12GB - 16GB` 内存和 `50GB+` 磁盘。详细说明见 `docker/all-in-one/README.md`。
+
 ---
 
 ### 5. 技术架构
