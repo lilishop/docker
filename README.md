@@ -6,6 +6,14 @@
   简体中文 | <a href="./README.en.md">English</a>
 </p>
 
+## All-In-One 本地体验说明
+
+`master` 分支的 All-In-One 是“完整单容器本地体验/验证形态”，默认镜像名为 `lilishop-all-in-one:dev`，需要先在 `opensource` 聚合目录完成本地构建，或者通过 `LILISHOP_IMAGE` 指定已经构建并推送的镜像。
+
+该形态会把多个运行组件放进一个容器，降低首次启动和演示门槛。它包含 nginx、`lilishop-all` 后端、买家 PC、商家端、运营端、IM Web 前端资源、uni-app H5 运行服务、MariaDB、Redis、Elasticsearch、RocketMQ 和 XXL-Job Admin；Kibana、Logstash、RocketMQ Dashboard 属于可选附加组件，需要构建镜像时显式包含后才能在运行时启用。
+
+All-In-One 不是生产高可用架构，也不是完整系统架构文档。完整架构、模块边界和技术选型请以官方文档及 `lilishop`、`lilishop-ui`、`lilishop-uniapp`、`docker` 各源码仓库为准。
+
 LILISHOP 是基于 Spring Boot / Spring Cloud / Vue / Uniapp 开发的 Java 开源商城系统，支持 B2B2C 多商户商城、小程序商城、微服务商城、直播电商、分销返佣、秒杀活动、Docker 私有化部署。
 
 ## 核心特性
@@ -131,9 +139,9 @@ node docker/scripts/dev-env.mjs stop
 | 运营端 | `http://127.0.0.1:10003` |
 | IM Web | `http://127.0.0.1:8000` |
 
-#### 单镜像单容器全量环境
+#### 单镜像单容器 All-In-One（master 完整版）
 
-如果希望用户只下载一条脚本，然后启动一个全量镜像，可使用 `docker/all-in-one`：
+如果希望把本地完整体验环境封装到一个容器中启动，可使用 `docker/all-in-one`。`master` 分支默认使用本地镜像 `lilishop-all-in-one:dev`，请先按 `docker/all-in-one/README.md` 构建镜像，或通过环境变量 `LILISHOP_IMAGE` 指定已经存在的镜像。
 
 macOS / Linux:
 
@@ -147,51 +155,24 @@ Windows PowerShell:
 .\docker\install\install-lilishop.ps1
 ```
 
-该模式会启动一个很重的单容器，容器内包含 nginx、后端、PC/商家/运营/IM 前端资源、uni-app H5 运行服务、MariaDB(MySQL 协议兼容)、Redis、Elasticsearch、RocketMQ 和 XXL-Job。Elasticsearch 是后端必需组件，安装脚本固定启用；Kibana、Logstash、RocketMQ Dashboard 可选。建议 Docker Desktop 分配 `4+ CPU`、`12GB - 16GB` 内存和 `50GB+` 磁盘。详细说明见 `docker/all-in-one/README.md`。
+该模式会启动一个较重的单容器，容器内包含 nginx、后端、PC / 商家端 / 运营端 / IM Web 前端资源、uni-app H5 运行服务、MariaDB（MySQL 协议兼容）、Redis、Elasticsearch、RocketMQ 和 XXL-Job Admin。Elasticsearch 默认启用；Kibana、Logstash、RocketMQ Dashboard 是可选附加组件。建议 Docker Desktop 分配 `4+ CPU`、`12GB - 16GB` 内存和 `50GB+` 磁盘。详细说明见 `docker/all-in-one/README.md`。
 
 ---
 
-### 5. 技术架构
+### 5. 架构文档边界
 
-#### 5.1 架构图
-![系统架构图](https://lili-system.oss-cn-beijing.aliyuncs.com/docs/%E6%9E%B6%E6%9E%84.png)
+本仓库首页不再维护不完整的系统架构图和技术栈表，避免与实际源码、部署形态和分支差异产生偏差。当前仓库主要说明 Docker 部署、开发环境启动、数据库脚本和 All-In-One 单容器体验方式。
 
-#### 5.2 后端技术栈
+完整架构请以官方文档及源码为准：
 
-| 技术            | 选型            | 版本   | 备注/用途  |
-| :-------------- | :-------------- | :----- | :--------- |
-| 核心框架        | Spring Boot     | 3.5.6  | 简化应用开发 |
-| ORM框架         | MyBatis-Plus    | 3.5.8 | 数据持久化  |
-| 数据库          | MySQL (LTS)     | 8.3.0  | 关系型数据存储 |
-| 消息队列        | RocketMQ        | 2.3.4  | 异步任务与解耦 |
-| 缓存            | Redis           | -  | 数据缓存    |
-| 搜索引擎        | Elasticsearch   | -  | 商品搜索   |
-| 安全框架        | Spring Security | -  | 认证与授权  |
-| 分库分表        | ShardingSphere  | 4.0.0  | 数据水平扩展 |
-| 定时任务        | XXL-Job         | 2.3.0  | 分布式任务调度 |
-| 认证方案        | JWT             | -      | Token 方案 |
+- 后端源码：`lilishop`
+- PC / 商家端 / 运营端 / IM Web：`lilishop-ui`
+- H5 / 小程序 / APP：`lilishop-uniapp`
+- 部署、SQL、镜像与启动脚本：`docker`
 
-#### 5.3 前端技术栈
+All-In-One 仅用于本地体验、演示或验证，不代表生产高可用部署架构。生产部署应按实际访问量、稳定性、监控、备份和扩缩容要求拆分数据库、缓存、搜索、消息、任务调度、前端静态资源和后端服务。
 
-**管理端 (平台/商家)**
-
-| 技术       | 选型       | 备注/用途  |
-| :--------- | :--------- | :--------- |
-| JS框架     | Vue.js     | 核心框架   |
-| UI库       | iView      | 界面组件   |
-| 状态管理   | Vuex       | 全局状态管理 |
-| 路由       | Vue Router | 页面路由   |
-| HTTP客户端 | axios      | API请求    |
-
-**移动端 (H5/小程序/APP)**
-
-| 技术      | 选型    | 备注/用途      |
- | :-------- | :------ | :------------- |
-| 核心框架  | uni-app | 跨平台开发框架 |
-| UI库      | uViewUI | 丰富的组件库   |
-| CSS预处理 | SCSS    | 样式开发       |
-
-### 6.功能列表
+### 6. 功能列表
 
 [功能清单](https://bdwx2tfwwt.feishu.cn/sheets/FFQKscQKDhUx60to1k9cbMngnYb?from=from_copylink)
 
