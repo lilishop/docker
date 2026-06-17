@@ -8,9 +8,11 @@
 
 ## All-In-One 本地体验说明
 
-`master` 分支的 All-In-One 是“完整单容器本地体验/验证形态”，默认镜像名为 `lilishop-all-in-one:dev`，需要先在 `opensource` 聚合目录完成本地构建，或者通过 `LILISHOP_IMAGE` 指定已经构建并推送的镜像。
+`master` 分支的 All-In-One 是“完整单容器本地体验/验证形态”，默认镜像名为 `ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite`。安装脚本默认会在每次执行时拉取远端最新同名镜像；如需使用本地开发镜像，可通过 `LILISHOP_IMAGE` 指定并设置 `LILISHOP_FORCE_PULL=false`。
 
 该形态会把多个运行组件放进一个容器，降低首次启动和演示门槛。它包含 nginx、`lilishop-all` 后端、买家 PC、商家端、运营端、IM Web 前端资源、uni-app H5 运行服务、MariaDB、Redis、Elasticsearch、RocketMQ 和 XXL-Job Admin；Kibana、Logstash、RocketMQ Dashboard 属于可选附加组件，需要构建镜像时显式包含后才能在运行时启用。
+
+数据库口径：常规部署和项目技术栈仍以 MySQL 为准，`docker-compose.yml` 默认使用 MySQL 镜像，后端也继续使用 MySQL JDBC 连接。All-In-One 镜像内置 MariaDB 是单容器本地体验的打包实现，作为 MySQL 协议兼容数据库使用，不代表生产部署或常规部署已经切换为 MariaDB。
 
 All-In-One 不是生产高可用架构，也不是完整系统架构文档。完整架构、模块边界和技术选型请以官方文档及 `lilishop`、`lilishop-ui`、`lilishop-uniapp`、`docker` 各源码仓库为准。
 
@@ -66,7 +68,7 @@ Lilishop 由 4 个独立仓库组成，均同步托管于 GitHub 与 Gitee：
 
 -   **全端覆盖**: 一套代码库支持PC、H5、小程序、APP，降低开发和维护成本。
 -   **商家入驻**: 支持多商家入驻，构建平台化电商生态。
--   **分布式架构**: 后端API服务化，支持独立部署和弹性伸缩。
+-   **All-In-One 后端**: 当前分支推荐使用 `lilishop-all` 统一后端入口，降低本地体验和私有化部署门槛。
 -   **前后端分离**: 清晰的职责划分，便于团队协作和独立开发。
 -   **容器化支持**: 提供Docker镜像和docker-compose配置，实现一键部署。
 -   **功能完善**: 涵盖客户、订单、商品、促销、店铺、运营、统计等完整电商业务模块。
@@ -132,7 +134,6 @@ node docker/scripts/dev-env.mjs stop
 
 | 服务 | 地址 |
 | :--- | :--- |
-| 后端 API | `http://127.0.0.1:8080` |
 | 买家 PC | `http://127.0.0.1:10000` |
 | uniapp H5 | `http://127.0.0.1:10001` |
 | 商家端 | `http://127.0.0.1:10002` |
@@ -141,7 +142,7 @@ node docker/scripts/dev-env.mjs stop
 
 #### 单镜像单容器 All-In-One（master 完整版）
 
-如果希望把本地完整体验环境封装到一个容器中启动，可使用 `docker/all-in-one`。`master` 分支默认使用本地镜像 `lilishop-all-in-one:dev`，请先按 `docker/all-in-one/README.md` 构建镜像，或通过环境变量 `LILISHOP_IMAGE` 指定已经存在的镜像。
+如果希望把本地完整体验环境封装到一个容器中启动，可使用 `docker/all-in-one`。`master` 分支默认使用已发布镜像 `ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite`，安装脚本默认会先拉取远端最新镜像再启动。All-In-One 只暴露一个 HTTP 入口，各端前端和统一后端 `/api/` 都通过该入口访问。
 
 macOS / Linux:
 
@@ -155,7 +156,13 @@ Windows PowerShell:
 .\docker\install\install-lilishop.ps1
 ```
 
-该模式会启动一个较重的单容器，容器内包含 nginx、后端、PC / 商家端 / 运营端 / IM Web 前端资源、uni-app H5 运行服务、MariaDB（MySQL 协议兼容）、Redis、Elasticsearch、RocketMQ 和 XXL-Job Admin。Elasticsearch 默认启用；Kibana、Logstash、RocketMQ Dashboard 是可选附加组件。建议 Docker Desktop 分配 `4+ CPU`、`12GB - 16GB` 内存和 `50GB+` 磁盘。详细说明见 `docker/all-in-one/README.md`。
+如果需要使用本地自行构建的开发镜像：
+
+```bash
+LILISHOP_IMAGE=lilishop-all-in-one:dev LILISHOP_FORCE_PULL=false ./docker/install/install-lilishop.sh
+```
+
+该模式会启动一个较重的单容器，容器内包含 nginx、后端、PC / 商家端 / 运营端 / IM Web 前端资源、uni-app H5 运行服务、MariaDB（MySQL 协议兼容）、Redis、Elasticsearch、RocketMQ 和 XXL-Job Admin。MariaDB 仅是 All-In-One 镜像内置的 MySQL 兼容实现；常规部署仍以 MySQL 为准。Elasticsearch 默认启用；Kibana、Logstash、RocketMQ Dashboard 是可选附加组件。建议 Docker Desktop 分配 `4+ CPU`、`12GB - 16GB` 内存和 `50GB+` 磁盘。详细说明见 `docker/all-in-one/README.md`。
 
 ---
 

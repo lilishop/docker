@@ -13,6 +13,10 @@
 - XXL-Job Admin
 - 可选 Kibana / Logstash / RocketMQ Dashboard
 
+访问口径：All-In-One 只暴露统一 HTTP 入口。买家 PC、商家端、运营端、IM Web、H5 以及后端 `/api/` 均通过同一个域名和端口访问，不再额外暴露各端独立 API 端口。
+
+数据库口径：常规部署和项目技术栈仍以 MySQL 为准；本镜像内置 MariaDB 只是为了在单容器本地体验中提供 MySQL 协议兼容数据库，不代表生产部署或常规 `docker-compose` 部署已经切换为 MariaDB。
+
 ## 构建
 
 需要在 `opensource` 聚合目录执行，保证构建上下文能访问 `lilishop`、`lilishop-ui`、`lilishop-uniapp` 和 `docker`。
@@ -34,7 +38,7 @@ docker build \
   .
 ```
 
-默认镜像包含 Elasticsearch、RocketMQ、MariaDB、Redis、XXL-Job 和各端运行所需内容；Kibana / Logstash 默认不打进镜像，避免首次构建额外下载数百 MB。需要调试链路时可显式开启：
+默认镜像包含 Elasticsearch、RocketMQ、MariaDB、Redis、XXL-Job 和各端运行所需内容；其中 MariaDB 按 MySQL 协议兼容数据库使用。Kibana / Logstash 默认不打进镜像，避免首次构建额外下载数百 MB。需要调试链路时可显式开启：
 
 ```bash
 docker build \
@@ -61,16 +65,18 @@ Windows PowerShell:
 
 脚本会提示输入域名/IP、端口、密码、数据目录和组件开关，然后执行一个 `docker run` 启动完整环境。
 
-如果本地已经存在输入的镜像，安装脚本会直接使用本地镜像，避免开发验证时因为未推送到镜像仓库而失败。需要强制拉取远端镜像时设置：
+默认镜像为 `ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite`。安装脚本默认会在每次执行时拉取远端最新同名镜像，避免本地已有旧 tag 时继续启动旧版本。
+
+如果需要使用本地自行构建的开发镜像，可显式指定本地镜像并关闭强制拉取：
 
 ```bash
-LILISHOP_FORCE_PULL=true ./docker/install/install-lilishop.sh
+LILISHOP_IMAGE=lilishop-all-in-one:dev LILISHOP_FORCE_PULL=false ./docker/install/install-lilishop.sh
 ```
 
 Windows PowerShell:
 
 ```powershell
-$env:LILISHOP_FORCE_PULL="true"; .\docker\install\install-lilishop.ps1
+$env:LILISHOP_IMAGE="lilishop-all-in-one:dev"; $env:LILISHOP_FORCE_PULL="false"; .\docker\install\install-lilishop.ps1
 ```
 
 Elasticsearch 是后端搜索与日志索引依赖，安装脚本固定启用；Kibana、Logstash、RocketMQ Dashboard 是可选附加组件。Kibana / Logstash 只有在构建镜像时开启对应 `INCLUDE_*` 参数后才能在运行时启用。

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DEFAULT_IMAGE="${LILISHOP_IMAGE:-lilishop-all-in-one:dev}"
+DEFAULT_IMAGE="${LILISHOP_IMAGE:-ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite}"
 DEFAULT_CONTAINER="${LILISHOP_CONTAINER:-lilishop-all}"
 
 tty_in="/dev/stdin"
@@ -65,7 +65,8 @@ image_exists() {
 pull_image_if_needed() {
   local image="$1"
   local platform="$2"
-  local force_pull="${LILISHOP_FORCE_PULL:-false}"
+  # 默认面向发布镜像安装，优先拉取远端同名 tag；离线开发可设置 LILISHOP_FORCE_PULL=false 复用本地镜像。
+  local force_pull="${LILISHOP_FORCE_PULL:-true}"
 
   case "$(printf '%s' "$force_pull" | tr '[:upper:]' '[:lower:]')" in
     y|yes|1|true|on|是)
@@ -76,7 +77,7 @@ pull_image_if_needed() {
   esac
 
   if image_exists "$image"; then
-    say "本地已存在镜像：${image}，跳过拉取。需要强制更新可设置 LILISHOP_FORCE_PULL=true。"
+    say "本地已存在镜像：${image}，按 LILISHOP_FORCE_PULL=false 跳过拉取。"
     return
   fi
 
@@ -112,7 +113,7 @@ main() {
   require_docker
   print_warning
 
-  local platform host http_port api_port mysql_port redis_port data_dir image container_name
+  local platform host http_port mysql_port redis_port data_dir image container_name
   local mysql_password redis_password admin_username admin_password enable_es enable_kibana enable_logstash enable_dashboard
   local java_opts es_java_opts
 
@@ -121,7 +122,6 @@ main() {
   container_name="$(prompt "容器名称" "$DEFAULT_CONTAINER")"
   host="$(prompt "对外访问 IP/域名" "127.0.0.1")"
   http_port="$(prompt "HTTP 访问端口" "80")"
-  api_port="$(prompt "后端 API 端口" "8080")"
   mysql_port="$(prompt "MySQL 兼容端口" "3306")"
   redis_port="$(prompt "Redis 端口" "6379")"
   data_dir="$(prompt "数据持久化目录" "$HOME/lilishop-data")"
@@ -129,6 +129,8 @@ main() {
   redis_password="$(prompt "Redis 密码" "lilishop")"
   admin_username="$(prompt "初始化管理员账号" "admin")"
   admin_password="$(prompt "初始化管理员密码" "123456")"
+  store_username="$(prompt "初始化商家账号" "13011111111")"
+  store_password="$(prompt "初始化商家密码" "111111")"
   enable_es="true"
   say "Elasticsearch: true（后端搜索服务必需，完整环境固定启用）"
   say "Kibana / Logstash 默认镜像不包含；如需启用，请使用 INCLUDE_KIBANA / INCLUDE_LOGSTASH 重新构建镜像。"
@@ -159,17 +161,17 @@ main() {
     --restart unless-stopped \
     --platform "$platform" \
     -p "$http_port:80" \
-    -p "$api_port:$api_port" \
     -p "$mysql_port:3306" \
     -p "$redis_port:6379" \
     -v "$data_dir:/data" \
     -e "LILI_HOST=$host" \
     -e "LILI_HTTP_PORT=$http_port" \
-    -e "LILI_API_PORT=$api_port" \
     -e "MYSQL_ROOT_PASSWORD=$mysql_password" \
     -e "REDIS_PASSWORD=$redis_password" \
     -e "LILI_ADMIN_USERNAME=$admin_username" \
     -e "LILI_ADMIN_PASSWORD=$admin_password" \
+    -e "LILI_STORE_USERNAME=$store_username" \
+    -e "LILI_STORE_PASSWORD=$store_password" \
     -e "ENABLE_ELASTICSEARCH=$enable_es" \
     -e "ENABLE_KIBANA=$enable_kibana" \
     -e "ENABLE_LOGSTASH=$enable_logstash" \
@@ -188,7 +190,7 @@ main() {
 - 运营端: http://$host:$http_port/manager/
 - IM: http://$host:$http_port/im/
 - H5: http://$host:$http_port/h5/
-- API: http://$host:$api_port/
+- 统一后端: http://$host:$http_port/api/
 
 常用命令：
 - 查看日志: docker logs -f $container_name

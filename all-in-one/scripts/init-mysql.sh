@@ -47,25 +47,41 @@ sql_escape() {
   printf "%s" "$1" | sed "s/'/''/g"
 }
 
-admin_hash="$(
-  python3 - <<'PY'
+make_bcrypt_md5_hash() {
+  local env_name="$1"
+  local default_value="$2"
+  PASSWORD_VALUE="${!env_name:-$default_value}" python3 - <<'PY'
 import bcrypt
 import hashlib
 import os
 
 # 登录链路使用 BCrypt(MD5(明文密码))，这里保持和业务认证契约一致。
-password = os.environ.get("LILI_ADMIN_PASSWORD", "123456").encode("utf-8")
+password = os.environ["PASSWORD_VALUE"].encode("utf-8")
 md5_value = hashlib.md5(password).hexdigest().encode("utf-8")
 print(bcrypt.hashpw(md5_value, bcrypt.gensalt(rounds=10)).decode("utf-8"))
 PY
+}
+
+admin_hash="$(
+  make_bcrypt_md5_hash LILI_ADMIN_PASSWORD "123456"
+)"
+store_password_hash="$(
+  make_bcrypt_md5_hash LILI_STORE_PASSWORD "111111"
 )"
 admin_username="$(sql_escape "${LILI_ADMIN_USERNAME:-admin}")"
 admin_hash_sql="$(sql_escape "$admin_hash")"
+store_username="$(sql_escape "${LILI_STORE_USERNAME:-13011111111}")"
+store_password_hash_sql="$(sql_escape "$store_password_hash")"
 
 mariadb --socket=/run/mysqld/mysqld.sock -uroot -p"${MYSQL_ROOT_PASSWORD}" lilishop <<SQL
 UPDATE li_admin_user
 SET username='${admin_username}', password='${admin_hash_sql}'
 WHERE id = 1337306110277476352
+LIMIT 1;
+
+UPDATE li_member
+SET username='${store_username}', mobile='${store_username}', password='${store_password_hash_sql}'
+WHERE id = 1376417684140326912
 LIMIT 1;
 SQL
 

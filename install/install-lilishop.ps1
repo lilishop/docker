@@ -43,7 +43,8 @@ function Image-Exists($ImageName) {
 }
 
 function Pull-Image-IfNeeded($ImageName, $Platform) {
-  $forcePull = (Env-OrDefault "LILISHOP_FORCE_PULL" "false").ToLowerInvariant()
+  # 默认面向发布镜像安装，优先拉取远端同名 tag；离线开发可设置 LILISHOP_FORCE_PULL=false 复用本地镜像。
+  $forcePull = (Env-OrDefault "LILISHOP_FORCE_PULL" "true").ToLowerInvariant()
   if ($forcePull -in @("y", "yes", "1", "true", "on", "是")) {
     Write-Host "强制拉取镜像：$ImageName ($Platform)"
     docker pull --platform $Platform $ImageName
@@ -51,7 +52,7 @@ function Pull-Image-IfNeeded($ImageName, $Platform) {
   }
 
   if (Image-Exists $ImageName) {
-    Write-Host "本地已存在镜像：$ImageName，跳过拉取。需要强制更新可设置 LILISHOP_FORCE_PULL=true。"
+    Write-Host "本地已存在镜像：$ImageName，按 LILISHOP_FORCE_PULL=false 跳过拉取。"
     return
   }
 
@@ -76,12 +77,11 @@ Write-Host "这是本地体验/演示/低门槛私有试用包，不是生产高
 Write-Host "============================================================"
 Write-Host ""
 
-$Image = Ask "镜像名称" (Env-OrDefault "LILISHOP_IMAGE" "lilishop-all-in-one:dev")
+$Image = Ask "镜像名称" (Env-OrDefault "LILISHOP_IMAGE" "ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite")
 $ContainerName = Ask "容器名称" (Env-OrDefault "LILISHOP_CONTAINER" "lilishop-all")
 $Platform = Ask "镜像平台 linux/amd64 或 linux/arm64" (Detect-Platform)
 $HostName = Ask "对外访问 IP/域名" "127.0.0.1"
 $HttpPort = Ask "HTTP 访问端口" "80"
-$ApiPort = Ask "后端 API 端口" "8080"
 $MysqlPort = Ask "MySQL 兼容端口" "3306"
 $RedisPort = Ask "Redis 端口" "6379"
 $DataDir = Ask "数据持久化目录" (Join-Path $HOME "lilishop-data")
@@ -89,6 +89,8 @@ $MysqlPassword = Ask "数据库 root 密码" "lilishop"
 $RedisPassword = Ask "Redis 密码" "lilishop"
 $AdminUsername = Ask "初始化管理员账号" "admin"
 $AdminPassword = Ask "初始化管理员密码" "123456"
+$StoreUsername = Ask "初始化商家账号" "13011111111"
+$StorePassword = Ask "初始化商家密码" "111111"
 $EnableEs = "true"
 Write-Host "Elasticsearch: true（后端搜索服务必需，完整环境固定启用）"
 Write-Host "Kibana / Logstash 默认镜像不包含；如需启用，请使用 INCLUDE_KIBANA / INCLUDE_LOGSTASH 重新构建镜像。"
@@ -119,17 +121,17 @@ docker run -d `
   --restart unless-stopped `
   --platform $Platform `
   -p "${HttpPort}:80" `
-  -p "${ApiPort}:${ApiPort}" `
   -p "${MysqlPort}:3306" `
   -p "${RedisPort}:6379" `
   -v "${DataDir}:/data" `
   -e "LILI_HOST=$HostName" `
   -e "LILI_HTTP_PORT=$HttpPort" `
-  -e "LILI_API_PORT=$ApiPort" `
   -e "MYSQL_ROOT_PASSWORD=$MysqlPassword" `
   -e "REDIS_PASSWORD=$RedisPassword" `
   -e "LILI_ADMIN_USERNAME=$AdminUsername" `
   -e "LILI_ADMIN_PASSWORD=$AdminPassword" `
+  -e "LILI_STORE_USERNAME=$StoreUsername" `
+  -e "LILI_STORE_PASSWORD=$StorePassword" `
   -e "ENABLE_ELASTICSEARCH=$EnableEs" `
   -e "ENABLE_KIBANA=$EnableKibana" `
   -e "ENABLE_LOGSTASH=$EnableLogstash" `
@@ -145,7 +147,7 @@ Write-Host "- 商家端: http://${HostName}:${HttpPort}/seller/"
 Write-Host "- 运营端: http://${HostName}:${HttpPort}/manager/"
 Write-Host "- IM: http://${HostName}:${HttpPort}/im/"
 Write-Host "- H5: http://${HostName}:${HttpPort}/h5/"
-Write-Host "- API: http://${HostName}:${ApiPort}/"
+Write-Host "- 统一后端: http://${HostName}:${HttpPort}/api/"
 Write-Host ""
 Write-Host "查看日志: docker logs -f $ContainerName"
 Write-Host "查看进程: docker exec -it $ContainerName supervisorctl status"

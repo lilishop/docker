@@ -1,7 +1,9 @@
+export const DEFAULT_IMAGE = 'ccr.ccs.tencentyun.com/lilishop/lilishop-all-in-one:lite';
+
 export function normalizeImageName(value) {
   const image = String(value || '').trim();
   if (!image) {
-    return 'lilishop-all-in-one:dev';
+    return DEFAULT_IMAGE;
   }
   const lastSegment = image.split('/').pop();
   return lastSegment.includes(':') ? image : `${image}:dev`;
@@ -26,7 +28,6 @@ export function buildInstallerConfig(input = {}) {
     containerName: input.containerName || 'lilishop-all',
     host,
     httpPort: String(input.httpPort || '80'),
-    apiPort: String(input.apiPort || '8080'),
     mysqlPort: String(input.mysqlPort || '3306'),
     redisPort: String(input.redisPort || '6379'),
     dataDir: input.dataDir || './lilishop-data',
@@ -34,6 +35,8 @@ export function buildInstallerConfig(input = {}) {
     redisPassword: input.redisPassword || 'lilishop',
     adminUsername: input.adminUsername || 'admin',
     adminPassword: input.adminPassword || '123456',
+    storeUsername: input.storeUsername || '13011111111',
+    storePassword: input.storePassword || '111111',
     enableElasticsearch: boolString(input.enableElasticsearch, true),
     enableKibana: boolString(input.enableKibana, false),
     enableLogstash: boolString(input.enableLogstash, false),
@@ -47,11 +50,12 @@ export function buildDockerRunArgs(config) {
   const env = {
     LILI_HOST: config.host,
     LILI_HTTP_PORT: config.httpPort,
-    LILI_API_PORT: config.apiPort,
     MYSQL_ROOT_PASSWORD: config.mysqlPassword,
     REDIS_PASSWORD: config.redisPassword,
     LILI_ADMIN_USERNAME: config.adminUsername,
     LILI_ADMIN_PASSWORD: config.adminPassword,
+    LILI_STORE_USERNAME: config.storeUsername,
+    LILI_STORE_PASSWORD: config.storePassword,
     ENABLE_ELASTICSEARCH: config.enableElasticsearch,
     ENABLE_KIBANA: config.enableKibana,
     ENABLE_LOGSTASH: config.enableLogstash,
@@ -71,8 +75,6 @@ export function buildDockerRunArgs(config) {
     config.platform,
     '-p',
     `${config.httpPort}:80`,
-    '-p',
-    `${config.apiPort}:${config.apiPort}`,
     '-p',
     `${config.mysqlPort}:3306`,
     '-p',

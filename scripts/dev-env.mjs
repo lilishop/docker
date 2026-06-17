@@ -198,7 +198,7 @@ async function loadOrPromptConfig(forcePrompt = false) {
     const defaults = buildRuntimeConfig({ host });
     const answers = {
       host,
-      apiBaseUrl: await ask(rl, '后端 API 地址', defaults.apiBaseUrl),
+      apiBaseUrl: await ask(rl, '统一后端地址', defaults.apiBaseUrl),
       buyerPcUrl: await ask(rl, '买家 PC 地址', defaults.buyerPcUrl),
       uniappH5Url: await ask(rl, 'uniapp H5 地址', defaults.uniappH5Url),
       sellerUrl: await ask(rl, '商家端地址', defaults.sellerUrl),
@@ -348,7 +348,7 @@ function printStatus() {
 
 function printUrls(config) {
   console.log('\n本地访问地址：');
-  console.log(`- 后端 API: ${config.apiBaseUrl}`);
+  console.log(`- 统一后端: ${config.apiBaseUrl}`);
   console.log(`- 买家 PC: ${config.buyerPcUrl}`);
   console.log(`- uniapp H5: ${config.uniappH5Url}`);
   console.log(`- 商家端: ${config.sellerUrl}`);
