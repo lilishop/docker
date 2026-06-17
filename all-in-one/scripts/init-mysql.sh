@@ -58,7 +58,7 @@ import os
 # 登录链路使用 BCrypt(MD5(明文密码))，这里保持和业务认证契约一致。
 password = os.environ["PASSWORD_VALUE"].encode("utf-8")
 md5_value = hashlib.md5(password).hexdigest().encode("utf-8")
-print(bcrypt.hashpw(md5_value, bcrypt.gensalt(rounds=10)).decode("utf-8"))
+print(bcrypt.hashpw(md5_value, bcrypt.gensalt(rounds=10, prefix=b"2a")).decode("utf-8"))
 PY
 }
 

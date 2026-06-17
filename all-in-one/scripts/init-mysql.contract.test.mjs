@@ -9,3 +9,8 @@ test('init-mysql resets the default store member password from runtime env', () 
   assert.match(script, /UPDATE li_member[\s\S]*SET username='\$\{store_username\}', mobile='\$\{store_username\}', password='\$\{store_password_hash_sql\}'/);
   assert.match(script, /WHERE id = 1376417684140326912/);
 });
+
+test('init-mysql generates Spring-compatible bcrypt hashes for MD5 passwords', () => {
+  assert.match(script, /hashlib\.md5\(password\)\.hexdigest\(\)\.encode\("utf-8"\)/);
+  assert.match(script, /bcrypt\.gensalt\(rounds=10, prefix=b["']2a["']\)/);
+});

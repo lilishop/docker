@@ -47,7 +47,7 @@ CREATE TABLE `li_admin_user`  (
 -- ----------------------------
 -- Records of li_admin_user
 -- ----------------------------
-INSERT INTO `li_admin_user` VALUES (1337306110277476352, '', '2020-12-11 07:59:57.000000', b'0', 'admin', '2021-12-01 16:44:56.648000', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/65e87ffa718b42bb9c201712566dbc9a.png', '1364415918628667392', 'aaa', 'aaa@aa.com', b'1', '13012345678', '初一', '$2a$10$sVnczXsvm2V0SBKCx3e96eRr6Ssl69bh56iD3RJNJE3o2LzqEO4qW', NULL, b'1', 'admin', '1394944593522327552');
+INSERT INTO `li_admin_user` VALUES (1337306110277476352, '', '2020-12-11 07:59:57.000000', b'0', 'admin', '2021-12-01 16:44:56.648000', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/65e87ffa718b42bb9c201712566dbc9a.png', '1364415918628667392', 'aaa', 'aaa@aa.com', b'1', '13012345678', '初一', '$2a$10$eRqNOKcPq98Q6PAzs9.VW.NbT1gNVN07S8BHyA9/KuOWdgqTJTlnC', NULL, b'1', 'admin', '1394944593522327552');
 
 -- ----------------------------
 -- Table structure for li_after_sale
@@ -4454,7 +4454,7 @@ CREATE TABLE `li_member`  (
 -- Records of li_member
 -- ----------------------------
 INSERT INTO `li_member` VALUES (1376364798236688384, NULL, '2021-03-28 21:45:14.178000', b'0', '15810610731', '2022-01-10 21:13:48.278000', '2021-03-28 00:00:00.000000', b'1', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/00218693d2e64c9893b269d1aec77f94.jpeg', b'1', '15810610731', '星星眨眨眼,月儿画问号', '$2a$10$FhOh0wqan7PCwFh96WXyqOcdxh.FQkUuuKBh745LyHR4Tkg0khiDO', 41601, 1, '1376369067769724928', '15810610731', '上海市 , 上海城区 , 浦东新区 , 高东镇', '1371783040048562731,1371783040048562732,1371783040048562733,1371783040048562734', 'PC', '2022-01-10 21:13:48.232000', NULL, NULL, NULL, 44717);
-INSERT INTO `li_member` VALUES (1376417684140326912, NULL, '2021-03-29 01:15:23.159000', b'0', '13011111111', '2021-12-22 16:07:27.926000', '2021-11-28 00:00:00.000000', b'1', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/cec8b43b6bad41c69f393e93c55c528f.jpg', b'1', '13011111111', '张三', '$2a$10$s9xnEGxRDdXRzvK/n2SNKu0aVz2Tq6Y8Sw04tyLzaOs3077jQlLMi', 55790972, 1, '1376433565247471616', '13011111111', '新疆维吾尔自治区,铁门关市,双丰镇', '', 'PC', '2021-12-22 16:07:27.915000', NULL, NULL, NULL, 56334259);
+INSERT INTO `li_member` VALUES (1376417684140326912, NULL, '2021-03-29 01:15:23.159000', b'0', '13011111111', '2021-12-22 16:07:27.926000', '2021-11-28 00:00:00.000000', b'1', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/cec8b43b6bad41c69f393e93c55c528f.jpg', b'1', '13011111111', '张三', '$2a$10$1EUGPWBsN4dPr3MDTs/M0OEWLjmENuCt5vyB8M7VYqrqNeBwxC78K', 55790972, 1, '1376433565247471616', '13011111111', '新疆维吾尔自治区,铁门关市,双丰镇', '', 'PC', '2021-12-22 16:07:27.915000', NULL, NULL, NULL, 56334259);
 
 -- ----------------------------
 -- Table structure for li_member_address
