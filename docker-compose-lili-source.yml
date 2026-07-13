@@ -26,109 +26,109 @@ services:
       - ../volumes/data/redsidata:/data
     command: redis-server --port 6379 --requirepass lilishop --appendonly yes --protected-mode no
 
-  elasticsearch:
-    image: harbor.dllll.xyz/middleware/elasticsearch:7.17.19
-    restart: always
-    container_name: elasticsearch
-    volumes:
-      # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
-      # - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
-      # - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
-      - ./config/ik:/usr/share/elasticsearch/plugins/ik
-      #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
-    ports: 
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      - cluster.name=elasticsearch
-      - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "50m"
-    networks: 
-      - stack
-    ulimits:
-      nofile:
-          soft: 65535
-          hard: 65535
+  # elasticsearch:
+  #   image: harbor.dllll.xyz/middleware/elasticsearch:7.17.19
+  #   restart: always
+  #   container_name: elasticsearch
+  #   volumes:
+  #     # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
+  #     # - ../volumes/data/es7/logs:/usr/share/elasticsearch/logs:rw
+  #     # - ../volumes/data/es7/data:/usr/share/elasticsearch/data:rw
+  #     - ./config/ik:/usr/share/elasticsearch/plugins/ik
+  #     #      - "./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+  #   ports: 
+  #     - "9200:9200"
+  #     - "9300:9300"
+  #   environment:
+  #     - cluster.name=elasticsearch
+  #     - discovery.type=single-node
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "50m"
+  #   networks: 
+  #     - stack
+  #   ulimits:
+  #     nofile:
+  #         soft: 65535
+  #         hard: 65535
 
-  kibana:
-    image: harbor.dllll.xyz/middleware/kibana:7.17.19
-    restart: always
-    container_name: kibana
-    ports:
-      - 5601:5601
-    # volumes:
-            #    - "./config/kibana.yml:/usr/share/kibana/config/kibana.yml"
-    networks: 
-      - stack
-    depends_on: ['elasticsearch']  
+  # kibana:
+  #   image: harbor.dllll.xyz/middleware/kibana:7.17.19
+  #   restart: always
+  #   container_name: kibana
+  #   ports:
+  #     - 5601:5601
+  #   # volumes:
+  #           #    - "./config/kibana.yml:/usr/share/kibana/config/kibana.yml"
+  #   networks: 
+  #     - stack
+  #   depends_on: ['elasticsearch']  
 
 
-  logstash:
-    image: harbor.dllll.xyz/middleware/logstash:7.17.19
-    restart: always
-    container_name: logstash
-    volumes:
-      - ./config/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
-    networks: 
-      - stack
-    depends_on: ['elasticsearch']
-    ports: 
-      - 4560:4560
+  # logstash:
+  #   image: harbor.dllll.xyz/middleware/logstash:7.17.19
+  #   restart: always
+  #   container_name: logstash
+  #   volumes:
+  #     - ./config/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+  #   networks: 
+  #     - stack
+  #   depends_on: ['elasticsearch']
+  #   ports: 
+  #     - 4560:4560
     
- # rocket mq name server
-  rmqnamesrv:
-    image: harbor.dllll.xyz/middleware/apache/rocketmq:4.9.7
-    restart: always
-    container_name: rocket-server
-    # environment:
-    #   JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
-    # volumes:
-      # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
-      # - ../volumes/data/rocket/server/logs:/home/rocketmq/logs
-    networks:
-      - rocketmq
-    ports:
-      - 9876:9876
-    command: sh mqnamesrv
-  # rocket mq broker
-  rmqbroker:
-    image: harbor.dllll.xyz/middleware/apache/rocketmq:4.9.7
-    restart: always
-    container_name: rocket-broker
-    volumes:
-      # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
-      # - ../volumes/data/rocket/broker/logs:/home/rocketmq/logs
-      # - ../volumes/data/rocket/broker/store:/home/rocketmq/store
-      - ./config/broker.conf:/opt/rocketmq-4.9.7/conf/broker.conf
-    environment:
-      - NAMESRV_ADDR=rmqnamesrv:9876
-      # - JAVA_OPTS:=-Duser.home=/opt
-      - JAVA_OPT_EXT=-server -Xms64m -Xmx64m -Xmn64m
-    depends_on:
-      - rmqnamesrv
-    networks:
-      - rocketmq
-    ports:
-      - 10909:10909
-      - 10911:10911
-    command: sh mqbroker -c /opt/rocketmq-4.9.7/conf/broker.conf
-  # xxl-job 分布式调度中心
-  xxl-job:
-    image: harbor.dllll.xyz/middleware/xuxueli/xxl-job-admin:2.3.0
-    restart: always
-    container_name: xxl-job
-    environment:
-      - PARAMS=--spring.datasource.url=jdbc:mysql://mysql:3306/lilishop?Unicode=true&characterEncoding=UTF-8  --spring.datasource.username=root --spring.datasource.password=lilishop --server.port=9001
-    depends_on:
-      - mysql
-    volumes:
-      - ../volumes/data/xxl-job:/data/applogs
-    ports:
-      - 9001:9001
+  # # rocket mq name server
+  # rmqnamesrv:
+  #   image: harbor.dllll.xyz/middleware/apache/rocketmq:4.9.7
+  #   restart: always
+  #   container_name: rocket-server
+  #   # environment:
+  #   #   JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
+  #   # volumes:
+  #     # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
+  #     # - ../volumes/data/rocket/server/logs:/home/rocketmq/logs
+  #   networks:
+  #     - rocketmq
+  #   ports:
+  #     - 9876:9876
+  #   command: sh mqnamesrv
+  # # rocket mq broker
+  # rmqbroker:
+  #   image: harbor.dllll.xyz/middleware/apache/rocketmq:4.9.7
+  #   restart: always
+  #   container_name: rocket-broker
+  #   volumes:
+  #     # 映射本地目录权限一定要设置为 777 权限，否则启动不成功
+  #     # - ../volumes/data/rocket/broker/logs:/home/rocketmq/logs
+  #     # - ../volumes/data/rocket/broker/store:/home/rocketmq/store
+  #     - ./config/broker.conf:/opt/rocketmq-4.9.7/conf/broker.conf
+  #   environment:
+  #     - NAMESRV_ADDR=rmqnamesrv:9876
+  #     # - JAVA_OPTS:=-Duser.home=/opt
+  #     - JAVA_OPT_EXT=-server -Xms64m -Xmx64m -Xmn64m
+  #   depends_on:
+  #     - rmqnamesrv
+  #   networks:
+  #     - rocketmq
+  #   ports:
+  #     - 10909:10909
+  #     - 10911:10911
+  #   command: sh mqbroker -c /opt/rocketmq-4.9.7/conf/broker.conf
+  # # xxl-job 分布式调度中心
+  # xxl-job:
+  #   image: harbor.dllll.xyz/middleware/xuxueli/xxl-job-admin:2.3.0
+  #   restart: always
+  #   container_name: xxl-job
+  #   environment:
+  #     - PARAMS=--spring.datasource.url=jdbc:mysql://mysql:3306/lilishop?Unicode=true&characterEncoding=UTF-8  --spring.datasource.username=root --spring.datasource.password=lilishop --server.port=9001
+  #   depends_on:
+  #     - mysql
+  #   volumes:
+  #     - ../volumes/data/xxl-job:/data/applogs
+  #   ports:
+  #     - 9001:9001
 networks: 
   rocketmq:
     driver: bridge
