@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : 192.168.31.100
+ Source Server         : 局域网
  Source Server Type    : MySQL
- Source Server Version : 80300 (8.3.0)
+ Source Server Version : 80300
  Source Host           : 192.168.31.100:3306
- Source Schema         : lilishop
+ Source Schema         : lilishop123
 
  Target Server Type    : MySQL
- Target Server Version : 80300 (8.3.0)
+ Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 13/07/2026 18:20:38
+ Date: 20/07/2026 09:06:47
 */
 
 SET NAMES utf8mb4;
@@ -2204,7 +2204,7 @@ CREATE TABLE `li_data_report_form`  (
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `form_liem` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_data_report_form
@@ -2220,7 +2220,7 @@ CREATE TABLE `li_data_report_form_item`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_data_report_form_item
@@ -2573,7 +2573,7 @@ CREATE TABLE `li_flash_discount`  (
   `limit_num` int NULL DEFAULT NULL COMMENT '限购数量，0不限',
   `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_flash_discount
@@ -5783,6 +5783,7 @@ CREATE TABLE `li_member_points_history`  (
   `member_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '会员名称',
   `point` bigint NULL DEFAULT NULL COMMENT '当前积分',
   `point_type` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `point_source` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT 'UNKNOWN' COMMENT '积分来源',
   `variable_point` bigint NULL DEFAULT NULL COMMENT '消费积分',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
@@ -6037,6 +6038,11 @@ CREATE TABLE `li_menu`  (
 -- ----------------------------
 INSERT INTO `li_menu` VALUES (200401020001000001, 'admin', '2026-07-13 14:49:12', b'0', 'admin', '2026-07-13 14:49:12', '商品-关联商品子菜单-商品分组', 'goods/group/index', 'md-list', 2, 'managerGoodsGroup', '1367044657296441344', 'goods-group', 3.00, '商品分组', NULL, '/manager/goods/goodsGroup*');
 INSERT INTO `li_menu` VALUES (200401020001000002, 'admin', '2026-07-13 14:49:20', b'0', 'admin', '2026-07-13 14:49:20', '商品-关联商品子菜单-虚拟销量', 'goods/virtual-sales/index', 'md-stats', 2, 'goods-virtual-sales', '1367044657296441344', 'goods-virtual-sales', 3.50, '虚拟销量', NULL, '/manager/goods/goods/list*,/manager/goods/goods/get*');
+INSERT INTO `li_menu` VALUES (200417160001000001, 'admin', '2026-07-20 09:05:56', b'0', 'admin', '2026-07-20 09:05:56', '统计-营业概况', 'statistics/overview', 'md-stats', 2, 'overviewStatistics', '1367052616634204160', 'overviewStatistics', -1.00, '营业概况', NULL, '/manager/statistics/overview*');
+INSERT INTO `li_menu` VALUES (200417160001000002, 'admin', '2026-07-20 09:06:11', b'0', 'admin', '2026-07-20 09:06:11', '统计-积分分析', 'statistics/points', 'md-stats', 2, 'pointsStatistics', '1367052616634204160', 'pointsStatistics', 3.00, '积分分析', NULL, '/manager/statistics/points*');
+INSERT INTO `li_menu` VALUES (200417160001000003, 'admin', '2026-07-20 09:06:15', b'0', 'admin', '2026-07-20 09:06:15', '统计-储值分析', 'statistics/deposit', 'md-stats', 2, 'depositStatistics', '1367052616634204160', 'depositStatistics', 4.00, '储值分析', NULL, '/manager/statistics/deposit*');
+INSERT INTO `li_menu` VALUES (200417160001000004, 'admin', '2026-07-20 09:06:19', b'0', 'admin', '2026-07-20 09:06:19', '统计-营销概况', 'statistics/marketing', 'md-stats', 2, 'marketingStatistics', '1367052616634204160', 'marketingStatistics', 5.00, '营销概况', NULL, '/manager/statistics/marketing*');
+INSERT INTO `li_menu` VALUES (200417160001000005, 'admin', '2026-07-20 09:06:19', b'0', 'admin', '2026-07-20 09:06:19', '统计-分销统计', 'statistics/distribution', 'md-stats', 2, 'distributionStatistics', '1367052616634204160', 'distributionStatistics', 6.00, '分销统计', NULL, '/manager/statistics/distribution*');
 INSERT INTO `li_menu` VALUES (1348810750596767744, 'admin', '2021-01-12 09:55:17', b'0', 'admin', '2021-01-15 09:42:50', 'null', '1', 'ios-american-football', 0, 'settings', '0', '1', 2.00, '设置', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1348810864748945408, 'admin', '2021-01-12 09:55:45', b'0', 'admin', '2021-03-15 20:57:12', 'null', 'null', 'ios-american-football', 0, 'log', '0', 'null', 3.00, '日志', 'null', '/manager/setting/log*');
 INSERT INTO `li_menu` VALUES (1349237129847005184, 'admin', '2021-01-13 14:09:34', b'0', 'admin', '2021-01-15 09:43:16', 'null', 'Main', 'ios-american-football', 1, 'sys', '1348810750596767744', '/sys', 1.00, '系统设置', 'null', NULL);
@@ -6104,9 +6110,9 @@ INSERT INTO `li_menu` VALUES (1367050829697122304, 'admin', '2021-03-03 09:54:51
 INSERT INTO `li_menu` VALUES (1367050939084570624, 'admin', '2021-03-03 09:55:17', b'0', 'admin', '2021-07-27 16:06:38', NULL, 'page/article-manage/ArticleCategory', 'md-aperture', 2, 'article-category', '1367050250249830400', 'article-category', 1.00, '文章分类', NULL, '/manager/other/articleCategory*');
 INSERT INTO `li_menu` VALUES (1367051048232943616, 'admin', '2021-03-03 09:55:43', b'0', 'admin', '2021-07-27 16:06:42', NULL, 'page/article-manage/articleList', 'md-alert', 2, 'articleList', '1367050250249830400', 'articleList', 3.00, '文章管理', NULL, '/manager/other/article*,/manager/other/articleCategory*');
 INSERT INTO `li_menu` VALUES (1367052616634204160, 'admin', '2021-03-03 10:01:57', b'0', 'admin', '2021-07-27 16:07:38', NULL, 'Main', 'md-aperture', 1, 'statistics', '1367040819248234496', '/', 0.00, '统计', NULL, '/manager/store*,/manager/member*');
-INSERT INTO `li_menu` VALUES (1367052705725415424, 'admin', '2021-03-03 10:02:18', b'0', 'admin', '2021-03-11 22:11:05', 'null', 'statistics/member', 'md-alert', 2, 'memberStatistics', '1367052616634204160', 'memberStatistics', 0.00, '客户统计', 'null', NULL);
+INSERT INTO `li_menu` VALUES (1367052705725415424, 'admin', '2021-03-03 10:02:18', b'0', 'admin', '2026-07-20 09:06:05', '统计-会员概况', 'statistics/member', 'md-alert', 2, 'memberStatistics', '1367052616634204160', 'memberStatistics', 0.00, '会员概况', 'null', '/manager/statistics/member*');
 INSERT INTO `li_menu` VALUES (1367052805503713280, 'admin', '2021-03-03 10:02:42', b'0', 'admin', '2021-03-11 22:11:14', 'null', 'statistics/order', 'md-alert', 2, 'orderStatistics', '1367052616634204160', 'orderStatistics', 1.00, '订单统计', 'null', NULL);
-INSERT INTO `li_menu` VALUES (1367052915314786304, 'admin', '2021-03-03 10:03:08', b'0', 'admin', '2021-03-11 22:11:23', 'null', 'statistics/goods', 'md-alert', 2, 'goodsStatistics', '1367052616634204160', 'goodsStatistics', 2.00, '商品统计', 'null', NULL);
+INSERT INTO `li_menu` VALUES (1367052915314786304, 'admin', '2021-03-03 10:03:08', b'0', 'admin', '2026-07-20 09:06:00', '统计-商品概况', 'statistics/goods', 'md-alert', 2, 'goodsStatistics', '1367052616634204160', 'goodsStatistics', 2.00, '商品概况', 'null', '/manager/statistics/goods*');
 INSERT INTO `li_menu` VALUES (1367053087121866752, 'admin', '2021-03-03 10:03:49', b'0', 'admin', '2021-03-11 22:11:34', 'null', 'statistics/traffic', 'md-alert', 2, 'trafficStatistics', '1367052616634204160', 'trafficStatistics', 4.00, '流量统计', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1372807928452481024, 'admin', '2021-03-19 02:11:30', b'0', NULL, NULL, NULL, 'Main', 'ios-aperture', 1, 'flow', '1367039534616805376', '/', 3.00, '流水', NULL, NULL);
 INSERT INTO `li_menu` VALUES (1372808148565360640, 'admin', '2021-03-19 02:12:23', b'0', 'admin', '2021-07-27 16:03:57', NULL, 'order/flow/paymentLog', 'md-alert', 2, 'paymentLog', '1372807928452481024', 'paymentLog', 1.00, '收款记录', NULL, '/manager/order/paymentLog*');
@@ -6198,7 +6204,7 @@ CREATE TABLE `li_notice_message`  (
   `email_status` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'CLOSE' COMMENT '邮箱渠道 OPEN/CLOSE',
   `email_content` varchar(2000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '邮箱正文，空则与站内信同文',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_notice_message
@@ -6271,7 +6277,7 @@ CREATE TABLE `li_nth_item_discount`  (
   `discount_value` decimal(10, 2) NULL DEFAULT NULL COMMENT '折扣值，RATE时为折数',
   `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_nth_item_discount
@@ -7025,6 +7031,7 @@ CREATE TABLE `li_purchase_quoted_item`  (
 -- ----------------------------
 -- Records of li_purchase_quoted_item
 -- ----------------------------
+
 -- ----------------------------
 -- Table structure for li_qa
 -- ----------------------------
@@ -7040,12 +7047,13 @@ CREATE TABLE `li_qa`  (
   `question` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '问题',
   `answer` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '答案',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_li_qa_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC COMMENT = 'IM租户问答';
+  INDEX `idx_li_qa_tenant_id`(`tenant_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = 'IM租户问答' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_qa
 -- ----------------------------
+
 -- ----------------------------
 -- Table structure for li_receipt
 -- ----------------------------
@@ -51805,7 +51813,6 @@ INSERT INTO `li_s_platform_view_data` VALUES (1466106069596332037, '2021-12-01 0
 INSERT INTO `li_s_platform_view_data` VALUES (1466106069600526338, '2021-12-01 00:00:00.000000', 1, '1413749887712206849', 1);
 INSERT INTO `li_s_platform_view_data` VALUES (1466106069600526339, '2021-12-01 00:00:00.000000', 579, '1376433565247471616', 109);
 
-
 -- ----------------------------
 -- Table structure for li_seat
 -- ----------------------------
@@ -51825,9 +51832,9 @@ CREATE TABLE `li_seat`  (
   `disabled` bit(1) NULL DEFAULT NULL COMMENT '坐席状态',
   `mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '手机号码',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_li_seat_tenant_id`(`tenant_id`) USING BTREE,
-  INDEX `idx_li_seat_username`(`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC COMMENT = 'IM坐席';
+  INDEX `idx_li_seat_tenant_id`(`tenant_id` ASC) USING BTREE,
+  INDEX `idx_li_seat_username`(`username` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = 'IM坐席' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_seat
@@ -51849,12 +51856,14 @@ CREATE TABLE `li_seat_setting`  (
   `out_line_auto_reply` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '离线自动回复',
   `long_term_auto_reply` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '长时间自动回复',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_li_seat_setting_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE utf8mb4_bin ROW_FORMAT = DYNAMIC COMMENT = 'IM坐席设置';
+  INDEX `idx_li_seat_setting_tenant_id`(`tenant_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = 'IM坐席设置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_seat_setting
--- ------------------------------ ----------------------------
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for li_seckill
 -- ----------------------------
 DROP TABLE IF EXISTS `li_seckill`;
@@ -52797,7 +52806,7 @@ CREATE TABLE `li_store_data_report_form`  (
   `cycle_num` int NULL DEFAULT NULL,
   `field_num` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_data_report_form
@@ -53431,7 +53440,7 @@ CREATE TABLE `li_system_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_li_system_log_store_id`(`store_id` ASC) USING BTREE,
   INDEX `idx_li_system_log_create_time`(`create_time` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系统操作日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系统操作日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_system_log
