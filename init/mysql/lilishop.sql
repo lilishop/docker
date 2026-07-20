@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 20/07/2026 09:06:47
+ Date: 20/07/2026 15:37:55
 */
 
 SET NAMES utf8mb4;
@@ -6043,6 +6043,7 @@ INSERT INTO `li_menu` VALUES (200417160001000002, 'admin', '2026-07-20 09:06:11'
 INSERT INTO `li_menu` VALUES (200417160001000003, 'admin', '2026-07-20 09:06:15', b'0', 'admin', '2026-07-20 09:06:15', '统计-储值分析', 'statistics/deposit', 'md-stats', 2, 'depositStatistics', '1367052616634204160', 'depositStatistics', 4.00, '储值分析', NULL, '/manager/statistics/deposit*');
 INSERT INTO `li_menu` VALUES (200417160001000004, 'admin', '2026-07-20 09:06:19', b'0', 'admin', '2026-07-20 09:06:19', '统计-营销概况', 'statistics/marketing', 'md-stats', 2, 'marketingStatistics', '1367052616634204160', 'marketingStatistics', 5.00, '营销概况', NULL, '/manager/statistics/marketing*');
 INSERT INTO `li_menu` VALUES (200417160001000005, 'admin', '2026-07-20 09:06:19', b'0', 'admin', '2026-07-20 09:06:19', '统计-分销统计', 'statistics/distribution', 'md-stats', 2, 'distributionStatistics', '1367052616634204160', 'distributionStatistics', 6.00, '分销统计', NULL, '/manager/statistics/distribution*');
+INSERT INTO `li_menu` VALUES (200420160001000000, 'admin', '2026-07-20 10:30:00', b'0', 'admin', '2026-07-20 10:30:00', '统计-数据报表', 'statistics/data-report', 'md-stats', 2, 'dataReport', '1367052616634204160', 'dataReport', 7.00, '数据报表', NULL, '/manager/statistics/report/*');
 INSERT INTO `li_menu` VALUES (1348810750596767744, 'admin', '2021-01-12 09:55:17', b'0', 'admin', '2021-01-15 09:42:50', 'null', '1', 'ios-american-football', 0, 'settings', '0', '1', 2.00, '设置', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1348810864748945408, 'admin', '2021-01-12 09:55:45', b'0', 'admin', '2021-03-15 20:57:12', 'null', 'null', 'ios-american-football', 0, 'log', '0', 'null', 3.00, '日志', 'null', '/manager/setting/log*');
 INSERT INTO `li_menu` VALUES (1349237129847005184, 'admin', '2021-01-13 14:09:34', b'0', 'admin', '2021-01-15 09:43:16', 'null', 'Main', 'ios-american-football', 1, 'sys', '1348810750596767744', '/sys', 1.00, '系统设置', 'null', NULL);
@@ -53117,6 +53118,7 @@ CREATE TABLE `li_store_menu`  (
 -- ----------------------------
 -- Records of li_store_menu
 -- ----------------------------
+INSERT INTO `li_store_menu` VALUES (200420160001000000, 'admin', '2026-07-20 10:30:00.000000', b'0', 'admin', '2026-07-20 10:30:00', NULL, 'statistics/data-report', 'ios-american-football', 2, 'dataReport', '1367044247978508288', 'dataReport', '5.14', '数据报表', '/store/statistics/report/*');
 INSERT INTO `li_store_menu` VALUES (1348810750596767744, NULL, '2022-01-11 22:35:33.000000', b'0', NULL, '2022-01-11 22:36:52', NULL, 'Main', 'ios-american-football', 0, 'goods', '0', '/', '1', '商品', NULL);
 INSERT INTO `li_store_menu` VALUES (1348810864748945408, NULL, '2022-01-11 22:35:37.000000', b'0', NULL, '2022-01-11 22:36:55', NULL, 'Main', 'ios-american-football', 1, 'Main', '1348810750596767744', '/', '1.1', '商品管理', '');
 INSERT INTO `li_store_menu` VALUES (1349237129847005184, NULL, '2022-01-11 22:35:40.000000', b'0', NULL, '2022-01-11 22:36:59', NULL, 'goods-operation', 'ios-american-football', 2, 'goods-operation', '1348810864748945408', '/goods-operation', '1.11', '商品发布', '/store/goods/category*,/store/goods/categorySpec*,/store/goods/categoryParameters*,/store/goods/draftGoods*,/store/goods/label*,/store/goods/goods*,/store/goods/goodsUnit*,/store/goods/spec*');
