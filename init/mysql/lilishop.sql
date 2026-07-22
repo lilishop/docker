@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 20/07/2026 15:37:55
+ Date: 22/07/2026 16:01:01
 */
 
 SET NAMES utf8mb4;
@@ -2157,6 +2157,11 @@ CREATE TABLE `li_damage_report`  (
   `evidence` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '凭证图片',
   `total_quantity` int NULL DEFAULT NULL COMMENT '报损总数量',
   `total_amount` decimal(20, 2) NULL DEFAULT NULL COMMENT '报损总金额',
+  `maker_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '制单人ID',
+  `maker_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '制单人',
+  `audit_time` datetime NULL DEFAULT NULL COMMENT '审核时间',
+  `auditor_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '审核人ID',
+  `auditor_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '审核人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_li_damage_report_sn`(`sn` ASC) USING BTREE,
   INDEX `idx_li_damage_report_store_id`(`store_id` ASC) USING BTREE,
@@ -2181,6 +2186,7 @@ CREATE TABLE `li_damage_report_item`  (
   `report_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '报损单ID',
   `goods_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '商品ID',
   `sku_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT 'SKU ID',
+  `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '商品名称',
   `quantity` int NULL DEFAULT NULL COMMENT '报损数量',
   `unit_price` decimal(20, 2) NULL DEFAULT NULL COMMENT '单价',
   `amount` decimal(20, 2) NULL DEFAULT NULL COMMENT '金额',
@@ -6857,7 +6863,10 @@ CREATE TABLE `li_procurement_order`  (
   `maker_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '制单人ID',
   `maker_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '制单人',
   `audit_time` datetime(6) NULL DEFAULT NULL COMMENT '审核时间',
+  `auditor_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '审核人ID',
+  `auditor_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '审核人',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  `stock_reason_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '出入库原因ID',
   `status` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_li_procurement_order_order_sn`(`order_sn` ASC) USING BTREE,
