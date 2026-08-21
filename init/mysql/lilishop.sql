@@ -54782,10 +54782,35 @@ ORDER BY sort_order;
 -- 第 22 步：等级升级条件启用字段（已有库增量）
 -- ============================================================
 
-ALTER TABLE li_distribution_grade
-    ADD COLUMN IF NOT EXISTS sales_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用销售额升级条件' AFTER invite_threshold,
-    ADD COLUMN IF NOT EXISTS commission_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用收益额升级条件' AFTER sales_enabled,
-    ADD COLUMN IF NOT EXISTS invite_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用邀请人数升级条件' AFTER commission_enabled;
+-- MySQL 8 无 ADD COLUMN IF NOT EXISTS，按列检查后动态 ADD（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_grade' AND COLUMN_NAME = 'sales_enabled'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_grade ADD COLUMN sales_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT ''是否启用销售额升级条件'' AFTER invite_threshold',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_grade' AND COLUMN_NAME = 'commission_enabled'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_grade ADD COLUMN commission_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT ''是否启用收益额升级条件'' AFTER sales_enabled',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_grade' AND COLUMN_NAME = 'invite_enabled'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_grade ADD COLUMN invite_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT ''是否启用邀请人数升级条件'' AFTER commission_enabled',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 UPDATE li_distribution_grade
 SET sales_enabled = 0,
@@ -54799,9 +54824,26 @@ WHERE grade_sort = 1
 -- 第 23 步：分销商品审核字段（已有库增量）
 -- ============================================================
 
-ALTER TABLE li_distribution_goods
-    ADD COLUMN IF NOT EXISTS auth_status VARCHAR(32) NOT NULL DEFAULT 'PASS' COMMENT '审核状态：TOBEAUDITED待审核 PASS已审核 REFUSE审核未通过' AFTER quantity,
-    ADD COLUMN IF NOT EXISTS auth_remark VARCHAR(255) DEFAULT NULL COMMENT '审核备注' AFTER auth_status;
+-- MySQL 8 无 ADD COLUMN IF NOT EXISTS，按列检查后动态 ADD（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_goods' AND COLUMN_NAME = 'auth_status'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_goods ADD COLUMN auth_status VARCHAR(32) NOT NULL DEFAULT ''PASS'' COMMENT ''审核状态：TOBEAUDITED待审核 PASS已审核 REFUSE审核未通过'' AFTER quantity',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_goods' AND COLUMN_NAME = 'auth_remark'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_goods ADD COLUMN auth_remark VARCHAR(255) DEFAULT NULL COMMENT ''审核备注'' AFTER auth_status',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 
 -- ============================================================
@@ -54863,36 +54905,121 @@ WHERE version IS NULL;
 --   AND ir.parent_distribution_id IS NOT NULL;
 
 -- ---------- 29.1 存量库：li_distribution_order 邀请佣金字段（若第 2 步未执行）----------
-ALTER TABLE li_distribution_order
-    ADD COLUMN IF NOT EXISTS invite_distribution_id VARCHAR(64) DEFAULT NULL COMMENT '二级分销员ID（邀请奖励受益人）' AFTER distribution_name,
-    ADD COLUMN IF NOT EXISTS invite_distribution_name VARCHAR(255) DEFAULT NULL COMMENT '二级分销员名称' AFTER invite_distribution_id,
-    ADD COLUMN IF NOT EXISTS invite_commission DOUBLE DEFAULT NULL COMMENT '二级邀请佣金' AFTER rebate,
-    ADD COLUMN IF NOT EXISTS invite_sell_back_rebate DOUBLE DEFAULT 0 COMMENT '二级邀请佣金退款冲回金额' AFTER sell_back_rebate,
-    ADD COLUMN IF NOT EXISTS settle_time DATETIME DEFAULT NULL COMMENT '佣金结算时间' AFTER settle_cycle;
+-- MySQL 8 无 ADD COLUMN IF NOT EXISTS，按列检查后动态 ADD（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_order' AND COLUMN_NAME = 'invite_distribution_id'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_order ADD COLUMN invite_distribution_id VARCHAR(64) DEFAULT NULL COMMENT ''二级分销员ID（邀请奖励受益人）'' AFTER distribution_name',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_order' AND COLUMN_NAME = 'invite_distribution_name'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_order ADD COLUMN invite_distribution_name VARCHAR(255) DEFAULT NULL COMMENT ''二级分销员名称'' AFTER invite_distribution_id',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_order' AND COLUMN_NAME = 'invite_commission'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_order ADD COLUMN invite_commission DOUBLE DEFAULT NULL COMMENT ''二级邀请佣金'' AFTER rebate',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_order' AND COLUMN_NAME = 'invite_sell_back_rebate'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_order ADD COLUMN invite_sell_back_rebate DOUBLE DEFAULT 0 COMMENT ''二级邀请佣金退款冲回金额'' AFTER sell_back_rebate',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_order' AND COLUMN_NAME = 'settle_time'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_order ADD COLUMN settle_time DATETIME DEFAULT NULL COMMENT ''佣金结算时间'' AFTER settle_cycle',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ---------- 29.2 存量库：reward_order 回填邀请佣金 ----------
--- UPDATE li_distribution_order do
+-- UPDATE li_distribution_order `do`
 --     INNER JOIN li_distribution_reward_order r
---         ON r.order_item_sn = do.order_item_sn
+--         ON r.order_item_sn = `do`.order_item_sn
 --         AND r.reward_type = 'INVITE'
 --         AND IFNULL(r.delete_flag, 0) = 0
--- SET do.invite_distribution_id = COALESCE(do.invite_distribution_id, r.beneficiary_distribution_id),
---     do.invite_commission = COALESCE(do.invite_commission, r.reward_amount),
---     do.settle_time = COALESCE(do.settle_time, r.settle_time)
--- WHERE IFNULL(do.invite_commission, 0) = 0 OR do.invite_distribution_id IS NULL;
+-- SET `do`.invite_distribution_id = COALESCE(`do`.invite_distribution_id, r.beneficiary_distribution_id),
+--     `do`.invite_commission = COALESCE(`do`.invite_commission, r.reward_amount),
+--     `do`.settle_time = COALESCE(`do`.settle_time, r.settle_time)
+-- WHERE IFNULL(`do`.invite_commission, 0) = 0 OR `do`.invite_distribution_id IS NULL;
 
 -- ---------- 29.3 删除 li_distribution 已废弃字段 ----------
-ALTER TABLE li_distribution
-    DROP COLUMN IF EXISTS name,
-    DROP COLUMN IF EXISTS id_number,
-    DROP COLUMN IF EXISTS settlement_bank_account_name,
-    DROP COLUMN IF EXISTS settlement_bank_account_num,
-    DROP COLUMN IF EXISTS settlement_bank_branch_name;
+-- MySQL 8 无 DROP COLUMN IF EXISTS，按列检查后动态 DROP（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution' AND COLUMN_NAME = 'name'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution DROP COLUMN name', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution' AND COLUMN_NAME = 'id_number'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution DROP COLUMN id_number', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution' AND COLUMN_NAME = 'settlement_bank_account_name'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution DROP COLUMN settlement_bank_account_name', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution' AND COLUMN_NAME = 'settlement_bank_account_num'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution DROP COLUMN settlement_bank_account_num', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution' AND COLUMN_NAME = 'settlement_bank_branch_name'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution DROP COLUMN settlement_bank_branch_name', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ---------- 29.4 删除 li_distribution_grade 已废弃字段 ----------
-ALTER TABLE li_distribution_grade
-    DROP COLUMN IF EXISTS condition_match_mode,
-    DROP COLUMN IF EXISTS grade_state;
+-- MySQL 8 无 DROP COLUMN IF EXISTS，按列检查后动态 DROP（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_grade' AND COLUMN_NAME = 'condition_match_mode'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution_grade DROP COLUMN condition_match_mode', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_grade' AND COLUMN_NAME = 'grade_state'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution_grade DROP COLUMN grade_state', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ---------- 29.5 删除已废弃表 ----------
 DROP TABLE IF EXISTS li_distribution_invite_relation;
@@ -54900,8 +55027,15 @@ DROP TABLE IF EXISTS li_distribution_reward_order;
 DROP TABLE IF EXISTS li_distribution_selected_goods;
 
 -- ---------- 29.6 删除 li_distribution_goods 冗余库存（实时读 SKU 库存）----------
-ALTER TABLE li_distribution_goods
-    DROP COLUMN IF EXISTS quantity;
+-- MySQL 8 无 DROP COLUMN IF EXISTS，按列检查后动态 DROP（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_goods' AND COLUMN_NAME = 'quantity'
+);
+SET @sql = IF(@exist > 0, 'ALTER TABLE li_distribution_goods DROP COLUMN quantity', 'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- ---------- 29.7 招募设置迁至 li_setting，删除计划/字段子表（存量库）----------
 -- 【存量库】若 li_distribution_recruit_plan 有数据，请先在管理端重新保存一次招募设置，或自行将配置写入 li_setting（id=DISTRIBUTION_RECRUIT_SETTING）。
@@ -54910,8 +55044,17 @@ DROP TABLE IF EXISTS li_distribution_recruit_plan_goods;
 DROP TABLE IF EXISTS li_distribution_recruit_plan;
 
 -- ---------- 29.8 招募申请动态填写内容合并至申请主表（存量库）----------
-ALTER TABLE li_distribution_recruit_application
-    ADD COLUMN IF NOT EXISTS apply_form_snapshot TEXT COMMENT '动态填写内容快照（JSON）' AFTER condition_snapshot;
+-- MySQL 8 无 ADD COLUMN IF NOT EXISTS，按列检查后动态 ADD（可重复执行）
+SET @db = DATABASE();
+
+SET @exist = (
+    SELECT COUNT(*) FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = @db AND TABLE_NAME = 'li_distribution_recruit_application' AND COLUMN_NAME = 'apply_form_snapshot'
+);
+SET @sql = IF(@exist = 0,
+    'ALTER TABLE li_distribution_recruit_application ADD COLUMN apply_form_snapshot TEXT COMMENT ''动态填写内容快照（JSON）'' AFTER condition_snapshot',
+    'SELECT 1');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 DROP TABLE IF EXISTS li_distribution_recruit_application_answer;
 
