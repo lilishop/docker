@@ -102,6 +102,12 @@ Lilishop 由 4 个独立仓库组成，均同步托管于 GitHub 与 Gitee：
 -   **手动方式**: 如果您选择手动部署，SQL脚本位于以下地址。请确保获取与您代码版本一致的SQL文件。
     [**数据库脚本 (Gitee)**](https://gitee.com/beijing_hongye_huicheng/docker/tree/master/init/mysql)
 
+**patches 执行顺序（两条部署路径相反）**
+
+`docker/init/mysql` 整目录挂到 MySQL 官方镜像的 `/docker-entrypoint-initdb.d`。entrypoint 按 glob 顺序执行，数字文件先于字母，因此 `999_apply_patches.sh` 排在 `lilishop.sql` **之前**。All-In-One 的 `init-mysql.sh` 则先导入 `lilishop.sql`，再跑 `patches/*.sql`。
+
+因此 **每个补丁都必须对「基表尚不存在」和「基表已存在」两种状态都安全**：`CREATE TABLE IF NOT EXISTS`；`ALTER` 仅在「表存在且列不存在」时执行；`INSERT`/`UPDATE` 在基表缺失时跳过。不要把补丁挪到 dump 之后来绕过 compose 顺序——那会让两条路径的执行模型分叉。已运行库不会再次执行 initdb，新补丁需手工打到已有数据卷。
+
 #### 一键启动本地全环境
 
 在 `opensource` 聚合目录下，脚本会启动 Docker 中间件、后端 `lilishop-all`、买家 PC、商家端、运营端、IM Web 和 uniapp H5。

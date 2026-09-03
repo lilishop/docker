@@ -33,6 +33,8 @@ SQL
       | mariadb --socket=/run/mysqld/mysqld.sock -uroot -p"${MYSQL_ROOT_PASSWORD}" lilishop
   fi
 
+  # 本路径先导 lilishop.sql 再跑 patches；compose initdb 则相反（999_apply_patches.sh 先于 dump）。
+  # 因此 patches/*.sql 必须对「基表尚不存在」和「基表已存在」两种状态都安全。
   if [ -d "$LILI_HOME/init/mysql/patches" ]; then
     for patch_sql in "$LILI_HOME"/init/mysql/patches/*.sql; do
       [ -f "$patch_sql" ] || continue

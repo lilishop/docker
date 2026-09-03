@@ -1,4 +1,5 @@
 -- 首次启动补齐商品参数关联表，并让默认上传走本地文件存储。
+-- DML 仅在基表已存在时执行：compose initdb 先跑 patches，此时 li_parameters / li_setting 还不存在。
 CREATE TABLE IF NOT EXISTS `li_category_parameter` (
   `id` bigint NOT NULL COMMENT 'ID',
   `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '创建者',
@@ -14,28 +15,18 @@ CREATE TABLE IF NOT EXISTS `li_category_parameter` (
   KEY `idx_li_category_parameter_parameter_id` (`parameter_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='分类-参数关联';
 
-INSERT IGNORE INTO `li_category_parameter` (`id`, `category_id`, `parameter_id`)
-SELECT `id`, `category_id`, `id`
-FROM `li_parameters`
-WHERE `category_id` IS NOT NULL;
+SET @need_dml := (
+  SELECT COUNT(1) FROM information_schema.TABLES
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'li_parameters');
+SET @sql := IF(@need_dml = 1,
+  'INSERT IGNORE INTO `li_category_parameter` (`id`, `category_id`, `parameter_id`) SELECT `id`, `category_id`, `id` FROM `li_parameters` WHERE `category_id` IS NOT NULL',
+  'SELECT ''skip li_category_parameter backfill: li_parameters missing''');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-INSERT INTO `li_setting` (
-  `id`,
-  `create_by`,
-  `create_time`,
-  `delete_flag`,
-  `update_by`,
-  `update_time`,
-  `setting_value`
-) VALUES (
-  'OSS_SETTING',
-  'admin',
-  NOW(6),
-  b'0',
-  'admin',
-  NOW(6),
-  '{"type":"LOCAL","localFilePath":"data/uploads","localFileUrlPrefix":"/files"}'
-) ON DUPLICATE KEY UPDATE
-  `update_by` = 'admin',
-  `update_time` = NOW(6),
-  `setting_value` = '{"type":"LOCAL","localFilePath":"data/uploads","localFileUrlPrefix":"/files"}';
+SET @need_dml := (
+  SELECT COUNT(1) FROM information_schema.TABLES
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'li_setting');
+SET @sql := IF(@need_dml = 1,
+  'INSERT INTO `li_setting` (`id`, `create_by`, `create_time`, `delete_flag`, `update_by`, `update_time`, `setting_value`) VALUES (''OSS_SETTING'', ''admin'', NOW(6), b''0'', ''admin'', NOW(6), ''{"type":"LOCAL","localFilePath":"data/uploads","localFileUrlPrefix":"/files"}'') ON DUPLICATE KEY UPDATE `update_by` = ''admin'', `update_time` = NOW(6), `setting_value` = ''{"type":"LOCAL","localFilePath":"data/uploads","localFileUrlPrefix":"/files"}''',
+  'SELECT ''skip li_setting upsert: table missing''');
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
