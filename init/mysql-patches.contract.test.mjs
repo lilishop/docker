@@ -7,6 +7,9 @@ const goodsSchedulePatchUrl = new URL('./mysql/patches/001_goods_schedule_fields
 const bootstrapPatchUrl = new URL('./mysql/patches/002_bootstrap_schema_and_local_upload.sql', import.meta.url);
 const afterSaleRefundPatchUrl = new URL('./mysql/patches/003_after_sale_refund_schema.sql', import.meta.url);
 const goodsSearchParamPatchUrl = new URL('./mysql/patches/004_goods_search_param.sql', import.meta.url);
+const walletLogAlignPatchUrl = new URL('./mysql/patches/005_distribution_wallet_log_align.sql', import.meta.url);
+const gradeHistoryRatePatchUrl = new URL('./mysql/patches/006_distribution_grade_history_rate.sql', import.meta.url);
+const orderItemSnUniquePatchUrl = new URL('./mysql/patches/007_distribution_order_item_sn_unique.sql', import.meta.url);
 
 function assertNoUnguardedDdlDml(sql, label) {
   const unguarded = sql.split(/\r?\n/).filter((line) =>
@@ -82,4 +85,64 @@ test('mysql goods search param patch provides inverted index table with sku-alig
   assert.match(goodsSearchParamPatch, /KEY `idx_li_goods_search_param_lookup`/);
   assert.match(goodsSearchParamPatch, /`goods_id` varchar\(255\) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci/);
   assert.doesNotMatch(goodsSearchParamPatch, /utf8mb4_0900/);
+});
+
+test('mysql wallet log align patch renames 9 legacy columns only when old names exist', () => {
+  assert.equal(existsSync(walletLogAlignPatchUrl), true);
+  const walletLogAlignPatch = readFileSync(walletLogAlignPatchUrl, 'utf8');
+
+  assert.match(walletLogAlignPatch, /FROM information_schema\.COLUMNS/);
+  assert.match(walletLogAlignPatch, /TABLE_NAME = 'li_distribution_wallet_log'/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `log_type` `biz_type`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `can_rebate_before` `before_can_rebate`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `can_rebate_after` `after_can_rebate`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `commission_frozen_before` `before_commission_frozen`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `commission_frozen_after` `after_commission_frozen`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `withdrawal_frozen_before` `before_withdrawal_frozen`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `withdrawal_frozen_after` `after_withdrawal_frozen`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `withdrawn_total_before` `before_withdrawn_total`/);
+  assert.match(walletLogAlignPatch, /CHANGE COLUMN `withdrawn_total_after` `after_withdrawn_total`/);
+  assert.match(walletLogAlignPatch, /AND NOT EXISTS \(/);
+  assert.match(walletLogAlignPatch, /COLUMN_NAME = 'biz_type'/);
+  assert.match(walletLogAlignPatch, /skip li_distribution_wallet_log\.log_type/);
+  assert.doesNotMatch(walletLogAlignPatch, /RENAME COLUMN/);
+  assertNoUnguardedDdlDml(walletLogAlignPatch, '005_distribution_wallet_log_align.sql');
+});
+
+test('mysql grade history rate patch widens decimal(10,2) snapshot columns only when they exist', () => {
+  assert.equal(existsSync(gradeHistoryRatePatchUrl), true);
+  const gradeHistoryRatePatch = readFileSync(gradeHistoryRatePatchUrl, 'utf8');
+
+  assert.match(gradeHistoryRatePatch, /FROM information_schema\.COLUMNS/);
+  assert.match(gradeHistoryRatePatch, /TABLE_NAME = 'li_distribution_grade_history'/);
+  assert.match(gradeHistoryRatePatch, /COLUMN_NAME = 'goods_commission_rate'/);
+  assert.match(gradeHistoryRatePatch, /COLUMN_NAME = 'invite_commission_rate'/);
+  assert.match(gradeHistoryRatePatch, /NUMERIC_PRECISION = 10/);
+  assert.match(gradeHistoryRatePatch, /NUMERIC_SCALE = 2/);
+  assert.match(gradeHistoryRatePatch, /MODIFY COLUMN `goods_commission_rate` DECIMAL\(10, 4\)/);
+  assert.match(gradeHistoryRatePatch, /MODIFY COLUMN `invite_commission_rate` DECIMAL\(10, 4\)/);
+  assert.match(gradeHistoryRatePatch, /skip li_distribution_grade_history\.goods_commission_rate/);
+  assert.match(gradeHistoryRatePatch, /skip li_distribution_grade_history\.invite_commission_rate/);
+  assert.doesNotMatch(gradeHistoryRatePatch, /^\s*CREATE TABLE/m);
+  assert.doesNotMatch(gradeHistoryRatePatch, /ADD COLUMN/);
+  assertNoUnguardedDdlDml(gradeHistoryRatePatch, '006_distribution_grade_history_rate.sql');
+});
+
+test('mysql distribution order item sn patch adds UNIQUE only when table exists and values are unique', () => {
+  assert.equal(existsSync(orderItemSnUniquePatchUrl), true);
+  const orderItemSnUniquePatch = readFileSync(orderItemSnUniquePatchUrl, 'utf8');
+
+  assert.match(orderItemSnUniquePatch, /FROM information_schema\.TABLES/);
+  assert.match(orderItemSnUniquePatch, /FROM information_schema\.STATISTICS/);
+  assert.match(orderItemSnUniquePatch, /TABLE_NAME = 'li_distribution_order'/);
+  assert.match(orderItemSnUniquePatch, /GROUP BY order_item_sn HAVING COUNT\(\*\) > 1/);
+  assert.match(orderItemSnUniquePatch, /ADD UNIQUE KEY `uk_do_order_item_sn` \(`order_item_sn`\)/);
+  assert.match(orderItemSnUniquePatch, /DROP INDEX `idx_do_order_item_sn`/);
+  assert.match(orderItemSnUniquePatch, /INDEX_NAME = 'uk_do_order_item_sn'/);
+  assert.match(orderItemSnUniquePatch, /INDEX_NAME = 'idx_do_order_item_sn'/);
+  assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.uk_do_order_item_sn: duplicate order_item_sn/);
+  assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.uk_do_order_item_sn/);
+  assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.idx_do_order_item_sn drop/);
+  assert.doesNotMatch(orderItemSnUniquePatch, /DELETE FROM/);
+  assertNoUnguardedDdlDml(orderItemSnUniquePatch, '007_distribution_order_item_sn_unique.sql');
 });

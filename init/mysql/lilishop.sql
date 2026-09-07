@@ -54191,7 +54191,7 @@ ALTER TABLE li_distribution_order
     ADD KEY idx_do_perf_payment (performance_distributor_id, payment_time),
     ADD KEY idx_do_member_payment (member_id, payment_time),
     ADD KEY idx_do_order_sn (order_sn),
-    ADD KEY idx_do_order_item_sn (order_item_sn);
+    ADD UNIQUE KEY uk_do_order_item_sn (order_item_sn);
 
 
 -- ============================================================
