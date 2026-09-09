@@ -1,8 +1,8 @@
 -- 运行库 li_distribution_grade_history 若已是实体列（goods_commission_rate /
 -- invite_commission_rate），从 decimal(10,2) 放到 decimal(10,4)，与等级表比例精度一致。
--- 只影响快照展示，不参与佣金计算。仓库建表仍是 JSON 快照结构，本补丁不改那些定义。
+-- 只影响快照展示，不参与佣金计算。仅扩已有扁平比例列精度，不负责 JSON→扁平（见 008）。
 -- 仅当表存在、列存在、且仍是 decimal(10,2) 时 MODIFY；列不存在或已是 (10,4) 时 skip。
--- compose initdb 先跑 patches 后导 dump，表不存在或 dump 为快照结构时也 skip。
+-- compose initdb 先跑 patches 后导 dump，表不存在时也 skip。
 -- 已运行库需手工执行本补丁（Docker initdb 只在空数据卷首次执行）：
 --   docker compose -f docker/docker-compose.yml exec -T mysql \
 --     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/006_distribution_grade_history_rate.sql

@@ -10,6 +10,7 @@ const goodsSearchParamPatchUrl = new URL('./mysql/patches/004_goods_search_param
 const walletLogAlignPatchUrl = new URL('./mysql/patches/005_distribution_wallet_log_align.sql', import.meta.url);
 const gradeHistoryRatePatchUrl = new URL('./mysql/patches/006_distribution_grade_history_rate.sql', import.meta.url);
 const orderItemSnUniquePatchUrl = new URL('./mysql/patches/007_distribution_order_item_sn_unique.sql', import.meta.url);
+const gradeHistoryFlattenPatchUrl = new URL('./mysql/patches/008_distribution_grade_history_flatten.sql', import.meta.url);
 
 function assertNoUnguardedDdlDml(sql, label) {
   const unguarded = sql.split(/\r?\n/).filter((line) =>
@@ -145,4 +146,49 @@ test('mysql distribution order item sn patch adds UNIQUE only when table exists 
   assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.idx_do_order_item_sn drop/);
   assert.doesNotMatch(orderItemSnUniquePatch, /DELETE FROM/);
   assertNoUnguardedDdlDml(orderItemSnUniquePatch, '007_distribution_order_item_sn_unique.sql');
+});
+
+test('mysql grade history flatten patch changes and adds columns independently', () => {
+  assert.equal(existsSync(gradeHistoryFlattenPatchUrl), true);
+  const gradeHistoryFlattenPatch = readFileSync(gradeHistoryFlattenPatchUrl, 'utf8');
+
+  assert.match(gradeHistoryFlattenPatch, /FROM information_schema\.TABLES/);
+  assert.match(gradeHistoryFlattenPatch, /FROM information_schema\.COLUMNS/);
+  assert.match(gradeHistoryFlattenPatch, /TABLE_NAME = 'li_distribution_grade_history'/);
+  assert.match(gradeHistoryFlattenPatch, /TABLE_NAME = 'li_distribution_grade'/);
+  assert.match(gradeHistoryFlattenPatch, /SELECT COUNT\(\*\) INTO @dgh_row_count/);
+  assert.match(gradeHistoryFlattenPatch, /SELECT after_grade_id FROM li_distribution_grade_history WHERE after_grade_id IS NOT NULL LIMIT 10/);
+  assert.match(gradeHistoryFlattenPatch, /INNER JOIN `li_distribution_grade` g ON h\.after_grade_id = g\.id SET h\.after_grade_id = CAST\(g\.grade_sort AS CHAR\)/);
+  assert.match(gradeHistoryFlattenPatch, /INNER JOIN `li_distribution_grade` g ON h\.before_grade_id = g\.id SET h\.before_grade_id = CAST\(g\.grade_sort AS CHAR\)/);
+  assert.match(gradeHistoryFlattenPatch, /CHANGE COLUMN `after_grade_id` `grade_id`/);
+  assert.match(gradeHistoryFlattenPatch, /CHANGE COLUMN `before_grade_id` `previous_grade_id`/);
+  assert.match(gradeHistoryFlattenPatch, /CHANGE COLUMN `change_time` `upgrade_time`/);
+  assert.match(gradeHistoryFlattenPatch, /变更后等级值（1-5）/);
+  assert.match(gradeHistoryFlattenPatch, /变更前等级值（1-5）/);
+  assert.match(gradeHistoryFlattenPatch, /自动升级写入，非通用变更时间/);
+  assert.match(gradeHistoryFlattenPatch, /ADD COLUMN `grade_name`/);
+  assert.match(gradeHistoryFlattenPatch, /ADD COLUMN `goods_commission_rate` DECIMAL\(10, 4\)/);
+  assert.match(gradeHistoryFlattenPatch, /ADD COLUMN `invite_commission_rate` DECIMAL\(10, 4\)/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'after_grade_id'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'grade_id'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'before_grade_id'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'previous_grade_id'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'change_time'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'upgrade_time'/);
+  assert.match(gradeHistoryFlattenPatch, /COLUMN_NAME = 'grade_name'/);
+  assert.match(gradeHistoryFlattenPatch, /AND NOT EXISTS \(/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.after_grade_id sample/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.after_grade_id to grade_sort/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.before_grade_id to grade_sort/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.after_grade_id/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.before_grade_id/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.change_time/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.grade_name/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.goods_commission_rate add/);
+  assert.match(gradeHistoryFlattenPatch, /skip li_distribution_grade_history\.invite_commission_rate add/);
+  assert.doesNotMatch(gradeHistoryFlattenPatch, /DROP COLUMN/);
+  assert.doesNotMatch(gradeHistoryFlattenPatch, /DROP TABLE/);
+  assert.doesNotMatch(gradeHistoryFlattenPatch, /^\s*CREATE TABLE/m);
+  assert.doesNotMatch(gradeHistoryFlattenPatch, /RENAME COLUMN/);
+  assertNoUnguardedDdlDml(gradeHistoryFlattenPatch, '008_distribution_grade_history_flatten.sql');
 });
