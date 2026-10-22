@@ -7,12 +7,18 @@ export function normalizeBaseUrl(value) {
 export function buildRuntimeConfig(input = {}) {
   const host = input.host || '127.0.0.1';
   const apiBaseUrl = normalizeBaseUrl(input.apiBaseUrl || `http://${host}:8080`);
+  const buyerApiUrl = normalizeBaseUrl(input.buyerApiUrl || `http://${host}:8888`);
+  const managerApiUrl = normalizeBaseUrl(input.managerApiUrl || `http://${host}:8887`);
+  const imApiUrl = normalizeBaseUrl(input.imApiUrl || `http://${host}:8885`);
   const wsProtocol = apiBaseUrl.startsWith('https://') ? 'wss' : 'ws';
   const apiHost = apiBaseUrl.replace(/^https?:\/\//, '');
 
   return {
     host,
     apiBaseUrl,
+    buyerApiUrl,
+    managerApiUrl,
+    imApiUrl,
     buyerPcUrl: normalizeBaseUrl(input.buyerPcUrl || `http://${host}:10000`),
     uniappH5Url: normalizeBaseUrl(input.uniappH5Url || `http://${host}:10001`),
     sellerUrl: normalizeBaseUrl(input.sellerUrl || `http://${host}:10002`),
@@ -22,22 +28,23 @@ export function buildRuntimeConfig(input = {}) {
   };
 }
 
-export function renderPcConfig({ apiBaseUrl, buyerPcUrl, uniappH5Url, prefix = '' }) {
+export function renderPcConfig({ apiBaseUrl, buyerApiUrl, managerApiUrl, buyerPcUrl, uniappH5Url, prefix = '' }) {
   const prefixLine = prefix ? `,\n  PREFIX: ${JSON.stringify(prefix)}` : '';
-  const apiBase = JSON.stringify(normalizeBaseUrl(apiBaseUrl));
+  const buyerBase = JSON.stringify(normalizeBaseUrl(buyerApiUrl || apiBaseUrl));
+  const managerBase = JSON.stringify(normalizeBaseUrl(managerApiUrl || apiBaseUrl));
 
   return `var BASE = {
   API_DEV: {
-    common: ${apiBase},
-    buyer: ${apiBase},
-    seller: ${apiBase},
-    manager: ${apiBase}
+    common: ${buyerBase},
+    buyer: ${buyerBase},
+    seller: ${managerBase},
+    manager: ${managerBase}
   },
   API_PROD: {
-    common: ${apiBase},
-    buyer: ${apiBase},
-    seller: ${apiBase},
-    manager: ${apiBase}
+    common: ${buyerBase},
+    buyer: ${buyerBase},
+    seller: ${managerBase},
+    manager: ${managerBase}
   },
   PC_URL: ${JSON.stringify(normalizeBaseUrl(buyerPcUrl))},
   WAP_URL: ${JSON.stringify(normalizeBaseUrl(uniappH5Url))}${prefixLine}
@@ -46,14 +53,18 @@ export function renderPcConfig({ apiBaseUrl, buyerPcUrl, uniappH5Url, prefix = '
 }
 
 export function renderImEnv(config) {
+  const imApi = config.imApiUrl || config.apiBaseUrl;
+  const buyerApi = config.buyerApiUrl || config.apiBaseUrl;
+  const managerApi = config.managerApiUrl || config.apiBaseUrl;
+
   return [
     'NODE_ENV=development',
     'VUE_APP_PREVIEW=false',
-    `VUE_APP_API_BASE_URL=${config.apiBaseUrl}`,
+    `VUE_APP_API_BASE_URL=${imApi}`,
     `VUE_APP_WEB_SOCKET_URL=${config.imWsUrl}`,
-    `VUE_APP_COMMON=${config.apiBaseUrl}`,
-    `VUE_APP_BUYER=${config.apiBaseUrl}`,
-    `VUE_APP_SELLER=${config.apiBaseUrl}`,
+    `VUE_APP_COMMON=${imApi}`,
+    `VUE_APP_BUYER=${buyerApi}`,
+    `VUE_APP_SELLER=${managerApi}`,
     'VUE_APP_WEBSITE_NAME="LiLi IM"',
     `VUE_APP_PC_URL=${config.buyerPcUrl}/`,
     `VUE_APP_PC_STORE=${config.sellerUrl}/`,
@@ -62,9 +73,11 @@ export function renderImEnv(config) {
 }
 
 export function renderUniappEnv(config) {
+  const buyerApi = config.buyerApiUrl || config.apiBaseUrl;
+
   return [
     'NODE_ENV=development',
-    `VUE_APP_API_BASE_URL=${config.apiBaseUrl}`,
+    `VUE_APP_API_BASE_URL=${buyerApi}`,
     `VUE_APP_WAP_URL=${config.uniappH5Url}`,
     `VUE_APP_IM_WEB_URL=${config.imWebUrl}`,
     `VUE_APP_IM_WS_URL=${config.imWsUrl}`,
@@ -83,23 +96,6 @@ export function renderBackendOverride() {
     url: jdbc:mysql://127.0.0.1:3306/lilishop?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: lilishop
-
-lili:
-  data:
-    elasticsearch:
-      enabled: false
-      cluster-nodes: 127.0.0.1:9200
-      schema: http
-    logstash:
-      server: 127.0.0.1:4560
-
-rocketmq:
-  name-server: 127.0.0.1:9876
-
-xxl:
-  job:
-    admin:
-      addresses: http://127.0.0.1:9001/xxl-job-admin
 `;
 }
 

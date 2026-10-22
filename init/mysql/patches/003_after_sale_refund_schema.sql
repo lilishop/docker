@@ -1,6 +1,6 @@
 -- 首次启动补齐商家售后确认收货退款链路依赖的表和消息模板字段。
 -- 本补丁必须对「基表尚不存在」和「基表已存在」两种状态都安全：
--- compose initdb 按 glob 先跑 patches、后导 lilishop.sql；all-in-one 则相反。
+-- compose initdb 按 glob 先跑 patches、后导 lilishop.sql。
 -- ALTER 仅在「表存在且列不存在」时执行；UPDATE 仅在表存在时 PREPARE 执行。
 SET NAMES utf8mb4;
 

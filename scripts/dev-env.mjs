@@ -35,18 +35,46 @@ const flags = new Set(args.filter((arg) => arg.startsWith('--')));
 
 const services = [
   {
-    name: 'backend',
+    name: 'buyer-api',
     cwd: backendDir,
     install: null,
     command: 'java',
     args: (config) => [
       '-jar',
-      path.join(backendDir, 'lilishop-all', 'target', 'lilishop-all-4.3.jar'),
+      path.join(backendDir, 'buyer-api', 'target', 'buyer-api-4.3.jar'),
       '--spring.profiles.active=dev',
       `--spring.config.additional-location=${pathToFileURL(backendOverridePath).href}`,
-      `--server.port=${parseUrlPort(config.apiBaseUrl)}`,
+      `--server.port=${parseUrlPort(config.buyerApiUrl)}`,
     ],
-    port: (config) => parseUrlPort(config.apiBaseUrl),
+    port: (config) => parseUrlPort(config.buyerApiUrl),
+  },
+  {
+    name: 'manager-api',
+    cwd: backendDir,
+    install: null,
+    command: 'java',
+    args: (config) => [
+      '-jar',
+      path.join(backendDir, 'manager-api', 'target', 'manager-api-4.3.jar'),
+      '--spring.profiles.active=dev',
+      `--spring.config.additional-location=${pathToFileURL(backendOverridePath).href}`,
+      `--server.port=${parseUrlPort(config.managerApiUrl)}`,
+    ],
+    port: (config) => parseUrlPort(config.managerApiUrl),
+  },
+  {
+    name: 'im-api',
+    cwd: backendDir,
+    install: null,
+    command: 'java',
+    args: (config) => [
+      '-jar',
+      path.join(backendDir, 'im-api', 'target', 'im-api-4.3.jar'),
+      '--spring.profiles.active=dev',
+      `--spring.config.additional-location=${pathToFileURL(backendOverridePath).href}`,
+      `--server.port=${parseUrlPort(config.imApiUrl)}`,
+    ],
+    port: (config) => parseUrlPort(config.imApiUrl),
   },
   {
     name: 'buyer',
@@ -160,7 +188,10 @@ function assertWorkspace() {
   const requiredPaths = [
     dockerDir,
     backendDir,
-    path.join(backendDir, 'lilishop-all', 'pom.xml'),
+    path.join(backendDir, 'pom.xml'),
+    path.join(backendDir, 'buyer-api', 'pom.xml'),
+    path.join(backendDir, 'manager-api', 'pom.xml'),
+    path.join(backendDir, 'im-api', 'pom.xml'),
     uiDir,
     uniappDir,
   ];
@@ -198,7 +229,9 @@ async function loadOrPromptConfig(forcePrompt = false) {
     const defaults = buildRuntimeConfig({ host });
     const answers = {
       host,
-      apiBaseUrl: await ask(rl, '统一后端地址', defaults.apiBaseUrl),
+      buyerApiUrl: await ask(rl, '买家端 API 地址', defaults.buyerApiUrl),
+      managerApiUrl: await ask(rl, '管理端/商家端 API 地址', defaults.managerApiUrl),
+      imApiUrl: await ask(rl, 'IM API 地址', defaults.imApiUrl),
       buyerPcUrl: await ask(rl, '买家 PC 地址', defaults.buyerPcUrl),
       uniappH5Url: await ask(rl, 'uniapp H5 地址', defaults.uniappH5Url),
       sellerUrl: await ask(rl, '商家端地址', defaults.sellerUrl),
@@ -241,8 +274,6 @@ function waitForMiddleware() {
   return Promise.all([
     waitForPort(3306),
     waitForPort(6379),
-    waitForPort(9200),
-    waitForPort(9876),
   ]);
 }
 
@@ -256,7 +287,7 @@ function installDependencies() {
 }
 
 function buildBackend() {
-  runChecked('mvn', ['-pl', 'lilishop-all', '-am', '-DskipTests', 'package'], backendDir);
+  runChecked('mvn', ['clean', 'package', '-DskipTests'], backendDir);
 }
 
 function startServices(config) {
@@ -348,7 +379,9 @@ function printStatus() {
 
 function printUrls(config) {
   console.log('\n本地访问地址：');
-  console.log(`- 统一后端: ${config.apiBaseUrl}`);
+  console.log(`- 买家 API (buyer-api): ${config.buyerApiUrl}`);
+  console.log(`- 管理端 API (manager-api): ${config.managerApiUrl}`);
+  console.log(`- IM API (im-api): ${config.imApiUrl}`);
   console.log(`- 买家 PC: ${config.buyerPcUrl}`);
   console.log(`- uniapp H5: ${config.uniappH5Url}`);
   console.log(`- 商家端: ${config.sellerUrl}`);
