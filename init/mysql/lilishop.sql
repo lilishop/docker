@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 02/11/2026 17:50:32
+ Date: 02/11/2026 18:21:36
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,7 @@ CREATE TABLE `li_admin_user`  (
   `role_ids` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色ID集合',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `UK_sh2dyl78jk1vxtlyohwr5wht9`(`username` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '管理员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_admin_user
@@ -98,7 +98,7 @@ CREATE TABLE `li_after_sale`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `member_id`(`member_id` ASC) USING BTREE COMMENT '会员id索引',
   INDEX `store_id`(`store_id` ASC) USING BTREE COMMENT '店铺id索引'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '售后' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_after_sale
@@ -119,7 +119,7 @@ CREATE TABLE `li_after_sale_log`  (
   `sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '售后服务单号',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sn`(`sn` ASC) USING BTREE COMMENT '售后服务单号索引'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '售后日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_after_sale_log
@@ -139,7 +139,7 @@ CREATE TABLE `li_after_sale_reason`  (
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '售后原因',
   `service_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '原因类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '售后原因' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_after_sale_reason
@@ -172,7 +172,7 @@ CREATE TABLE `li_app_version`  (
   `version_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '版本名称',
   `version_update_date` datetime NULL DEFAULT NULL COMMENT '版本更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'app版本控制' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_app_version
@@ -470,7 +470,7 @@ CREATE TABLE `li_article`  (
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '文章类型',
   `open_status` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of li_article
@@ -552,7 +552,7 @@ CREATE TABLE `li_article_category`  (
   `article_category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分类名称',
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分类类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章分类' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of li_article_category
@@ -611,7 +611,7 @@ CREATE TABLE `li_bill`  (
   `gift_card_refund_subsidy` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '退货礼品卡平台补贴返还',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `store_id`(`store_id` ASC) USING BTREE COMMENT '店铺id索引'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '结算单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_bill
@@ -663,7 +663,7 @@ CREATE TABLE `li_brand`  (
   `logo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '品牌图标',
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '品牌名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品品牌' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of li_brand
@@ -1138,7 +1138,7 @@ CREATE TABLE `li_category`  (
   `sort_order` int NULL DEFAULT 0 COMMENT '排序值',
   `support_channel` bit(1) NULL DEFAULT NULL COMMENT '是否支持频道',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品分类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_category
@@ -2074,7 +2074,7 @@ CREATE TABLE `li_category_brand`  (
   `brand_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '品牌ID',
   `category_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分类ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品分类品牌关联' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_category_brand
@@ -2136,50 +2136,6 @@ INSERT INTO `li_category_parameter` VALUES (1440577561582112769, NULL, NULL, NUL
 INSERT INTO `li_category_parameter` VALUES (1440577603638398978, NULL, NULL, NULL, NULL, NULL, '1348576427264204943', '1440577603638398978');
 
 -- ----------------------------
--- Table structure for li_category_parameter_group
--- ----------------------------
-DROP TABLE IF EXISTS `li_category_parameter_group`;
-CREATE TABLE `li_category_parameter_group`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `category_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '关联分类ID',
-  `group_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '参数组名称',
-  `sort` int NULL DEFAULT NULL COMMENT '排序',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_category_parameter_group
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_category_parameter_group_rel
--- ----------------------------
-DROP TABLE IF EXISTS `li_category_parameter_group_rel`;
-CREATE TABLE `li_category_parameter_group_rel`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `category_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分类ID',
-  `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '参数组ID',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_li_category_parameter_group_rel_category_group`(`category_id` ASC, `group_id` ASC) USING BTREE,
-  INDEX `idx_li_category_parameter_group_rel_category_id`(`category_id` ASC) USING BTREE,
-  INDEX `idx_li_category_parameter_group_rel_group_id`(`group_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '分类-参数组关联' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_category_parameter_group_rel
--- ----------------------------
-
--- ----------------------------
 -- Table structure for li_category_specification
 -- ----------------------------
 DROP TABLE IF EXISTS `li_category_specification`;
@@ -2193,7 +2149,7 @@ CREATE TABLE `li_category_specification`  (
   `category_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分类ID',
   `specification_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '规格ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品分类规格' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_category_specification
@@ -2222,7 +2178,7 @@ CREATE TABLE `li_clerk`  (
   `is_super` bit(1) NULL DEFAULT NULL COMMENT '是否是超级管理员 超级管理员/普通管理员',
   `status` bit(1) NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_clerk
@@ -2239,7 +2195,7 @@ CREATE TABLE `li_clerk_role`  (
   `clerk_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '店员唯一id',
   `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '角色唯一id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_clerk_role
@@ -2269,7 +2225,7 @@ CREATE TABLE `li_commodity`  (
   `store_id` bigint NULL DEFAULT NULL,
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '直播商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_commodity
@@ -2295,30 +2251,10 @@ CREATE TABLE `li_connect`  (
   `union_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联合登录类型',
   `user_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '联合登录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_connect
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_connect_config
--- ----------------------------
-DROP TABLE IF EXISTS `li_connect_config`;
-CREATE TABLE `li_connect_config`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `config_key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '配置key',
-  `config_value` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '配置',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_connect_config
 -- ----------------------------
 
 -- ----------------------------
@@ -2354,7 +2290,7 @@ CREATE TABLE `li_coupon`  (
   `range_day_type` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `effective_days` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '优惠券' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_coupon
@@ -2383,7 +2319,7 @@ CREATE TABLE `li_coupon_activity`  (
   `scope_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'PORTION_GOODS' COMMENT '关联范围类型',
   `coupon_frequency_enum` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '领取周期',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '优惠券活动实体类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_coupon_activity
@@ -2404,7 +2340,7 @@ CREATE TABLE `li_coupon_activity_item`  (
   `coupon_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   `num` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '优惠券活动-优惠券关联实体类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_coupon_activity_item
@@ -2424,7 +2360,7 @@ CREATE TABLE `li_custom_words`  (
   `disabled` int NULL DEFAULT NULL COMMENT '是否禁用',
   `name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '自定义分词' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_custom_words
@@ -2509,52 +2445,6 @@ CREATE TABLE `li_damage_report_item`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for li_data_report_form
--- ----------------------------
-DROP TABLE IF EXISTS `li_data_report_form`;
-CREATE TABLE `li_data_report_form`  (
-  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `form_liem` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_data_report_form
--- ----------------------------
-INSERT INTO `li_data_report_form` VALUES ('1', '店铺销售月报', 'month', '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\"]');
-
--- ----------------------------
--- Table structure for li_data_report_form_item
--- ----------------------------
-DROP TABLE IF EXISTS `li_data_report_form_item`;
-CREATE TABLE `li_data_report_form_item`  (
-  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_data_report_form_item
--- ----------------------------
-INSERT INTO `li_data_report_form_item` VALUES ('1', '客单价', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('10', '支付商品数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('11', '成功退款金额', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('12', '退款订单数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('13', '下单-支付转化率', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('14', '退款率', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('2', '总成交金额', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('3', '下单金额', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('4', '下单人数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('5', '下单笔数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('6', '下单商品数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('7', '支付金额', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('8', '支付人数', NULL);
-INSERT INTO `li_data_report_form_item` VALUES ('9', '支付订单数', NULL);
-
--- ----------------------------
 -- Table structure for li_department
 -- ----------------------------
 DROP TABLE IF EXISTS `li_department`;
@@ -2569,7 +2459,7 @@ CREATE TABLE `li_department`  (
   `sort_order` decimal(10, 2) NULL DEFAULT NULL COMMENT '排序值',
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '部门' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_department
@@ -2600,7 +2490,7 @@ CREATE TABLE `li_department_role`  (
   `department_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门ID',
   `role_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '角色部门' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_department_role
@@ -2642,7 +2532,7 @@ CREATE TABLE `li_distribution`  (
   INDEX `idx_distribution_parent`(`parent_distribution_id` ASC) USING BTREE,
   INDEX `idx_distribution_join_time`(`join_time` ASC) USING BTREE,
   INDEX `idx_distribution_member_status`(`member_id` ASC, `distribution_status` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '分销员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_distribution
@@ -2704,7 +2594,7 @@ CREATE TABLE `li_distribution_cash`  (
   INDEX `idx_dc_distribution_status`(`distribution_id` ASC, `distribution_cash_status` ASC) USING BTREE,
   INDEX `idx_dc_audit_user`(`audit_user_id` ASC) USING BTREE,
   INDEX `idx_dc_create_time`(`create_time` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '分销佣金' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_distribution_cash
@@ -2801,7 +2691,7 @@ CREATE TABLE `li_distribution_goods`  (
   `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '缩略图路径',
   `store_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'storeName',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '分销商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_distribution_goods
@@ -2970,7 +2860,7 @@ CREATE TABLE `li_distribution_order`  (
   INDEX `idx_do_perf_payment`(`performance_distributor_id` ASC, `payment_time` ASC) USING BTREE,
   INDEX `idx_do_member_payment`(`member_id` ASC, `payment_time` ASC) USING BTREE,
   INDEX `idx_do_order_sn`(`order_sn` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '分销订单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_distribution_order
@@ -3049,41 +2939,6 @@ CREATE TABLE `li_distribution_share_event`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for li_distribution_stats_daily_distributor
--- ----------------------------
-DROP TABLE IF EXISTS `li_distribution_stats_daily_distributor`;
-CREATE TABLE `li_distribution_stats_daily_distributor`  (
-  `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主键',
-  `stat_date` date NOT NULL COMMENT '统计日期（业务时区 Asia/Shanghai）',
-  `distributor_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '分销员ID',
-  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员ID（冗余）',
-  `grade_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '当日结束时等级ID',
-  `new_sales_amount` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '新增销售额（原始实付口径）',
-  `new_customer_count` int NOT NULL DEFAULT 0 COMMENT '新增客户数',
-  `pay_customer_count` int NOT NULL DEFAULT 0 COMMENT '支付客户数',
-  `new_invite_count` int NOT NULL DEFAULT 0 COMMENT '新增邀请下级数',
-  `order_invite_count` int NOT NULL DEFAULT 0 COMMENT '开单邀请数（产生业绩的下级去重）',
-  `share_count` int NOT NULL DEFAULT 0 COMMENT '商品分享次数',
-  `share_goods_count` int NOT NULL DEFAULT 0 COMMENT '分享商品数（goods_id去重）',
-  `share_uv` int NOT NULL DEFAULT 0 COMMENT '分享引流UV',
-  `share_pv` int NOT NULL DEFAULT 0 COMMENT '分享浏览量PV',
-  `settled_commission` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '当日结算佣金（DIRECT+INVITE）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `delete_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '删除标志',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_dsdd_date_distributor`(`stat_date` ASC, `distributor_id` ASC) USING BTREE,
-  INDEX `idx_dsdd_distributor_date`(`distributor_id` ASC, `stat_date` ASC) USING BTREE,
-  INDEX `idx_dsdd_stat_date`(`stat_date` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分销员按日聚合快照（可选）' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_distribution_stats_daily_distributor
--- ----------------------------
-
--- ----------------------------
 -- Table structure for li_distribution_visit_event
 -- ----------------------------
 DROP TABLE IF EXISTS `li_distribution_visit_event`;
@@ -3152,61 +3007,6 @@ CREATE TABLE `li_distribution_wallet_log`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for li_draft_goods
--- ----------------------------
-DROP TABLE IF EXISTS `li_draft_goods`;
-CREATE TABLE `li_draft_goods`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `brand_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '品牌ID',
-  `buy_count` int NULL DEFAULT NULL COMMENT '购买数量',
-  `category_name_json` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '分类名称json',
-  `category_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分类path',
-  `comment_num` int NULL DEFAULT NULL COMMENT '评论数量',
-  `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '成本价格',
-  `enable_quantity` int NULL DEFAULT NULL COMMENT '可用库存',
-  `freight_payer` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '运费承担者',
-  `goods_gallery_list_json` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '商品图片json',
-  `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品名称',
-  `goods_params_list_json` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '商品参数json',
-  `goods_unit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '计量单位',
-  `goods_video` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品视频',
-  `grade` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品好评率',
-  `intro` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
-  `mobile_intro` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品移动端详情',
-  `original` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '原图路径',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品价格',
-  `quantity` int NULL DEFAULT NULL COMMENT '库存',
-  `recommend` bit(1) NULL DEFAULT NULL COMMENT '是否为推荐商品',
-  `sales_model` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '销售模式',
-  `save_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '草稿商品保存类型',
-  `self_operated` bit(1) NULL DEFAULT NULL COMMENT '是否自营',
-  `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
-  `store_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺名称',
-  `selling_point` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '卖点',
-  `shop_category_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺分类',
-  `sku_list_json` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '货品列表json',
-  `small` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '小图路径',
-  `sn` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品编号',
-  `template_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '运费模板ID',
-  `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '缩略图',
-  `weight` decimal(10, 2) NULL DEFAULT NULL COMMENT '重量',
-  `store_category_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺分类路径',
-  `big` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '大图路径',
-  `market_enable` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `goods_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_draft_goods
--- ----------------------------
-
--- ----------------------------
 -- Table structure for li_feedback
 -- ----------------------------
 DROP TABLE IF EXISTS `li_feedback`;
@@ -3219,7 +3019,7 @@ CREATE TABLE `li_feedback`  (
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '类型',
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '意见反馈' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_feedback
@@ -3247,7 +3047,7 @@ CREATE TABLE `li_file`  (
   `file_directory_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '文件夹ID',
   `owner_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '拥有者名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '文件' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_file
@@ -3299,7 +3099,7 @@ CREATE TABLE `li_flash_discount`  (
   `limit_num` int NULL DEFAULT NULL COMMENT '限购数量，0不限',
   `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '限时直降' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_flash_discount
@@ -3321,7 +3121,7 @@ CREATE TABLE `li_foot_print`  (
   `sku_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '规格ID',
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '浏览历史' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_foot_print
@@ -3344,7 +3144,7 @@ CREATE TABLE `li_freight_template`  (
   `pricing_method` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '计价方式 按件、按重量',
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '运费模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_freight_template
@@ -3372,7 +3172,7 @@ CREATE TABLE `li_freight_template_child`  (
   `first_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '运费',
   `freight_template_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺模板ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '运费模板子配置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_freight_template_child
@@ -3415,7 +3215,7 @@ CREATE TABLE `li_full_discount`  (
   `scope_id` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '范围关联的ID',
   `scope_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'PORTION_GOODS' COMMENT '关联范围类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '满优惠活动' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_full_discount
@@ -3540,45 +3340,6 @@ CREATE TABLE `li_gift_card_cash_issue_batch`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for li_gift_card_cash_user_card
--- ----------------------------
-DROP TABLE IF EXISTS `li_gift_card_cash_user_card`;
-CREATE TABLE `li_gift_card_cash_user_card`  (
-  `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `delete_flag` bit(1) NULL DEFAULT b'0',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `activity_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `credential_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `member_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `create_batch_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `issue_batch_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `issue_time` datetime(6) NULL DEFAULT NULL,
-  `gift_card_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `card_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `scope_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `scope_id` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `validity_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `valid_end_time` datetime(6) NULL DEFAULT NULL,
-  `valid_months_after_activate` int NULL DEFAULT NULL,
-  `card_no` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `face_value` decimal(12, 2) NOT NULL,
-  `balance` decimal(12, 2) NOT NULL,
-  `status` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'ACTIVE/USED_UP/EXPIRED',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_li_gift_card_cash_user_card_cred`(`credential_id` ASC) USING BTREE,
-  INDEX `idx_li_gift_card_cash_user_card_member`(`member_id` ASC) USING BTREE,
-  INDEX `idx_li_gift_card_cash_user_card_activity`(`activity_id` ASC) USING BTREE,
-  INDEX `idx_li_gift_card_cash_user_card_batch`(`create_batch_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '现金礼品卡用户卡' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_gift_card_cash_user_card
--- ----------------------------
-
--- ----------------------------
 -- Table structure for li_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `li_goods`;
@@ -3631,7 +3392,7 @@ CREATE TABLE `li_goods`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `store_id`(`store_id` ASC) USING BTREE COMMENT '店铺id索引',
   INDEX `idx_li_goods_delete_flag_create_time`(`delete_flag` ASC, `create_time` DESC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods
@@ -3915,7 +3676,7 @@ CREATE TABLE `li_goods_collection`  (
   `member_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '会员id',
   `sku_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户商品收藏' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods_collection
@@ -3991,7 +3752,7 @@ CREATE TABLE `li_goods_gallery`  (
   `sort` int NULL DEFAULT NULL COMMENT '排序',
   `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '缩略图路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品相册' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods_gallery
@@ -4352,158 +4113,6 @@ CREATE TABLE `li_goods_group_goods`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for li_goods_params
--- ----------------------------
-DROP TABLE IF EXISTS `li_goods_params`;
-CREATE TABLE `li_goods_params`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `goods_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品ID',
-  `param_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '参数ID',
-  `param_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '参数名字',
-  `param_value` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '参数值',
-  `is_index` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_goods_params
--- ----------------------------
-INSERT INTO `li_goods_params` VALUES (1387976458604904448, '15810610731', '2021-04-30 11:45:49.742000', b'0', NULL, NULL, '1377800619737219072', '1384433344917274624', 'cpu', '4核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387976459087249408, '15810610731', '2021-04-30 11:45:49.859000', b'0', NULL, NULL, '1377800619737219072', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387976459133386752, '15810610731', '2021-04-30 11:45:49.870000', b'0', NULL, NULL, '1377800619737219072', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387976571989524480, '15810610731', '2021-04-30 11:46:16.777000', b'0', NULL, NULL, '1377799713352318976', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387976572006301696, '15810610731', '2021-04-30 11:46:16.781000', b'0', NULL, NULL, '1377799713352318976', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387976572018884608, '15810610731', '2021-04-30 11:46:16.784000', b'0', NULL, NULL, '1377799713352318976', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977068075024384, '15810610731', '2021-04-30 11:48:15.053000', b'0', NULL, NULL, '1377798982008307712', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977068091801600, '15810610731', '2021-04-30 11:48:15.057000', b'0', NULL, NULL, '1377798982008307712', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977068108578816, '15810610731', '2021-04-30 11:48:15.061000', b'0', NULL, NULL, '1377798982008307712', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977148882485248, '15810610731', '2021-04-30 11:48:34.319000', b'0', NULL, NULL, '1376852559976726528', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977148899262464, '15810610731', '2021-04-30 11:48:34.323000', b'0', NULL, NULL, '1376852559976726528', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977148916039680, '15810610731', '2021-04-30 11:48:34.327000', b'0', NULL, NULL, '1376852559976726528', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977226716184576, '15810610731', '2021-04-30 11:48:52.876000', b'0', NULL, NULL, '1376851499652481024', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977226737156096, '15810610731', '2021-04-30 11:48:52.881000', b'0', NULL, NULL, '1376851499652481024', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977226758127616, '15810610731', '2021-04-30 11:48:52.886000', b'0', NULL, NULL, '1376851499652481024', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977377518190592, '15810610731', '2021-04-30 11:49:28.830000', b'0', NULL, NULL, '1376521743522332672', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977377526579200, '15810610731', '2021-04-30 11:49:28.832000', b'0', NULL, NULL, '1376521743522332672', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977377539162112, '15810610731', '2021-04-30 11:49:28.835000', b'0', NULL, NULL, '1376521743522332672', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977446996836352, '15810610731', '2021-04-30 11:49:45.395000', b'0', NULL, NULL, '1376373278360207360', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977447013613568, '15810610731', '2021-04-30 11:49:45.399000', b'0', NULL, NULL, '1376373278360207360', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977447022002176, '15810610731', '2021-04-30 11:49:45.401000', b'0', NULL, NULL, '1376373278360207360', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977574063276032, '15810610731', '2021-04-30 11:50:15.690000', b'0', NULL, NULL, '1376529925690884096', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977574096830464, '15810610731', '2021-04-30 11:50:15.698000', b'0', NULL, NULL, '1376529925690884096', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977574126190592, '15810610731', '2021-04-30 11:50:15.705000', b'0', NULL, NULL, '1376529925690884096', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977650366054400, '15810610731', '2021-04-30 11:50:33.882000', b'0', NULL, NULL, '1376541893319458816', '1387975061817786368', '存储介质', '其他', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977650374443008, '15810610731', '2021-04-30 11:50:33.884000', b'0', NULL, NULL, '1376541893319458816', '1387975197688070144', '存储容量', '18G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977650387025920, '15810610731', '2021-04-30 11:50:33.887000', b'0', NULL, NULL, '1376541893319458816', '1387975559488733184', '电池容量', '2000mAh', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977650399608832, '15810610731', '2021-04-30 11:50:33.890000', b'0', NULL, NULL, '1376541893319458816', '1387975685796003840', '滤镜直径', '55mm', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977732427612160, '15810610731', '2021-04-30 11:50:53.447000', b'0', NULL, NULL, '1376544590403731456', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977732436000768, '15810610731', '2021-04-30 11:50:53.449000', b'0', NULL, NULL, '1376544590403731456', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977732444389376, '15810610731', '2021-04-30 11:50:53.451000', b'0', NULL, NULL, '1376544590403731456', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977808235462656, '15810610731', '2021-04-30 11:51:11.521000', b'0', NULL, NULL, '1376547793954406400', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977808243851264, '15810610731', '2021-04-30 11:51:11.523000', b'0', NULL, NULL, '1376547793954406400', '1384433556624769024', '颜色', '黄色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977808252239872, '15810610731', '2021-04-30 11:51:11.525000', b'0', NULL, NULL, '1376547793954406400', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977878062235648, '15810610731', '2021-04-30 11:51:28.169000', b'0', NULL, NULL, '1376554435945168896', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977878070624256, '15810610731', '2021-04-30 11:51:28.171000', b'0', NULL, NULL, '1376554435945168896', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977878079012864, '15810610731', '2021-04-30 11:51:28.173000', b'0', NULL, NULL, '1376554435945168896', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977942654517248, '15810610731', '2021-04-30 11:51:43.569000', b'0', NULL, NULL, '1376556775007846400', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977942658711552, '15810610731', '2021-04-30 11:51:43.570000', b'0', NULL, NULL, '1376556775007846400', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387977942667100160, '15810610731', '2021-04-30 11:51:43.572000', b'0', NULL, NULL, '1376556775007846400', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978008832245760, '15810610731', '2021-04-30 11:51:59.347000', b'0', NULL, NULL, '1376559979007311872', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978008844828672, '15810610731', '2021-04-30 11:51:59.350000', b'0', NULL, NULL, '1376559979007311872', '1384433556624769024', '颜色', '黄色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978008849022976, '15810610731', '2021-04-30 11:51:59.351000', b'0', NULL, NULL, '1376559979007311872', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978070354296832, '15810610731', '2021-04-30 11:52:14.015000', b'0', NULL, NULL, '1376563269799510016', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978070366879744, '15810610731', '2021-04-30 11:52:14.018000', b'0', NULL, NULL, '1376563269799510016', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978070375268352, '15810610731', '2021-04-30 11:52:14.020000', b'0', NULL, NULL, '1376563269799510016', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978145524613120, '15810610731', '2021-04-30 11:52:31.937000', b'0', NULL, NULL, '1376565597554343936', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978145528807424, '15810610731', '2021-04-30 11:52:31.938000', b'0', NULL, NULL, '1376565597554343936', '1384433556624769024', '颜色', '黄色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978145537196032, '15810610731', '2021-04-30 11:52:31.940000', b'0', NULL, NULL, '1376565597554343936', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978246808666112, '15810610731', '2021-04-30 11:52:56.085000', b'0', NULL, NULL, '1376569004398739456', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978246821249024, '15810610731', '2021-04-30 11:52:56.088000', b'0', NULL, NULL, '1376569004398739456', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978246829637632, '15810610731', '2021-04-30 11:52:56.090000', b'0', NULL, NULL, '1376569004398739456', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978323308576768, '15810610731', '2021-04-30 11:53:14.324000', b'0', NULL, NULL, '1376570513572233216', '1384433344917274624', 'cpu', '4核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978323312771072, '15810610731', '2021-04-30 11:53:14.325000', b'0', NULL, NULL, '1376570513572233216', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978323321159680, '15810610731', '2021-04-30 11:53:14.327000', b'0', NULL, NULL, '1376570513572233216', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978409916760064, '15810610731', '2021-04-30 11:53:34.973000', b'0', NULL, NULL, '1376572058351173632', '1384433344917274624', 'cpu', '4核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978409929342976, '15810610731', '2021-04-30 11:53:34.976000', b'0', NULL, NULL, '1376572058351173632', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978409937731584, '15810610731', '2021-04-30 11:53:34.978000', b'0', NULL, NULL, '1376572058351173632', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978474748116992, '15810610731', '2021-04-30 11:53:50.430000', b'0', NULL, NULL, '1376575579398078464', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978474752311296, '15810610731', '2021-04-30 11:53:50.431000', b'0', NULL, NULL, '1376575579398078464', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978474760699904, '15810610731', '2021-04-30 11:53:50.433000', b'0', NULL, NULL, '1376575579398078464', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978602544365568, '15810610731', '2021-04-30 11:54:20.899000', b'0', NULL, NULL, '1376578239509561344', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978602548559872, '15810610731', '2021-04-30 11:54:20.900000', b'0', NULL, NULL, '1376578239509561344', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978602556948480, '15810610731', '2021-04-30 11:54:20.902000', b'0', NULL, NULL, '1376578239509561344', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978668638208000, '15810610731', '2021-04-30 11:54:36.657000', b'0', NULL, NULL, '1376580346304266240', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978668646596608, '15810610731', '2021-04-30 11:54:36.659000', b'0', NULL, NULL, '1376580346304266240', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978668650790912, '15810610731', '2021-04-30 11:54:36.660000', b'0', NULL, NULL, '1376580346304266240', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978747780530176, '15810610731', '2021-04-30 11:54:55.526000', b'0', NULL, NULL, '1376585141652029440', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978747788918784, '15810610731', '2021-04-30 11:54:55.528000', b'0', NULL, NULL, '1376585141652029440', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978747797307392, '15810610731', '2021-04-30 11:54:55.530000', b'0', NULL, NULL, '1376585141652029440', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978827078041600, '15810610731', '2021-04-30 11:55:14.432000', b'0', NULL, NULL, '1376702383932833792', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978827094818816, '15810610731', '2021-04-30 11:55:14.436000', b'0', NULL, NULL, '1376702383932833792', '1384433556624769024', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978827103207424, '15810610731', '2021-04-30 11:55:14.438000', b'0', NULL, NULL, '1376702383932833792', '1384433712875175936', '内存', '2G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978909038936064, '15810610731', '2021-04-30 11:55:33.973000', b'0', NULL, NULL, '1376847364819517440', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978909043130368, '15810610731', '2021-04-30 11:55:33.974000', b'0', NULL, NULL, '1376847364819517440', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387978909047324672, '15810610731', '2021-04-30 11:55:33.975000', b'0', NULL, NULL, '1376847364819517440', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979014303383552, '15810610731', '2021-04-30 11:55:59.070000', b'0', NULL, NULL, '1376845635923214336', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979014307577856, '15810610731', '2021-04-30 11:55:59.071000', b'0', NULL, NULL, '1376845635923214336', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979014311772160, '15810610731', '2021-04-30 11:55:59.072000', b'0', NULL, NULL, '1376845635923214336', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979130024230912, '15810610731', '2021-04-30 11:56:26.659000', b'0', NULL, NULL, '1376848829046849536', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979130028425216, '15810610731', '2021-04-30 11:56:26.661000', b'0', NULL, NULL, '1376848829046849536', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979130036813824, '15810610731', '2021-04-30 11:56:26.663000', b'0', NULL, NULL, '1376848829046849536', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979248513318912, '15810610731', '2021-04-30 11:56:54.910000', b'0', NULL, NULL, '1376704881007525888', '1384433344917274624', 'cpu', '16核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979248517513216, '15810610731', '2021-04-30 11:56:54.911000', b'0', NULL, NULL, '1376704881007525888', '1384433556624769024', '颜色', '蓝色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979248525901824, '15810610731', '2021-04-30 11:56:54.913000', b'0', NULL, NULL, '1376704881007525888', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979406026211328, '15810610731', '2021-04-30 11:57:32.464000', b'0', NULL, NULL, '1376707575780737024', '1384433344917274624', 'cpu', '4核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979406030405632, '15810610731', '2021-04-30 11:57:32.465000', b'0', NULL, NULL, '1376707575780737024', '1384433556624769024', '颜色', '黄色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979406034599936, '15810610731', '2021-04-30 11:57:32.466000', b'0', NULL, NULL, '1376707575780737024', '1384433712875175936', '内存', '8G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979473051189248, '15810610731', '2021-04-30 11:57:48.444000', b'0', NULL, NULL, '1376710057034514432', '1384439159900340224', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979473059577856, '15810610731', '2021-04-30 11:57:48.446000', b'0', NULL, NULL, '1376710057034514432', '1384439255744380928', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979473063772160, '15810610731', '2021-04-30 11:57:48.447000', b'0', NULL, NULL, '1376710057034514432', '1384439433687728128', '容量', '2T', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979473067966464, '15810610731', '2021-04-30 11:57:48.448000', b'0', NULL, NULL, '1376710057034514432', '1384439631541436416', '硬盘', '固态硬盘', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979561626501120, '15810610731', '2021-04-30 11:58:09.562000', b'0', NULL, NULL, '1376718137113706496', '1384439159900340224', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979561634889728, '15810610731', '2021-04-30 11:58:09.564000', b'0', NULL, NULL, '1376718137113706496', '1384439255744380928', '内存', '64G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979561639084032, '15810610731', '2021-04-30 11:58:09.565000', b'0', NULL, NULL, '1376718137113706496', '1384439433687728128', '容量', '512G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979561643278336, '15810610731', '2021-04-30 11:58:09.566000', b'0', NULL, NULL, '1376718137113706496', '1384439631541436416', '硬盘', '机械硬盘', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979998056415232, '15810610731', '2021-04-30 11:59:53.615000', b'0', NULL, NULL, '1385076936341979136', '1384433344917274624', 'cpu', '32核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979998064803840, '15810610731', '2021-04-30 11:59:53.617000', b'0', NULL, NULL, '1385076936341979136', '1384433556624769024', '颜色', '黄色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387979998077386752, '15810610731', '2021-04-30 11:59:53.620000', b'0', NULL, NULL, '1385076936341979136', '1384433712875175936', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980064301252608, '15810610731', '2021-04-30 12:00:09.409000', b'0', NULL, NULL, '1376843937540472832', '1384433344917274624', 'cpu', '32核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980064309641216, '15810610731', '2021-04-30 12:00:09.411000', b'0', NULL, NULL, '1376843937540472832', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980064313835520, '15810610731', '2021-04-30 12:00:09.412000', b'0', NULL, NULL, '1376843937540472832', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980213714944000, '15810610731', '2021-04-30 12:00:45.032000', b'0', NULL, NULL, '1376727107777855488', '1384439159900340224', '颜色', '黑色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980213719138304, '15810610731', '2021-04-30 12:00:45.033000', b'0', NULL, NULL, '1376727107777855488', '1384439255744380928', '内存', '32G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980213723332608, '15810610731', '2021-04-30 12:00:45.034000', b'0', NULL, NULL, '1376727107777855488', '1384439433687728128', '容量', '2T', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980213731721216, '15810610731', '2021-04-30 12:00:45.036000', b'0', NULL, NULL, '1376727107777855488', '1384439631541436416', '硬盘', '固态硬盘', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980372033142784, '15810610731', '2021-04-30 12:01:22.778000', b'0', NULL, NULL, '1376823198414274560', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980372037337088, '15810610731', '2021-04-30 12:01:22.779000', b'0', NULL, NULL, '1376823198414274560', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980372041531392, '15810610731', '2021-04-30 12:01:22.780000', b'0', NULL, NULL, '1376823198414274560', '1384433712875175936', '内存', '16G', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980568158797824, '15810610731', '2021-04-30 12:02:09.538000', b'0', NULL, NULL, '1376839431016677376', '1384433344917274624', 'cpu', '8核', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980568162992128, '15810610731', '2021-04-30 12:02:09.539000', b'0', NULL, NULL, '1376839431016677376', '1384433556624769024', '颜色', '白色', NULL);
-INSERT INTO `li_goods_params` VALUES (1387980568171380736, '15810610731', '2021-04-30 12:02:09.541000', b'0', NULL, NULL, '1376839431016677376', '1384433712875175936', '内存', '4G', NULL);
-INSERT INTO `li_goods_params` VALUES (1388026811803238400, '13011111111', '2021-04-30 15:05:54.880000', b'0', NULL, NULL, '1377070177157382144', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1395291288911216640, '13011111111', '2021-05-20 16:12:21.192000', b'0', NULL, NULL, '1377806377656778752', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1395654455893950464, '13011111111', '2021-05-21 16:15:26.944000', b'0', NULL, NULL, '1376443041593688064', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1397762586128154624, '13011111111', '2021-05-27 11:52:24.363000', b'0', NULL, NULL, '1395547148858163200', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1398158275295313920, '13011111111', '2021-05-28 14:04:44.012000', b'0', NULL, NULL, '1398158275052044288', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1400327594020175872, '13011111111', '2021-06-03 13:44:49.900000', b'0', NULL, NULL, '1400327593747546112', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1400404623197470720, '13011111111', '2021-06-03 18:50:55.087000', b'0', NULL, NULL, '1400404622950006784', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1401158278217465856, '13011111111', '2021-06-05 20:45:40.446000', b'0', NULL, NULL, '1401151419146305536', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1401719528949284864, '13011111111', '2021-06-07 09:55:53.048000', b'0', NULL, NULL, '1401554126134837248', '1384437321981493248', '口味', '原味', NULL);
-INSERT INTO `li_goods_params` VALUES (1401902123936194562, '13011111111', '2021-06-07 22:01:27.085000', b'0', NULL, NULL, '1397451307471601664', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1402172956449513473, '13011111111', '2021-06-08 15:57:38.588000', b'0', NULL, NULL, '1402073713776861185', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1402590164543627266, '13011111111', '2021-06-09 19:35:28.752000', b'0', NULL, NULL, '1402590163830595586', '1384437321981493248', '口味', '原味', NULL);
-INSERT INTO `li_goods_params` VALUES (1403187209956515842, '13011111111', '2021-06-11 11:07:55.469000', b'0', NULL, NULL, '1403187209721634817', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1403239139957342209, '13011111111', '2021-06-11 14:34:16.549000', b'0', NULL, NULL, '1403239139542106113', '1384437321981493248', '口味', '原味', NULL);
-INSERT INTO `li_goods_params` VALUES (1403979501717975042, '13011111111', '2021-06-13 15:36:12.544000', b'0', NULL, NULL, '1403979501457928193', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1404606193377505281, '13011111111', '2021-06-15 09:06:27.480000', b'0', NULL, NULL, '1404606193050349570', '1384437321981493248', '口味', NULL, NULL);
-INSERT INTO `li_goods_params` VALUES (1404961839226630145, '13011111111', '2021-06-16 08:39:40.058000', b'0', NULL, NULL, '1404616425478582273', '1384437321981493248', '口味', '原味', NULL);
-
--- ----------------------------
 -- Table structure for li_goods_search_param
 -- ----------------------------
 DROP TABLE IF EXISTS `li_goods_search_param`;
@@ -4576,7 +4185,7 @@ CREATE TABLE `li_goods_sku`  (
   `goods_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `alert_quantity` int NULL DEFAULT NULL COMMENT '预警库存',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品SKU' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods_sku
@@ -5177,350 +4786,6 @@ INSERT INTO `li_goods_sku` VALUES (1440957997391036418, '13011111111', '2021-09-
 INSERT INTO `li_goods_sku` VALUES (1440957997407813633, '13011111111', '2021-09-23 16:35:32.945000', b'0', '13011111111', '2021-09-23 16:59:56.850000', NULL, NULL, '0', NULL, 0, '1348576427268399674,1348576427268399682,1348576427268399683', NULL, 10.00, NULL, '1428546600908681218', '1440957996728336385', 'JJR/C 大型32CM变形车布加迪（蓝黑）遥控车小孩RC遥控汽车男孩电动赛车儿童玩具车礼物 黄蜂侠', '件', NULL, 100.00, '<p>&nbsp;JJR/C 大型32CM变形车布加迪（蓝黑）遥控车小孩RC遥控汽车男孩电动赛车儿童玩具车礼物<br/></p>', 'TOBEAUDITED', NULL, 'UPPER', '<p>&nbsp;JJR/C 大型32CM变形车布加迪（蓝黑）遥控车小孩RC遥控汽车男孩电动赛车儿童玩具车礼物<br/></p>', NULL, 1000.00, NULL, 1000, b'0', 'RETAIL', b'0', '1376433565247471616', '生活百货1', '电动赛车儿童玩具车礼物', 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/83df593e6ba448ddbe6685d928e6fa65.jpg?x-oss-process=style/200X200', 'bh1', '{\"images\":[{\"url\":\"https://lilishop-oss.oss-cn-beijing.aliyuncs.com/83df593e6ba448ddbe6685d928e6fa65.jpg\",\"name\":\"b98601ddbab1c19f.jpg\",\"status\":\"finished\"}],\"变形车\":\"黄蜂侠\"}', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/83df593e6ba448ddbe6685d928e6fa65.jpg?x-oss-process=style/400X400', NULL, NULL, 4.00, ' 黄蜂侠', '1405362265608503298', 'PHYSICAL_GOODS', 0);
 
 -- ----------------------------
--- Table structure for li_goods_tag
--- ----------------------------
-DROP TABLE IF EXISTS `li_goods_tag`;
-CREATE TABLE `li_goods_tag`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `tag_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '标签名称',
-  `tag_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标签说明',
-  `start_time` datetime(6) NULL DEFAULT NULL COMMENT '开始时间',
-  `end_time` datetime(6) NULL DEFAULT NULL COMMENT '结束时间',
-  `enable_flag` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否启用',
-  `sort_order` int NOT NULL DEFAULT 100 COMMENT '排序值',
-  `display_position` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '展示位：TITLE_BEFORE/TITLE_AFTER',
-  `tag_source` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '标签来源：SYSTEM/CUSTOM',
-  `tag_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '系统标签编码',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_li_goods_tag_tag_code`(`tag_code` ASC) USING BTREE,
-  INDEX `idx_li_goods_tag_display_sort_time`(`display_position` ASC, `sort_order` ASC, `create_time` ASC) USING BTREE,
-  INDEX `idx_li_goods_tag_source_code`(`tag_source` ASC, `tag_code` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品标签主表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_goods_tag
--- ----------------------------
-INSERT INTO `li_goods_tag` VALUES (100001, 'admin', '2026-04-23 11:00:20.000000', b'0', 'admin', '2026-05-07 14:22:29.430000', '自营', '自营展示规则，是否等于自营时，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'1', 0, 'TITLE_BEFORE', 'SYSTEM', 'SELF_OPERATED');
-INSERT INTO `li_goods_tag` VALUES (100002, 'admin', '2026-04-23 11:00:36.000000', b'0', 'admin', '2026-05-07 14:22:39.399000', '新品', '新品展示规则，商品通过审核后 X 天内，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'1', 0, 'TITLE_BELOW', 'SYSTEM', 'NEW');
-INSERT INTO `li_goods_tag` VALUES (100003, 'admin', '2026-04-23 11:00:36.000000', b'0', 'admin', '2026-05-07 14:22:47.962000', '包邮', '包邮展示规则，运费模版为包邮时，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'1', 0, 'TITLE_BELOW', 'SYSTEM', 'FREE_SHIPPING');
-INSERT INTO `li_goods_tag` VALUES (100004, 'admin', '2026-04-23 11:00:36.000000', b'0', 'admin', '2026-05-07 14:22:55.493000', '爆品', '爆品展示规则，最近30天销量大于 X 件，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'0', 0, 'TITLE_BELOW', 'SYSTEM', 'HOT_GOODS');
-INSERT INTO `li_goods_tag` VALUES (100005, 'admin', '2026-04-23 11:00:36.000000', b'0', 'admin', '2026-05-07 14:23:02.412000', '热卖', '热卖展示规则，最近30天用户评论数大于 X 条，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'0', 0, 'TITLE_BELOW', 'SYSTEM', 'HOT_SALE');
-INSERT INTO `li_goods_tag` VALUES (100006, 'admin', '2026-04-23 11:00:36.000000', b'0', 'admin', '2026-05-07 14:23:09.461000', '优选', '优选展示规则，最近30天用户好评率大于 X 时，展示此标签。', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'1', 0, 'TITLE_BELOW', 'SYSTEM', 'PREFERRED');
-INSERT INTO `li_goods_tag` VALUES (2049774478307442690, 'admin', '2026-04-30 16:54:53.253000', b'0', 'admin', '2026-05-07 14:23:17.482000', '百亿补贴', '百亿补贴', '2026-05-07 00:00:00.000000', '2026-05-14 00:00:00.000000', b'1', 1, 'TITLE_BELOW', 'CUSTOM', NULL);
-
--- ----------------------------
--- Table structure for li_goods_tag_scope
--- ----------------------------
-DROP TABLE IF EXISTS `li_goods_tag_scope`;
-CREATE TABLE `li_goods_tag_scope`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
-  `tag_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '标签ID',
-  `scope_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '范围类型：GOODS/BRAND/CATEGORY/STORE',
-  `scope_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '范围ID',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_li_goods_tag_scope`(`tag_id` ASC, `scope_type` ASC, `scope_id` ASC) USING BTREE,
-  INDEX `idx_li_goods_tag_scope_tag_id`(`tag_id` ASC) USING BTREE,
-  INDEX `idx_li_goods_tag_scope_scope`(`scope_type` ASC, `scope_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品标签范围表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_goods_tag_scope
--- ----------------------------
-INSERT INTO `li_goods_tag_scope` VALUES (2052273046456979458, 'admin', '2026-05-07 14:23:18.327000', b'0', '2049774478307442690', 'GOODS', '2039222518399459329');
-INSERT INTO `li_goods_tag_scope` VALUES (2052273046482145282, 'admin', '2026-05-07 14:23:18.330000', b'0', '2049774478307442690', 'GOODS', '2047596045112528897');
-
--- ----------------------------
--- Table structure for li_goods_tag_stat
--- ----------------------------
-DROP TABLE IF EXISTS `li_goods_tag_stat`;
-CREATE TABLE `li_goods_tag_stat`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `goods_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '商品ID',
-  `stat_date` date NOT NULL COMMENT '统计日期',
-  `sales_30d` int NOT NULL DEFAULT 0 COMMENT '近30天完成订单销量',
-  `after_sale_complete_30d` int NOT NULL DEFAULT 0 COMMENT '近30天完成售后扣减量',
-  `net_sales_30d` int NOT NULL DEFAULT 0 COMMENT '近30天净销量',
-  `evaluation_count_30d` int NOT NULL DEFAULT 0 COMMENT '近30天有效评价数',
-  `good_count_30d` int NOT NULL DEFAULT 0 COMMENT '近30天好评数',
-  `good_rate_30d` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '近30天好评率',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_li_goods_tag_stat`(`goods_id` ASC, `stat_date` ASC) USING BTREE,
-  INDEX `idx_li_goods_tag_stat_stat_date`(`stat_date` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品标签统计快照表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_goods_tag_stat
--- ----------------------------
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156288, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376373278360207360', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156289, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376443041593688064', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156290, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376521743522332672', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156291, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376529925690884096', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156292, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376541893319458816', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156293, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376544590403731456', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156294, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376547793954406400', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156295, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376554435945168896', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156296, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376556775007846400', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156297, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376559979007311872', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156298, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376563269799510016', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156299, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376565597554343936', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156300, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376569004398739456', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156301, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376570513572233216', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156302, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376572058351173632', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156303, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376575579398078464', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156304, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376578239509561344', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156305, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376580346304266240', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156306, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376585141652029440', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156307, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376702383932833792', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156308, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376704881007525888', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156309, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376707575780737024', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156310, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376710057034514432', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156311, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376718137113706496', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156312, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376721241347457024', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156313, 'SYSTEM', '2026-04-27 15:05:14.171000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376724657817780224', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156314, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376727107777855488', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156315, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376731245702021120', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156316, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376823198414274560', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156317, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376824912886366208', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156318, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376826558169219072', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156319, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376828632130912256', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156320, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376830414609448960', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156321, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376831656517697536', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156322, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376833366283780096', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156323, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376836083676872704', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156324, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376837607538819072', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156325, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376839431016677376', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156326, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376841229546815488', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156327, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376843937540472832', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156328, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376845635923214336', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156329, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376847364819517440', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156330, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376848829046849536', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156331, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376850145118781440', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156332, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376851499652481024', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156333, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1376852559976726528', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156334, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377056075185913856', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156335, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377057500825649152', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156336, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377060105891086336', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156337, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377062205337370624', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156338, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377064344218501120', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156339, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377066518478585856', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156340, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377068348600221696', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156341, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377070177157382144', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156342, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377071458592751616', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156343, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377073255017349120', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156344, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377074868700315648', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156345, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377077664103268352', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156346, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377079318244491264', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156347, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377080790948511744', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156348, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377081950438686720', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156349, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377083477941288960', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156350, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377085464581767168', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156351, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377088702781587456', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156352, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377092374001352704', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156353, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377094770479857664', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156354, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377096232782004224', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156355, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377097638318440448', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156356, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377098934119301120', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156357, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377100803117940736', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156358, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377102418646401024', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156359, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377104395929387008', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156360, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377106159533555712', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156361, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377118965985181696', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156362, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377121719424122880', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156363, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377122967070179328', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156364, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377124687384936448', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156365, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377126533780471808', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156366, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377127936569638912', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156367, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377129270085681152', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156368, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377132926042374144', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156369, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377137906799345664', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156370, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377140889272451072', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156371, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377143657961881600', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156372, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377145942322446336', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156373, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377148247834886144', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156374, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377149625735053312', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156375, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377150756729126912', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156376, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377152258084438016', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156377, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377153549724549120', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156378, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377155058428280832', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156379, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377156242815844352', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156380, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377157734218072064', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156381, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377159189872246784', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156382, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377161623881383936', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156383, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377798982008307712', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156384, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377799713352318976', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156385, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377800619737219072', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156386, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377801726362386432', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156387, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377802526690115584', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156388, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377803458140176384', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156389, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377805575856848896', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156390, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1377806377656778752', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156391, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1385076936341979136', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156392, 'SYSTEM', '2026-04-27 15:05:14.172000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395276362339581952', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156393, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395282867839303680', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156394, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395286105762299904', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156395, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395291918597881856', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156396, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395547148858163200', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156397, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1395550279465697280', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156398, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1397451307471601664', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156399, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1397832521424568320', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156400, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1398158275052044288', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156401, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1400327593747546112', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156402, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1400404622950006784', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156403, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1401151419146305536', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156404, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1401410511345549312', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156405, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1401554126134837248', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156406, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402073713776861185', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156407, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402158455838810113', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156408, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402206597456142337', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156409, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402255838979366913', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156410, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402500007232634882', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156411, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402590163830595586', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156412, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402643622764240897', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156413, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1402904395876950018', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156414, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403185585234141186', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156415, 'SYSTEM', '2026-04-27 15:05:14.173000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403187209721634817', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156416, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403191446782369794', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156417, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403239139542106113', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156418, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403275318165532673', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156419, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403535292535959553', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156420, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1403979501457928193', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156421, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1404606193050349570', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156422, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1404616425478582273', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156423, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1407141165611155457', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156424, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1407235041835429890', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156425, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1407237331770224642', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156426, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1407259376264503298', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156427, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1408065297286758401', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156428, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1408341846372220930', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156429, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1409127716142514177', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156430, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1409695620697223170', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156431, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1409760455992623105', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156432, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1409794871070613505', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156433, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1410062527401082882', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156434, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1410135216010653698', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156435, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1410137032131702786', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156436, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1410783659834040321', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156437, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1410840693279420417', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156438, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411211852470616066', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156439, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411214574171258881', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156440, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411214811031994369', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156441, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411856000617873410', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156442, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411930887357267970', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156443, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1411933154009481217', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156444, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412247339608109057', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156445, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412309030987464705', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156446, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412314635630379009', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156447, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412342478582132738', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156448, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412342882715906050', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156449, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412647674449309697', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156450, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1412779098535985154', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156451, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413034058905387010', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156452, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413057217784283138', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156453, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413141892615733249', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156454, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413337691798732801', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156455, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413391378004951041', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156456, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413392652440027137', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156457, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413749888458801154', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156458, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413751437755006977', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156459, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1413806466637611009', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156460, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414055878550994946', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156461, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414395084481609729', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156462, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414395590671187970', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156463, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414397274281590785', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156464, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414478064512258049', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156465, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414504328509902849', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156466, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414524009866186754', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156467, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414526378582593537', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156468, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414768324752297986', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156469, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414778830800146434', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156470, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414846873131667457', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156471, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414882527303553025', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156472, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1414992423667748866', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156473, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415103002948521985', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156474, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415218005651345409', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156475, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415225989068607490', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156476, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415233400433135618', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156477, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415243186717446145', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156478, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415275858776936450', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156479, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415325133502271489', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156480, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415491126404960257', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156481, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415510068771016706', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156482, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415561472910938114', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156483, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415849951439998977', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156484, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415864933049290754', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156485, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415890321179791362', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156486, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1415911028039208962', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156487, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1416249545307049986', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156488, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1416730853502210050', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156489, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1416771637739900929', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156490, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417042971908714497', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156491, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417301555284357122', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156492, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417323812845072385', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156493, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417386628880871426', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156494, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417393373242011649', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156495, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417401480986832898', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156496, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417402333449760770', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156497, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417402854717861890', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156498, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417711980530479106', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156499, 'SYSTEM', '2026-04-27 15:05:14.174000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417750387969323010', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156500, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1417793631499325441', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156501, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1418040185451749377', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156502, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1418396448006119425', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156503, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1418483301417787393', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156504, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1418498834838102018', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156505, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1418838138588274690', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156506, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1419288608091971586', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156507, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1419838771248279553', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156508, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1419839441527418882', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156509, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1419893593011957761', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156510, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1419897245810339842', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156511, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420027282756775937', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156512, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420202304402141186', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156513, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420204918732795906', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156514, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420274223604346881', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156515, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420278368302313473', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156516, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420292038826700802', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156517, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420330414778920961', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156518, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420622927871913986', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156519, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420625635848794114', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156520, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420889496531296258', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156521, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1420982716229541889', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156522, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1421288475668635650', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156523, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1421368752021561345', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156524, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1421446652792004610', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156525, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422026576317767681', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156526, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422069221727526913', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156527, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422073672823595010', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156528, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422452630081519618', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156529, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422504241898209281', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156530, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422504948487438338', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156531, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422506934624600065', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156532, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1422541937126187009', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156533, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1425467252869726210', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156534, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1432275164472606721', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156535, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1432999711421280258', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156536, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1434784339069034497', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156537, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1434800943580372993', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156538, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '1440957996728336385', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156539, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '2039222518399459329', '2026-04-27', 30, 0, 30, 3, 2, 66.67);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156540, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '2044680875692269569', '2026-04-27', 2, 0, 2, 2, 2, 100.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156541, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '2046049196517982210', '2026-04-27', 0, 0, 0, 0, 0, 0.00);
-INSERT INTO `li_goods_tag_stat` VALUES (2048659719814156542, 'SYSTEM', '2026-04-27 15:05:14.175000', b'0', 'SYSTEM', '2026-04-27 15:05:14.117000', '2047596045112528897', '2026-04-27', 3, 0, 3, 2, 2, 100.00);
-
--- ----------------------------
 -- Table structure for li_goods_unit
 -- ----------------------------
 DROP TABLE IF EXISTS `li_goods_unit`;
@@ -5533,7 +4798,7 @@ CREATE TABLE `li_goods_unit`  (
   `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品计量单位' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods_unit
@@ -5560,7 +4825,7 @@ CREATE TABLE `li_goods_words`  (
   `whole_spell` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `words` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品关键字' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_goods_words
@@ -5600,7 +4865,7 @@ CREATE TABLE `li_im_message`  (
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '聊天内容',
   `talk_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '聊天Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = 'IM消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_im_message
@@ -5636,7 +4901,7 @@ CREATE TABLE `li_im_talk`  (
   `tenant_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '坐席Id',
   `tenant_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '坐席名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '聊天' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_im_talk
@@ -5718,7 +4983,7 @@ CREATE TABLE `li_kanjia_activity`  (
   `surplus_price` decimal(10, 2) NULL DEFAULT NULL,
   `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '砍价活动参与对象' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_kanjia_activity
@@ -5753,7 +5018,7 @@ CREATE TABLE `li_kanjia_activity_goods`  (
   `scope_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'PORTION_GOODS' COMMENT '关联范围类型',
   `goods_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '砍价活动商品对象' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_kanjia_activity_goods
@@ -5777,7 +5042,7 @@ CREATE TABLE `li_kanjia_activity_log`  (
   `kanjia_price` decimal(10, 2) NULL DEFAULT NULL,
   `surplus_price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '砍价活动日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_kanjia_activity_log
@@ -5996,7 +5261,7 @@ CREATE TABLE `li_logistics`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '物流公司名称',
   `stand_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '支持电子面单',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '物流公司' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_logistics
@@ -6048,7 +5313,7 @@ CREATE TABLE `li_member`  (
   UNIQUE INDEX `username`(`username` ASC) USING BTREE COMMENT 'username唯一索引',
   INDEX `idx_li_member_disabled_create_time`(`disabled` ASC, `create_time` DESC) USING BTREE,
   INDEX `query_mobile`(`mobile` ASC) USING BTREE COMMENT 'query_member'
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member
@@ -6078,7 +5343,7 @@ CREATE TABLE `li_member_address`  (
   `mobile` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '手机号码',
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '收货人姓名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户地址' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_address
@@ -6147,7 +5412,7 @@ CREATE TABLE `li_member_coupon`  (
   `store_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺名称',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_li_member_coupon_live_room_id`(`live_room_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户优惠券' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_coupon
@@ -6164,7 +5429,7 @@ CREATE TABLE `li_member_coupon_sign`  (
   `invalid_time` datetime NULL DEFAULT NULL COMMENT '过期时间',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户优惠券领取标记' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_coupon_sign
@@ -6205,7 +5470,7 @@ CREATE TABLE `li_member_evaluation`  (
   `service_score` int NULL DEFAULT NULL COMMENT '服务评分',
   `store_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户商品评价' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_evaluation
@@ -6310,7 +5575,7 @@ CREATE TABLE `li_member_group`  (
   `group_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '分组名称',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分组描述',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户分组' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_group
@@ -6333,89 +5598,11 @@ CREATE TABLE `li_member_group_user`  (
   UNIQUE INDEX `uniq_group_member`(`group_id` ASC, `member_id` ASC) USING BTREE,
   INDEX `idx_group_id`(`group_id` ASC) USING BTREE,
   INDEX `idx_member_id`(`member_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户分组用户关联' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_group_user
 -- ----------------------------
-
--- ----------------------------
--- Table structure for li_member_level
--- ----------------------------
-DROP TABLE IF EXISTS `li_member_level`;
-CREATE TABLE `li_member_level`  (
-  `id` bigint NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '会员等级名称',
-  `discount` decimal(20, 2) NULL DEFAULT NULL COMMENT '折扣',
-  `upgrade_point` bigint NULL DEFAULT NULL COMMENT '达到该积分后升级',
-  `keep_point` bigint NULL DEFAULT NULL COMMENT '达到该积分后可保级',
-  `point_cash_flag` bit(1) NULL DEFAULT NULL COMMENT '是否开启积分抵现',
-  `point_give_ratio` decimal(20, 2) NULL DEFAULT NULL COMMENT '消费积分赠送的倍数',
-  `level` int NULL DEFAULT NULL COMMENT '等级',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '更新者',
-  `delete_flag` bit(1) NULL DEFAULT b'0' COMMENT '是否删除',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '会员等级' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_member_level
--- ----------------------------
-INSERT INTO `li_member_level` VALUES (1, '普通会员', 100.00, 1200, 0, b'0', 1.00, 0, NULL, '2024-06-20 16:42:56.081000', NULL, 'admin', b'0');
-INSERT INTO `li_member_level` VALUES (2, '银卡会员', 97.00, 4000, 1200, b'0', 1.20, 1, NULL, '2024-06-20 16:44:50.363000', NULL, 'admin', b'0');
-INSERT INTO `li_member_level` VALUES (3, '金卡会员', 92.00, 50000, 4000, b'1', 1.50, 2, NULL, '2024-06-20 16:43:34.432000', NULL, 'admin', b'0');
-
--- ----------------------------
--- Table structure for li_member_level_record
--- ----------------------------
-DROP TABLE IF EXISTS `li_member_level_record`;
-CREATE TABLE `li_member_level_record`  (
-  `id` bigint NOT NULL,
-  `member_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '会员id',
-  `member_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '会员名称',
-  `old_level_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '旧会员等级',
-  `new_level_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '新会员等级',
-  `start_time` datetime NULL DEFAULT NULL COMMENT '会员等级开始时间',
-  `end_time` datetime NULL DEFAULT NULL COMMENT '会员等级结束时间',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '备注',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '会员等级变更记录' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_member_level_record
--- ----------------------------
-INSERT INTO `li_member_level_record` VALUES (1780260072073494530, '1376417684140326912', '13011111111', '1', '2', '2024-04-16 23:40:51', '2024-04-17 23:40:51', '平台：admin 升级会员等级', '2024-04-16 23:40:51');
-INSERT INTO `li_member_level_record` VALUES (1780260522818568194, '1376364798236688384', '15810610731', '1', '2', '2024-04-16 23:42:39', '2024-04-17 23:42:39', '平台：admin 升级会员等级', '2024-04-16 23:42:39');
-INSERT INTO `li_member_level_record` VALUES (1780262960522932225, '1376417684140326912', '13011111111', '2', '3', '2024-04-16 23:52:20', '2024-04-17 23:52:20', '平台：admin 升级会员等级', '2024-04-16 23:52:20');
-INSERT INTO `li_member_level_record` VALUES (1780453739816103937, '1376364798236688384', '15810610731', '2', '3', '2024-04-17 12:30:25', '2024-04-18 12:30:25', '平台：admin 升级会员等级', '2024-04-17 12:30:25');
-INSERT INTO `li_member_level_record` VALUES (1780457786350600194, '1376417684140326912', '13011111111', '1', '2', '2024-04-17 12:46:30', '2025-04-17 12:46:30', '平台：admin 升级会员等级', '2024-04-17 12:46:30');
-INSERT INTO `li_member_level_record` VALUES (1780607164621000705, '1376364798236688384', '15810610731', '1', '2', '2024-04-17 22:40:05', '2025-04-17 22:40:05', '商家：家家乐 升级会员等级', '2024-04-17 22:40:05');
-INSERT INTO `li_member_level_record` VALUES (1780607812838100993, '1376364798236688384', '15810610731', '2', '3', '2024-04-17 22:42:39', '2025-04-17 22:42:39', '商家：家家乐 升级会员等级', '2024-04-17 22:42:39');
-INSERT INTO `li_member_level_record` VALUES (1780756520460357634, '1376364798236688384', '15810610731', '1', '2', '2024-04-18 08:33:34', '2025-04-18 08:33:34', '商家：家家乐 升级会员等级', '2024-04-18 08:33:34');
-INSERT INTO `li_member_level_record` VALUES (1780775607517392897, '1376364798236688384', '15810610731', '2', '3', '2024-04-18 09:49:25', '2025-04-18 09:49:25', '平台：admin 升级会员等级', '2024-04-18 09:49:25');
-INSERT INTO `li_member_level_record` VALUES (1780864282280398850, '1376417684140326912', '130****1111', '1', '1', '2024-04-18 15:41:46', '2025-04-18 15:41:46', '会员消费积分达到升级门槛,自动升级', '2024-04-18 15:41:46');
-INSERT INTO `li_member_level_record` VALUES (1780866898301358081, '1376364798236688384', '15810610731', '1', '1', '2024-04-18 15:52:10', '2025-04-18 15:52:10', '会员消费积分达到升级门槛,自动升级', '2024-04-18 15:52:10');
-INSERT INTO `li_member_level_record` VALUES (1780866898414604290, '1376417684140326912', '130****1111', '1', '1', '2024-04-18 15:52:10', '2025-04-18 15:52:10', '会员消费积分达到升级门槛,自动升级', '2024-04-18 15:52:10');
-INSERT INTO `li_member_level_record` VALUES (1780890974566768642, '1376364798236688384', '15810610731', '1', '1', '2024-04-18 17:27:50', '2025-04-18 17:27:50', '会员消费积分达到升级门槛,自动升级', '2024-04-18 17:27:50');
-INSERT INTO `li_member_level_record` VALUES (1780896681336832002, '1376364798236688384', '15810610731', '1', '2', '2024-04-18 17:50:31', '2025-04-18 17:50:31', '会员消费积分达到升级门槛,自动升级', '2024-04-18 17:50:31');
-INSERT INTO `li_member_level_record` VALUES (1780941423206531074, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2026-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 20:48:18');
-INSERT INTO `li_member_level_record` VALUES (1780949449275719682, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2027-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 21:20:12');
-INSERT INTO `li_member_level_record` VALUES (1780952273438912513, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2028-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 21:31:25');
-INSERT INTO `li_member_level_record` VALUES (1780954532956626946, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2029-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 21:40:24');
-INSERT INTO `li_member_level_record` VALUES (1780956219565944834, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2030-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 21:47:06');
-INSERT INTO `li_member_level_record` VALUES (1780957698066493441, '1376364798236688384', '15810610731', '2', '2', '2024-04-18 17:50:31', '2031-04-18 17:50:31', '购买会员，时间延长一年', '2024-04-18 21:52:58');
-INSERT INTO `li_member_level_record` VALUES (1780959125992177666, '1376364798236688384', '15810610731', '2', '3', '2024-04-18 21:58:39', '2025-04-18 21:58:39', '购买会员，等级升级', '2024-04-18 21:58:39');
-INSERT INTO `li_member_level_record` VALUES (1780978636661215233, '1780973536295514112', '18545459863', '1', '3', '2024-04-18 23:16:11', '2025-04-18 23:16:11', '购买会员，等级升级', '2024-04-18 23:16:11');
-INSERT INTO `li_member_level_record` VALUES (1781288857848446977, '1781267445152047104', '23c194c970ae4766071e602afdffc1ee', '1', '2', '2024-04-19 19:48:53', '2025-04-19 19:48:53', '商家：家家乐 升级会员等级', '2024-04-19 19:48:53');
-INSERT INTO `li_member_level_record` VALUES (1793065780337369089, '1793065711371857920', '天行健', '1', '2', '2024-05-22 07:46:10', '2025-05-22 07:46:10', '平台：admin 升级会员等级', '2024-05-22 07:46:10');
-INSERT INTO `li_member_level_record` VALUES (1793065802206470146, '1793065711371857920', '天行健', '2', '3', '2024-05-22 07:46:15', '2025-05-22 07:46:15', '平台：admin 升级会员等级', '2024-05-22 07:46:15');
-INSERT INTO `li_member_level_record` VALUES (1795611816822009858, '1795611768194666496', '哈皮购', '1', '2', '2024-05-29 08:23:13', '2025-05-29 08:23:13', '平台：admin 升级会员等级', '2024-05-29 08:23:13');
-INSERT INTO `li_member_level_record` VALUES (1806241100284522498, '1803595424414584832', '854e039ea5824bcb96205bdab4de275e', '1', '2', '2024-06-27 16:20:11', '2025-06-27 16:20:11', '购买会员，等级升级', '2024-06-27 16:20:11');
-INSERT INTO `li_member_level_record` VALUES (1806243727323918337, '1803595424414584832', '854e039ea5824bcb96205bdab4de275e', '2', '3', '2024-06-27 16:30:38', '2025-06-27 16:30:38', '购买会员，等级升级', '2024-06-27 16:30:38');
-INSERT INTO `li_member_level_record` VALUES (1807592585412964353, '1795343398736035840', 'f0806c31c7b3690208c2f9f171484d5a', '1', '2', '2024-07-01 09:50:30', '2025-07-01 09:50:30', '购买会员，等级升级', '2024-07-01 09:50:30');
 
 -- ----------------------------
 -- Table structure for li_member_message
@@ -6435,7 +5622,7 @@ CREATE TABLE `li_member_message`  (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '消息标题',
   `message_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '客户消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_message
@@ -6462,7 +5649,7 @@ CREATE TABLE `li_member_notice`  (
   `receive_time` bigint NULL DEFAULT NULL COMMENT '阅读时间',
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户站内信' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_notice
@@ -6487,7 +5674,7 @@ CREATE TABLE `li_member_notice_log`  (
   `send_type` int NULL DEFAULT NULL COMMENT '发送类型',
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_notice_log
@@ -6509,7 +5696,7 @@ CREATE TABLE `li_member_notice_senter`  (
   `send_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '发送类型',
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_notice_senter
@@ -6532,7 +5719,7 @@ CREATE TABLE `li_member_points_history`  (
   `point_source` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT 'UNKNOWN' COMMENT '积分来源',
   `variable_point` bigint NULL DEFAULT NULL COMMENT '消费积分',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户积分历史' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_points_history
@@ -6554,7 +5741,7 @@ CREATE TABLE `li_member_receipt`  (
   `receipt_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '发票类型',
   `taxpayer_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '纳税人识别号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户发票' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_receipt
@@ -6676,7 +5863,7 @@ CREATE TABLE `li_member_sign`  (
   UNIQUE INDEX `uk_member_day`(`member_id` ASC, `create_time` ASC) USING BTREE COMMENT 'uk_member_day',
   INDEX `query_create_time`(`create_time` ASC) USING BTREE COMMENT 'query_create_time',
   INDEX `query_member_id`(`member_id` ASC) USING BTREE COMMENT 'query_member_id'
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户签到' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_sign
@@ -6693,7 +5880,7 @@ CREATE TABLE `li_member_statistics_data`  (
   `member_count` int NULL DEFAULT NULL COMMENT '当前会员数量',
   `newly_added` int NULL DEFAULT NULL COMMENT '新增会员数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户统计' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_statistics_data
@@ -6716,7 +5903,7 @@ CREATE TABLE `li_member_wallet`  (
   `member_wallet` decimal(10, 2) NULL DEFAULT NULL COMMENT '会员预存款',
   `wallet_password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '预存款密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '客户预存款' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_wallet
@@ -6748,7 +5935,7 @@ CREATE TABLE `li_member_withdraw_apply`  (
   `out_bill_no` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '第三方转账单号',
   `wechat_package` varchar(1024) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '微信等待用户确认信息',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '会员提现申请' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_member_withdraw_apply
@@ -6777,7 +5964,7 @@ CREATE TABLE `li_menu`  (
   `front_component` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '文件地址',
   `permission` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '权限url',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '菜单权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_menu
@@ -6879,7 +6066,6 @@ INSERT INTO `li_menu` VALUES (1376450531517530112, 'admin', '2021-03-29 03:25:55
 INSERT INTO `li_menu` VALUES (1376450662098796544, 'admin', '2021-03-29 03:26:26', b'0', 'admin', '2021-07-27 16:07:23', NULL, 'sys/message/noticeMessageTemplate', 'ios-american-football', 2, 'noticeMessageTemplate', '1376450531517530112', 'noticeMessageTemplate', 1.00, '站内信', NULL, '/manager/other/message*');
 INSERT INTO `li_menu` VALUES (1376450766817984512, 'admin', '2021-03-29 03:26:51', b'0', 'admin', '2021-03-29 03:27:25', 'null', 'Main', 'md-checkmark', 1, 'sms', '1367040599596728320', '/', 6.00, '短信管理', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1376450876423536640, 'admin', '2021-03-29 03:27:17', b'0', 'admin', '2021-07-27 16:07:29', NULL, 'sys/message/sms', 'ios-timer', 2, 'sms', '1376450766817984512', 'sms', 1.00, '短信', NULL, '/manager/sms/sms*,/manager/passport/member*');
-INSERT INTO `li_menu` VALUES (1384035281702748160, 'admin', '2021-04-19 14:45:00', b'0', 'admin', '2021-07-27 16:08:18', 'null', 'member/message-manage/weChatMessageManager', 'md-aperture', 2, 'message-manage', '1349237129847005184', 'message-manage', 5.00, '微信消息', 'null', '/manager/wechat/wechatMessage*');
 INSERT INTO `li_menu` VALUES (1403988156444962818, 'admin', '2021-06-13 16:10:36', b'0', 'admin', '2021-12-02 19:54:37', 'null', 'promotions/coupon-activity/coupon', '', 2, 'promotions/coupon-activity', '1367049214198022144', 'promotions/coupon-activity', 0.00, '券活动', 'null', '/manager/promotion/couponActivity*');
 INSERT INTO `li_menu` VALUES (1407601962899230721, 'admin', '2021-06-23 15:30:35', b'0', 'admin', '2021-07-27 16:05:08', NULL, 'Main', '', 1, 'liveManage', '1367040067201138688', '/', 2.00, '直播管理', NULL, '/manager/broadcast*');
 INSERT INTO `li_menu` VALUES (1407602049759072258, 'admin', '2021-06-23 15:30:55', b'0', 'admin', '2021-12-07 10:54:54', NULL, 'promotions/live/live', '', 2, 'promotions/live', '1407601962899230721', 'promotions/live', 1.00, '直播管理', NULL, 'null');
@@ -6907,6 +6093,7 @@ INSERT INTO `li_menu` VALUES (2053060244543295489, 'admin', '2026-05-09 18:31:21
 INSERT INTO `li_menu` VALUES (2054458120364294145, 'admin', '2026-05-13 15:06:01', b'0', 'admin', '2026-05-14 18:25:54', NULL, 'member-benefit', NULL, 2, 'member-benefit', '2053037117402689538', 'member-benefit', 4.00, '客户权益', NULL, '');
 INSERT INTO `li_menu` VALUES (2057668382760361986, 'admin', '2026-05-22 11:42:27', b'0', 'admin', '2026-05-22 11:43:13', NULL, 'promotions/gift-card-cash/gift-card-cash-activity', NULL, 2, 'promotions/gift-card-cash', '1367049214198022144', 'promotions/gift-card-cash', 10.00, '礼品卡', NULL, '/manager/promotion/giftCardCash*');
 INSERT INTO `li_menu` VALUES (2057668382760361988, 'admin', '2026-10-29 17:37:32', b'0', 'admin', '2026-10-29 17:37:32', NULL, 'page-decoration/category-setting', 'md-apps', 2, 'category-setting', '1367050320584114176', 'categorySetting', 3.00, '分类设置', NULL, '/manager/setting/setting*');
+INSERT INTO `li_menu` VALUES (2057668382760361989, 'admin', '2026-11-02 18:07:05', b'0', 'admin', '2026-11-02 18:07:05', '系统设置-定时任务管理', 'sys/timed-task/index', 'ios-timer', 2, 'timedTask', '1349237129847005184', 'timed-task', 10.00, '定时任务', NULL, '/manager/setting/timed-task*');
 INSERT INTO `li_menu` VALUES (2070335987930095617, 'admin', '2026-06-26 10:38:59', b'0', 'admin', '2026-07-01 13:45:30', '直播一级导航', NULL, NULL, 0, 'live', '0', NULL, 0.60, '直播', NULL, NULL);
 INSERT INTO `li_menu` VALUES (2070336142943182850, 'admin', '2026-06-26 10:39:36', b'0', 'admin', '2026-07-01 13:42:12', '直播分组，有子菜单时不作为页面打开', 'promotions/live/live', NULL, 1, '/', '2070335987930095617', '/', 0.00, '直播管理', NULL, NULL);
 INSERT INTO `li_menu` VALUES (2070336618820526082, 'admin', '2026-06-26 10:41:30', b'0', 'admin', '2026-07-01 13:47:58', '直播管理页面，对应 views/live/list.vue', 'live/list', NULL, 2, 'live-list', '2070336142943182850', 'live-list', 0.00, '直播管理', NULL, NULL);
@@ -6929,7 +6116,7 @@ CREATE TABLE `li_message`  (
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `message_client` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发送客户端',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_message
@@ -6955,7 +6142,7 @@ CREATE TABLE `li_notice_message`  (
   `email_status` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'CLOSE' COMMENT '邮箱渠道 OPEN/CLOSE',
   `email_content` varchar(2000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '邮箱正文，空则与站内信同文',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '通知类消息模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_notice_message
@@ -6983,29 +6170,6 @@ INSERT INTO `li_notice_message` VALUES (20, NULL, '2021-07-21 19:16:58.000000', 
 INSERT INTO `li_notice_message` VALUES (21, NULL, '2021-07-26 18:59:00.000000', NULL, NULL, '2021-07-26 18:59:03.000000', '恭喜您，您的提处理成功，提现金额为¥#{收入金额}，将在1-3个工作日内到账~', '微信提现成功通知', 'OPEN', '微信提现成功通知', 'income', 'WALLET_WITHDRAWAL_SUCCESS', 'CLOSE', NULL);
 
 -- ----------------------------
--- Table structure for li_notice_message_template
--- ----------------------------
-DROP TABLE IF EXISTS `li_notice_message_template`;
-CREATE TABLE `li_notice_message_template`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `message_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '消息CODE',
-  `notice_content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '站内信内容',
-  `notice_state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '站内信是否开启',
-  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '类型',
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '模板名称',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_notice_message_template
--- ----------------------------
-
--- ----------------------------
 -- Table structure for li_nth_item_discount
 -- ----------------------------
 DROP TABLE IF EXISTS `li_nth_item_discount`;
@@ -7028,7 +6192,7 @@ CREATE TABLE `li_nth_item_discount`  (
   `discount_value` decimal(10, 2) NULL DEFAULT NULL COMMENT '折扣值，RATE时为折数',
   `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '第N件优惠' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_nth_item_discount
@@ -7100,7 +6264,7 @@ CREATE TABLE `li_order`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_delete_flag_create_time_id_sn`(`delete_flag` ASC, `create_time` DESC, `id` DESC, `sn` ASC) USING BTREE,
   INDEX `idx_order_status_delete_flag_sn`(`order_status` ASC, `delete_flag` ASC, `sn` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '订单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order
@@ -7146,7 +6310,7 @@ CREATE TABLE `li_order_complaint`  (
   `store_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '店铺名称',
   `sku_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '货品ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单交易投诉' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_complaint
@@ -7169,7 +6333,7 @@ CREATE TABLE `li_order_complaint_communication`  (
   `owner_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '对话所属ID,卖家ID/买家ID',
   `owner_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '对话所属名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '订单交易投诉通信' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_complaint_communication
@@ -7276,7 +6440,7 @@ CREATE TABLE `li_order_item`  (
   `refund_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '退款金额',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_item_order_sn`(`order_sn` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '子订单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_item
@@ -7298,7 +6462,7 @@ CREATE TABLE `li_order_log`  (
   `operator_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '操作者类型',
   `order_sn` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '订单日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_log
@@ -7332,7 +6496,7 @@ CREATE TABLE `li_order_package`  (
   `delivery_remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '无需配送说明',
   `logistics_time` datetime NULL DEFAULT NULL COMMENT '本批次发货时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '订单包裹' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_package
@@ -7357,7 +6521,7 @@ CREATE TABLE `li_order_package_item`  (
   `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '订单分包裹详情' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_order_package_item
@@ -7381,7 +6545,7 @@ CREATE TABLE `li_page_data`  (
   `page_show` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '页面开关状态',
   `page_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '页面类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '页面数据' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_page_data
@@ -7410,7 +6574,7 @@ CREATE TABLE `li_parameters`  (
   `required` int NULL DEFAULT NULL COMMENT '是否必填',
   `sort` int NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品参数' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_parameters
@@ -7471,7 +6635,7 @@ CREATE TABLE `li_pintuan`  (
   `scope_id` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '范围关联的ID',
   `scope_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'PORTION_GOODS' COMMENT '关联范围类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '拼团' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_pintuan
@@ -7506,7 +6670,7 @@ CREATE TABLE `li_points_goods`  (
   `goods_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '商品编号',
   `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '货品名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '积分商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_points_goods
@@ -7528,7 +6692,7 @@ CREATE TABLE `li_points_goods_category`  (
   `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '父ID',
   `sort_order` decimal(19, 2) NULL DEFAULT NULL COMMENT '排序值',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '积分商品分类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_points_goods_category
@@ -7687,106 +6851,10 @@ CREATE TABLE `li_promotion_goods`  (
   `points` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '兑换积分',
   `goods_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '商品编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '促销商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_promotion_goods
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_purchase_order
--- ----------------------------
-DROP TABLE IF EXISTS `li_purchase_order`;
-CREATE TABLE `li_purchase_order`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `delete_flag` bit(1) NULL DEFAULT NULL COMMENT '删除标志 true/false 删除/未删除',
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新者',
-  `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
-  `category_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分类ID',
-  `category_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '分类名称',
-  `consignee_address_id_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '地址ID',
-  `consignee_address_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '地址名称',
-  `contact_number` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联系电话',
-  `contact_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联系类型',
-  `contacts` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联系人',
-  `deadline` datetime(6) NULL DEFAULT NULL COMMENT '截止时间',
-  `member_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '供求人',
-  `need_receipt` bit(1) NULL DEFAULT NULL COMMENT '是否需要发票',
-  `price_method` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '价格类型',
-  `receipt_time` datetime(6) NULL DEFAULT NULL COMMENT '收货时间',
-  `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '状态',
-  `supplement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '补充说明',
-  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_purchase_order
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_purchase_order_item
--- ----------------------------
-DROP TABLE IF EXISTS `li_purchase_order_item`;
-CREATE TABLE `li_purchase_order_item`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品名称',
-  `goods_unit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数量单位',
-  `images` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '图片',
-  `num` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数量',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
-  `purchase_order_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '采购ID',
-  `specs` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '规格',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_purchase_order_item
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_purchase_quoted
--- ----------------------------
-DROP TABLE IF EXISTS `li_purchase_quoted`;
-CREATE TABLE `li_purchase_quoted`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `annex` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '附件',
-  `company_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '公司名称',
-  `contact_number` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联系电话',
-  `contacts` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '联系人',
-  `context` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '报价说明',
-  `member_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '报价人',
-  `purchase_order_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '采购单ID',
-  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_purchase_quoted
--- ----------------------------
-
--- ----------------------------
--- Table structure for li_purchase_quoted_item
--- ----------------------------
-DROP TABLE IF EXISTS `li_purchase_quoted_item`;
-CREATE TABLE `li_purchase_quoted_item`  (
-  `id` bigint NOT NULL COMMENT 'ID',
-  `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-  `purchase_quoted_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '报价单ID',
-  `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品名称',
-  `goods_unit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数量单位',
-  `num` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数量',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
-  `specs` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '规格',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of li_purchase_quoted_item
 -- ----------------------------
 
 -- ----------------------------
@@ -7844,7 +6912,7 @@ CREATE TABLE `li_receipt`  (
   `bank_name` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '开户银行',
   `bank_account` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '银行账户',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '发票' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_receipt
@@ -7888,7 +6956,7 @@ CREATE TABLE `li_recharge`  (
   `pay_time` datetime(6) NULL DEFAULT NULL COMMENT '支付时间',
   `receivable_no` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '预存款充值记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_recharge
@@ -7947,7 +7015,7 @@ CREATE TABLE `li_refund_log`  (
   `order_sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单编号',
   `out_order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '退款申请号码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '退款日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_refund_log
@@ -8116,7 +7184,7 @@ CREATE TABLE `li_region`  (
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '行政地区路径',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `parent_id`(`parent_id` ASC) USING BTREE COMMENT '父id'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '行政地区' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_region
@@ -31645,7 +30713,7 @@ CREATE TABLE `li_role`  (
   `description` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_role
@@ -31666,7 +30734,7 @@ CREATE TABLE `li_role_menu`  (
   `menu_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '菜单',
   `role_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '角色权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_role_menu
@@ -31683,7 +30751,7 @@ CREATE TABLE `li_s_platform_view_data`  (
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '店铺ID',
   `uv_num` bigint NULL DEFAULT NULL COMMENT 'UV数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '平台pv统计' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_s_platform_view_data
@@ -31763,7 +30831,7 @@ CREATE TABLE `li_seckill`  (
   `scope_id` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '范围关联的ID',
   `scope_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'PORTION_GOODS' COMMENT '关联范围类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '秒杀活动' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_seckill
@@ -31793,7 +30861,7 @@ CREATE TABLE `li_seckill_apply`  (
   `sku_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '货品ID',
   `time_line` int NOT NULL COMMENT '时刻',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '秒杀活动申请' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_seckill_apply
@@ -31836,7 +30904,7 @@ CREATE TABLE `li_service_notice`  (
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
   `to_url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '点击跳转',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '服务订阅消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_service_notice
@@ -31855,7 +30923,7 @@ CREATE TABLE `li_setting`  (
   `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
   `setting_value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '配置值value',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '配置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_setting
@@ -31905,7 +30973,7 @@ CREATE TABLE `li_short_link`  (
   `update_time` datetime(6) NULL DEFAULT NULL COMMENT '更新时间',
   `original_params` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '短链接/暂时只用于小程序二维码业务' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_short_link
@@ -31925,7 +30993,7 @@ CREATE TABLE `li_sms_reach`  (
   `sms_range` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '接收人',
   `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '短信任务' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_sms_reach
@@ -31945,7 +31013,7 @@ CREATE TABLE `li_sms_sign`  (
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核备注',
   `id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '短信签名' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_sms_sign
@@ -31965,7 +31033,7 @@ CREATE TABLE `li_sms_template`  (
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核备注',
   `template_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '短信模板CODE',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '短信模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_sms_template
@@ -31986,7 +31054,7 @@ CREATE TABLE `li_special`  (
   `page_data_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '页面ID',
   `special_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '专题活动名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '专题活动' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_special
@@ -32007,7 +31075,7 @@ CREATE TABLE `li_specification`  (
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属店铺',
   `spec_value` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '规格项' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_specification
@@ -32069,13 +31137,13 @@ CREATE TABLE `li_store`  (
   `page_show` bit(1) NULL DEFAULT NULL COMMENT '默认页面是否开启',
   `self_pick_flag` bit(1) NULL DEFAULT NULL COMMENT '是否开启自提',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '店铺' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store
 -- ----------------------------
-INSERT INTO `li_store` VALUES (1376369067769724928, 'admin', '2021-03-28 22:02:12.109000', b'0', 'admin', '2026-10-09 16:58:53.698000', '1376364798236688384', '15810610731', b'1', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/e3e1c6ef28a844f98a0c907bd74a4085.png', '自营店', '北京五道口', '1371783043718578711,1371783043718578712,1371783043722772487,1371783043722772492', '北京市 北京城区 海淀区 学院路街道', '39.992552,116.338611', 'Lilishop自营店简介', 4.00, 4.00, 4.00, 0, 13, '4a971f4f4ff9637cd9286a0197b0573bf2f65de052c21791f90d4235fca41456e1cc145075567f5f47b8e13c895f3fc8cacec5789f9afee8df670f7cbe5c0f82', '37ef9b97807d03c6741298ed4eb5b536d2d238e08a3c00fb01fe48f03a569974c99ad767e72c04b3165ef29aca2c488b505fe4ca', NULL, b'0', b'0');
-INSERT INTO `li_store` VALUES (1376433565247471616, 'admin', '2021-03-29 02:18:29.507000', b'0', 'admin', '2026-09-01 19:14:11.384000', '1376417684140326912', '13011111111', b'1', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/STORE/1376433565247471616/default/2acb9deca59540b5a2812034e0e06e1f.png', '家家乐', '家家乐超市', '1401797451790156093,1401797451790156094,1401797451790156416,1401797451790156442', '北京市 北京城区 海淀区 西三旗街道', '116.378877,40.063637', '店223232', 4.41, 4.47, 4.58, 176, 69, '32b8ff6f8d1c240be8d7fe51bdd6d44a6776ea86930afbe5c3c342825e942c914fc6126b6be1f003ab04aee1af9f442d2c33e1427529300671588866edaa4b12', '37ef9b97807d03c6741298ed4eb5b536d2d238e08a3c00fb01fe48f03a569974c99ad767e72c04b3165ef29aca2c488b505fe4ca', NULL, b'0', b'1');
+INSERT INTO `li_store` VALUES (1376369067769724928, 'admin', '2021-03-28 22:02:12.109000', b'0', 'admin', '2026-10-09 16:58:53.698000', '1376364798236688384', '15810610731', b'1', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/e3e1c6ef28a844f98a0c907bd74a4085.png', '自营店', '北京五道口', '1371783043718578711,1371783043718578712,1371783043722772487,1371783043722772492', '北京市 北京城区 海淀区 学院路街道', '39.992552,116.338611', 'Lilishop自营店简介', 4.00, 4.00, 4.00, 101, 13, '4a971f4f4ff9637cd9286a0197b0573bf2f65de052c21791f90d4235fca41456e1cc145075567f5f47b8e13c895f3fc8cacec5789f9afee8df670f7cbe5c0f82', '37ef9b97807d03c6741298ed4eb5b536d2d238e08a3c00fb01fe48f03a569974c99ad767e72c04b3165ef29aca2c488b505fe4ca', NULL, b'0', b'0');
+INSERT INTO `li_store` VALUES (1376433565247471616, 'admin', '2021-03-29 02:18:29.507000', b'0', 'admin', '2026-09-01 19:14:11.384000', '1376417684140326912', '13011111111', b'1', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/STORE/1376433565247471616/default/2acb9deca59540b5a2812034e0e06e1f.png', '家家乐', '家家乐超市', '1401797451790156093,1401797451790156094,1401797451790156416,1401797451790156442', '北京市 北京城区 海淀区 西三旗街道', '116.378877,40.063637', '店223232', 4.41, 4.47, 4.58, 284, 69, '32b8ff6f8d1c240be8d7fe51bdd6d44a6776ea86930afbe5c3c342825e942c914fc6126b6be1f003ab04aee1af9f442d2c33e1427529300671588866edaa4b12', '37ef9b97807d03c6741298ed4eb5b536d2d238e08a3c00fb01fe48f03a569974c99ad767e72c04b3165ef29aca2c488b505fe4ca', NULL, b'0', b'1');
 INSERT INTO `li_store` VALUES (2086998206548111361, '用户2', '2026-08-11 10:08:41.657000', b'0', 'admin', '2026-08-11 10:21:39.361000', '2082347162620928000', '用户2', b'0', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MEMBER/2082347162620928000/default/9ac88318264d4a1cafa3229899ede2dc.jpg', '1', '1', '1767392532215517184,1767392532219711488,1767392532219711489,1767392532219711490', '河南省,洛阳市,新安县,铁门镇', '112.076089,34.786316', '1', 5.00, 5.00, 5.00, 0, 0, NULL, NULL, NULL, b'0', b'0');
 INSERT INTO `li_store` VALUES (2087002100850323457, '用户3', '2026-08-11 10:24:10.140000', b'0', 'admin', '2026-08-11 10:26:29.189000', '2082347324542033920', '用户3', b'0', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MEMBER/2082347324542033920/default/be679913d87248348e0b2d54d35bcc2b.jpg', '1', '1', '1767392532215517184,1767392532219711488,1767392532219711489,1767392532219711490', '河南省,洛阳市,新安县,铁门镇', '112.076089,34.786316', '1', 5.00, 5.00, 5.00, 0, 0, NULL, NULL, NULL, b'0', b'0');
 INSERT INTO `li_store` VALUES (2087003321459896321, '用户4', '2026-08-11 10:29:01.153000', b'0', 'admin', '2026-08-11 10:34:35.469000', '2082347402677723136', '用户4', b'0', 'OPEN', NULL, 'https://lilishop-oss.oss-cn-beijing.aliyuncs.com/MEMBER/2082347402677723136/default/4836ccb3e9b44c4a839e8b2ddc71a5b5.jpg', '测试手机店', '杨宋镇', '1767392532416845119,1767392532416845120,1767392532416845121,1767392532416845122', '北京市,北京城区,怀柔区,杨宋镇', '116.691382,40.240685', '测试手机店', 5.00, 5.00, 5.00, 0, 0, NULL, NULL, NULL, b'0', b'0');
@@ -32097,7 +31165,7 @@ CREATE TABLE `li_store_address`  (
   `mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电话',
   `store_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '店铺自提点' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_address
@@ -32124,7 +31192,7 @@ CREATE TABLE `li_store_collection`  (
   `member_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '会员ID',
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '客户收藏' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_collection
@@ -32146,7 +31214,7 @@ CREATE TABLE `li_store_department`  (
   `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '父id',
   `sort_order` decimal(20, 2) NULL DEFAULT NULL COMMENT '排序值',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店铺部门' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_department
@@ -32169,7 +31237,7 @@ CREATE TABLE `li_store_department_role`  (
   `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '角色id',
   `department_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '部门id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店铺角色部门' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_department_role
@@ -32222,7 +31290,7 @@ CREATE TABLE `li_store_detail`  (
   `merchant_number` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `app_merchant_key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '店铺详细' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_detail
@@ -32625,7 +31693,7 @@ CREATE TABLE `li_store_goods_label`  (
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
   `sort_order` decimal(19, 2) NULL DEFAULT NULL COMMENT '店铺商品分类排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '店铺商品分类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_goods_label
@@ -32696,7 +31764,7 @@ CREATE TABLE `li_store_logistics`  (
   `exp_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '快递类型',
   `partner_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '电子面单客户账户名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '店铺-物流公司' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_logistics
@@ -32744,7 +31812,7 @@ CREATE TABLE `li_store_menu`  (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '菜单标题',
   `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权限url',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店铺菜单权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_menu
@@ -32840,7 +31908,7 @@ CREATE TABLE `li_store_menu_role`  (
   `store_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '店铺id',
   `is_super` bit(1) NULL DEFAULT NULL COMMENT '是否拥有操作数据权限，为否则只有查看权限',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店铺角色权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_menu_role
@@ -32933,7 +32001,7 @@ CREATE TABLE `li_store_message`  (
   `store_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '关联店铺ID',
   `store_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '关联店铺名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '店铺消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_message
@@ -33080,7 +32148,7 @@ CREATE TABLE `li_store_role`  (
   `default_role` bit(1) NULL DEFAULT NULL COMMENT '是否为注册默认角色',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '店铺角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_store_role
@@ -33115,7 +32183,7 @@ CREATE TABLE `li_studio`  (
   `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   `store_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '直播间' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_studio
@@ -33130,7 +32198,7 @@ CREATE TABLE `li_studio_commodity`  (
   `goods_id` int NULL DEFAULT NULL,
   `room_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '直播间商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_studio_commodity
@@ -33189,27 +32257,27 @@ CREATE TABLE `li_timed_task`  (
 -- ----------------------------
 -- Records of li_timed_task
 -- ----------------------------
-INSERT INTO `li_timed_task` VALUES ('AppointmentMinuteTaskExecute', '预约超时核销与提醒', '预约任务', 'appointmentMinuteTaskExecute', 'execute', '0 0/5 * * * ?', 1, '预约服务未到店核销自动处理及临期服务微信提醒', '2026-11-02 17:50:00', 1, 75, NULL, '2026-10-29 17:37:42', '2026-11-02 17:50:00');
-INSERT INTO `li_timed_task` VALUES ('BroadcastExecute', '小程序直播状态同步', '系统任务', 'broadcastExecute', 'execute', '0 0/30 * * * ?', 1, '同步微信小程序直播间数据和回放状态', '2026-11-02 17:30:00', 1, 28, NULL, '2026-10-29 17:37:42', '2026-11-02 17:30:00');
-INSERT INTO `li_timed_task` VALUES ('CancelOrderTaskExecute', '订单超时自动取消', '订单任务', 'cancelOrderTaskExecute', 'execute', '0 0/5 * * * ?', 1, '未付款订单超时后自动取消并释放库存', '2026-11-02 17:50:00', 1, 29, 'Cannot invoke \"cn.lili.modules.system.entity.dos.Setting.getSettingValue()\" because \"setting\" is null', '2026-10-29 17:37:42', '2026-11-02 17:50:00');
-INSERT INTO `li_timed_task` VALUES ('CouponExecute', '优惠券状态更新', '营销任务', 'couponExecute', 'execute', '0 0/30 * * * ?', 1, '失效或过期优惠券自动标记为已过期', '2026-11-02 17:30:00', 1, 84, NULL, '2026-10-29 17:37:42', '2026-11-02 17:30:00');
+INSERT INTO `li_timed_task` VALUES ('AppointmentMinuteTaskExecute', '预约超时核销与提醒', '预约任务', 'appointmentMinuteTaskExecute', 'execute', '0 0/5 * * * ?', 1, '预约服务未到店核销自动处理及临期服务微信提醒', '2026-11-02 18:20:00', 1, 37, NULL, '2026-10-29 17:37:42', '2026-11-02 18:20:00');
+INSERT INTO `li_timed_task` VALUES ('BroadcastExecute', '小程序直播状态同步', '系统任务', 'broadcastExecute', 'execute', '0 0/30 * * * ?', 1, '同步微信小程序直播间数据和回放状态', '2026-11-02 18:00:00', 1, 41, NULL, '2026-10-29 17:37:42', '2026-11-02 18:00:00');
+INSERT INTO `li_timed_task` VALUES ('CancelOrderTaskExecute', '订单超时自动取消', '订单任务', 'cancelOrderTaskExecute', 'execute', '0 0/5 * * * ?', 1, '未付款订单超时后自动取消并释放库存', '2026-11-02 18:20:00', 1, 18, 'Cannot invoke \"cn.lili.modules.system.entity.dos.Setting.getSettingValue()\" because \"setting\" is null', '2026-10-29 17:37:42', '2026-11-02 18:20:00');
+INSERT INTO `li_timed_task` VALUES ('CouponExecute', '优惠券状态更新', '营销任务', 'couponExecute', 'execute', '0 0/30 * * * ?', 1, '失效或过期优惠券自动标记为已过期', '2026-11-02 18:00:00', 1, 65, NULL, '2026-10-29 17:37:42', '2026-11-02 18:00:00');
 INSERT INTO `li_timed_task` VALUES ('DistributionRelationExpireExecute', '分销绑定关系过期', '分销任务', 'distributionRelationExpireExecute', 'execute', '0 0 2 * * ?', 1, '超过有效期的分销关系自动解绑', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('GiftCardCashExpireExecute', '礼品卡现金过期处理', '营销任务', 'giftCardCashExpireExecute', 'execute', '0 0 0 * * ?', 1, '礼品卡绑定的余额过期处理', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
-INSERT INTO `li_timed_task` VALUES ('GoodsExecute', '商品定时上下架', '商品任务', 'goodsExecute', 'execute', '0 0/10 * * * ?', 1, '定时上架或达到下架时间的商品状态流转', '2026-11-02 17:50:00', 1, 7, NULL, '2026-10-29 17:37:42', '2026-11-02 17:50:00');
+INSERT INTO `li_timed_task` VALUES ('GoodsExecute', '商品定时上下架', '商品任务', 'goodsExecute', 'execute', '0 0/10 * * * ?', 1, '定时上架或达到下架时间的商品状态流转', '2026-11-02 18:20:00', 1, 4, NULL, '2026-10-29 17:37:42', '2026-11-02 18:20:00');
 INSERT INTO `li_timed_task` VALUES ('HotWordsEveryDayTaskExecute', '搜索热词每日更新', '商品任务', 'hotWordsEveryDayTaskExecute', 'execute', '0 0 1 * * ?', 1, '统计搜索频次更新热门搜索关键词', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('MemberCouponSignEverydayExecute', '会员优惠券每日签到', '营销任务', 'memberCouponSignEverydayExecute', 'execute', '0 0 0 * * ?', 1, '会员每日签到领券等定时触发', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('MemberStatisticsExecute', '会员活跃与增长统计', '统计任务', 'memberStatisticsExecute', 'execute', '0 0 1 * * ?', 1, '每日归档会员总数、新增会员与活跃情况', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
-INSERT INTO `li_timed_task` VALUES ('OnlineMemberStatistics', '在线会员统计', '统计任务', 'onlineMemberStatistics', 'execute', '0 0/10 * * * ?', 1, '统计当前在线用户数与会话情况', '2026-11-02 17:50:00', 1, 40, 'LettuceConnectionFactory has been STOPPED. Use start() to initialize it', '2026-10-29 17:37:42', '2026-11-02 17:50:00');
+INSERT INTO `li_timed_task` VALUES ('OnlineMemberStatistics', '在线会员统计', '统计任务', 'onlineMemberStatistics', 'execute', '0 0/10 * * * ?', 1, '统计当前在线用户数与会话情况', '2026-11-02 18:20:00', 1, 23, 'LettuceConnectionFactory has been STOPPED. Use start() to initialize it', '2026-10-29 17:37:42', '2026-11-02 18:20:00');
 INSERT INTO `li_timed_task` VALUES ('ORDER_AUTO_COMPLETE', '订单自动确认收货', '订单任务', 'orderEveryDayTaskExecute', 'executeAutoComplete', '0 0 3 * * ?', 1, '订单发货后达到自动收货时限自动确认收货', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('ORDER_AUTO_EVALUATE', '订单自动好评', '订单任务', 'orderEveryDayTaskExecute', 'executeAutoEvaluate', '0 0 3 * * ?', 1, '订单完成达到评价时限未评价自动五星好评', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('ORDER_CLOSE_AFTER_SALE', '自动关闭超时售后', '订单任务', 'orderEveryDayTaskExecute', 'executeCloseAfterSale', '0 0 4 * * ?', 1, '买家申请售后超时未处理或未退货自动关闭', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('ORDER_CLOSE_COMPLAINT', '自动关闭超时投诉', '订单任务', 'orderEveryDayTaskExecute', 'executeCloseComplaint', '0 0 4 * * ?', 1, '交易投诉超时未响应自动关闭', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('ORDER_CREATE_BILL', '生成店铺结算单', '订单任务', 'orderEveryDayTaskExecute', 'executeCreateBill', '0 0 6 * * ?', 1, '按店铺结算周期生成每日或每月对账结算单', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 INSERT INTO `li_timed_task` VALUES ('ORDER_PROFIT_SHARING', '订单分账与解冻', '订单任务', 'orderEveryDayTaskExecute', 'executeProfitSharing', '0 0 5 * * ?', 1, '订单结算周期完成后解冻佣金与分账', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
-INSERT INTO `li_timed_task` VALUES ('PageViewStatisticsExecute', '页面访问PV/UV统计', '统计任务', 'pageViewStatisticsExecute', 'execute', '0 0 * * * ?', 1, '按小时归档店铺与平台页面访问量', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
+INSERT INTO `li_timed_task` VALUES ('PageViewStatisticsExecute', '页面访问PV/UV统计', '统计任务', 'pageViewStatisticsExecute', 'execute', '0 0 * * * ?', 1, '按小时归档店铺与平台页面访问量', '2026-11-02 18:00:00', 1, 32, NULL, '2026-10-29 17:37:42', '2026-11-02 18:00:00');
 INSERT INTO `li_timed_task` VALUES ('PromotionEverydayExecute', '促销活动每日更新', '营销任务', 'promotionEverydayExecute', 'execute', '0 0 0 * * ?', 1, '每日秒杀、拼团、满减等活动的开始与结束状态流转', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
-INSERT INTO `li_timed_task` VALUES ('RechargeOrderTaskExecute', '充值订单超时取消', '订单任务', 'rechargeOrderTaskExecute', 'execute', '0 0/10 * * * ?', 1, '充值未付款订单超时后关闭', '2026-11-02 17:50:00', 1, 29, 'Cannot invoke \"cn.lili.modules.system.entity.dos.Setting.getSettingValue()\" because \"setting\" is null', '2026-10-29 17:37:42', '2026-11-02 17:50:00');
-INSERT INTO `li_timed_task` VALUES ('StoreExecute', '店铺状态处理', '店铺任务', 'storeExecute', 'execute', '0 0/30 * * * ?', 1, '店铺过期或年费到期状态处理', '2026-11-02 17:30:00', 0, 409, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'lilishop_123.li_store\' doesn\'t exist\r\n### The error may exist in cn/lili/modules/store/mapper/StoreMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id,member_id,member_name,store_name,store_end_time,store_disable,self_operated,store_logo,store_center,store_desc,store_address_path,store_address_id_path,store_address_detail,description_score,service_score,delivery_score,goods_num,collection_num,yzf_sign,yzf_mp_sign,merchant_euid,page_show,self_pick_flag,create_by,create_time,update_by,update_time,delete_flag  FROM li_store      WHERE  (store_disable = ?)\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'lilishop_123.li_store\' doesn\'t exist\n; bad SQL grammar []', '2026-10-29 17:37:42', '2026-11-02 17:30:00');
+INSERT INTO `li_timed_task` VALUES ('RechargeOrderTaskExecute', '充值订单超时取消', '订单任务', 'rechargeOrderTaskExecute', 'execute', '0 0/10 * * * ?', 1, '充值未付款订单超时后关闭', '2026-11-02 18:20:00', 1, 18, 'Cannot invoke \"cn.lili.modules.system.entity.dos.Setting.getSettingValue()\" because \"setting\" is null', '2026-10-29 17:37:42', '2026-11-02 18:20:00');
+INSERT INTO `li_timed_task` VALUES ('StoreExecute', '店铺状态处理', '店铺任务', 'storeExecute', 'execute', '0 0/30 * * * ?', 1, '店铺过期或年费到期状态处理', '2026-11-02 18:00:00', 1, 149, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'lilishop_123.li_store\' doesn\'t exist\r\n### The error may exist in cn/lili/modules/store/mapper/StoreMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id,member_id,member_name,store_name,store_end_time,store_disable,self_operated,store_logo,store_center,store_desc,store_address_path,store_address_id_path,store_address_detail,description_score,service_score,delivery_score,goods_num,collection_num,yzf_sign,yzf_mp_sign,merchant_euid,page_show,self_pick_flag,create_by,create_time,update_by,update_time,delete_flag  FROM li_store      WHERE  (store_disable = ?)\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'lilishop_123.li_store\' doesn\'t exist\n; bad SQL grammar []', '2026-10-29 17:37:42', '2026-11-02 18:00:00');
 INSERT INTO `li_timed_task` VALUES ('StoreRatingExecute', '店铺评分统计更新', '店铺任务', 'storeRatingExecute', 'execute', '0 0 2 * * ?', 1, '根据近期用户评价重新计算店铺综合评分', NULL, NULL, NULL, NULL, '2026-10-29 17:37:42', '2026-10-29 17:37:42');
 
 -- ----------------------------
@@ -33238,7 +32306,7 @@ CREATE TABLE `li_trade`  (
   `consignee_mobile` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '收件人手机',
   `pay_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '交易' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_trade
@@ -33253,7 +32321,7 @@ CREATE TABLE `li_user_role`  (
   `role_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色唯一id',
   `user_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户唯一id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_user_role
@@ -33274,7 +32342,7 @@ CREATE TABLE `li_verification_source`  (
   `resource` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '资源地址',
   `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '验证码资源类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '验证码资源维护' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_verification_source
@@ -33294,7 +32362,7 @@ CREATE TABLE `li_wallet_log`  (
   `money` decimal(10, 2) NULL DEFAULT NULL COMMENT '金额',
   `service_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NULL DEFAULT NULL COMMENT '业务类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '钱包变动日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_wallet_log
@@ -33320,7 +32388,7 @@ CREATE TABLE `li_wechat_message`  (
   `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `scene_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '关联站内信场景',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '微信消息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_wechat_message
@@ -33346,7 +32414,7 @@ CREATE TABLE `li_wechat_mp_message`  (
   `scene_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '关联站内信场景',
   `template_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '微信小程序消息订阅' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_wechat_mp_message
