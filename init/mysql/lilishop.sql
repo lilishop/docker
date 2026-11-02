@@ -11,7 +11,7 @@
  Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 29/10/2026 18:23:46
+ Date: 02/11/2026 17:15:04
 */
 
 SET NAMES utf8mb4;
@@ -6876,10 +6876,9 @@ INSERT INTO `li_menu` VALUES (1374177910411231232, 'admin', '2021-03-22 20:55:19
 INSERT INTO `li_menu` VALUES (1374178303975358464, 'admin', '2021-03-22 20:56:53', b'0', 'admin', '2021-07-27 16:06:08', 'null', 'distribution/distribution', 'md-person', 2, 'distribution', '1374173575405109248', 'distribution', 2.00, '分销员', 'null', '/manager/distribution*');
 INSERT INTO `li_menu` VALUES (1374916594269945856, 'admin', '2021-03-24 21:50:35', b'0', 'admin', '2021-07-27 16:08:51', NULL, 'sys/slider/slider', 'ios-aperture', 2, 'slider', '1349237129847005184', 'slider', 7.00, '验证码', NULL, '/manager/other/verificationSource*');
 INSERT INTO `li_menu` VALUES (1376450531517530112, 'admin', '2021-03-29 03:25:55', b'0', NULL, NULL, NULL, 'Main', 'md-basketball', 1, 'notice', '1367040599596728320', '/', 5.00, '站内信', NULL, NULL);
-INSERT INTO `li_menu` VALUES (1376450662098796544, 'admin', '2021-03-29 03:26:26', b'0', 'admin', '2021-07-27 16:07:23', NULL, 'sys/message/noticeMessageTemplate', 'ios-american-football', 2, 'noticeMessageTemplate', '1376450531517530112', 'noticeMessageTemplate', 1.00, '站内信', NULL, '/manager/other/message*');
+INSERT INTO `li_menu` VALUES (1376450662098796544, 'admin', '2021-03-29 03:26:26', b'0', 'admin', '2021-07-27 16:07:23', NULL, 'sys/message/noticeMessageTemplate', 'ios-american-football', 2, 'noticeMessageTemplate', '1376450531517530112', 'noticeMessageTemplate', 1.00, '消息模板', NULL, '/manager/other/message*');
 INSERT INTO `li_menu` VALUES (1376450766817984512, 'admin', '2021-03-29 03:26:51', b'0', 'admin', '2021-03-29 03:27:25', 'null', 'Main', 'md-checkmark', 1, 'sms', '1367040599596728320', '/', 6.00, '短信管理', 'null', NULL);
 INSERT INTO `li_menu` VALUES (1376450876423536640, 'admin', '2021-03-29 03:27:17', b'0', 'admin', '2021-07-27 16:07:29', NULL, 'sys/message/sms', 'ios-timer', 2, 'sms', '1376450766817984512', 'sms', 1.00, '短信', NULL, '/manager/sms/sms*,/manager/passport/member*');
-INSERT INTO `li_menu` VALUES (1384035281702748160, 'admin', '2021-04-19 14:45:00', b'0', 'admin', '2021-07-27 16:08:18', 'null', 'member/message-manage/weChatMessageManager', 'md-aperture', 2, 'message-manage', '1349237129847005184', 'message-manage', 5.00, '微信消息', 'null', '/manager/wechat/wechatMessage*');
 INSERT INTO `li_menu` VALUES (1403988156444962818, 'admin', '2021-06-13 16:10:36', b'0', 'admin', '2021-12-02 19:54:37', 'null', 'promotions/coupon-activity/coupon', '', 2, 'promotions/coupon-activity', '1367049214198022144', 'promotions/coupon-activity', 0.00, '券活动', 'null', '/manager/promotion/couponActivity*');
 INSERT INTO `li_menu` VALUES (1407601962899230721, 'admin', '2021-06-23 15:30:35', b'0', 'admin', '2021-07-27 16:05:08', NULL, 'Main', '', 1, 'liveManage', '1367040067201138688', '/', 2.00, '直播管理', NULL, '/manager/broadcast*');
 INSERT INTO `li_menu` VALUES (1407602049759072258, 'admin', '2021-06-23 15:30:55', b'0', 'admin', '2021-12-07 10:54:54', NULL, 'promotions/live/live', '', 2, 'promotions/live', '1407601962899230721', 'promotions/live', 1.00, '直播管理', NULL, 'null');
@@ -6907,6 +6906,7 @@ INSERT INTO `li_menu` VALUES (2053060244543295489, 'admin', '2026-05-09 18:31:21
 INSERT INTO `li_menu` VALUES (2054458120364294145, 'admin', '2026-05-13 15:06:01', b'0', 'admin', '2026-05-14 18:25:54', NULL, 'member-benefit', NULL, 2, 'member-benefit', '2053037117402689538', 'member-benefit', 4.00, '客户权益', NULL, '');
 INSERT INTO `li_menu` VALUES (2057668382760361986, 'admin', '2026-05-22 11:42:27', b'0', 'admin', '2026-05-22 11:43:13', NULL, 'promotions/gift-card-cash/gift-card-cash-activity', NULL, 2, 'promotions/gift-card-cash', '1367049214198022144', 'promotions/gift-card-cash', 10.00, '礼品卡', NULL, '/manager/promotion/giftCardCash*');
 INSERT INTO `li_menu` VALUES (2057668382760361988, 'admin', '2026-10-29 17:37:32', b'0', 'admin', '2026-10-29 17:37:32', NULL, 'page-decoration/category-setting', 'md-apps', 2, 'category-setting', '1367050320584114176', 'categorySetting', 3.00, '分类设置', NULL, '/manager/setting/setting*');
+INSERT INTO `li_menu` VALUES (2057668382760361989, 'admin', '2026-11-02 17:13:21', b'0', 'admin', '2026-11-02 17:13:21', '系统设置-定时任务管理', 'sys/timed-task/index', 'ios-timer', 2, 'timedTask', '1349237129847005184', 'timed-task', 10.00, '定时任务', NULL, '/manager/setting/timed-task*');
 INSERT INTO `li_menu` VALUES (2070335987930095617, 'admin', '2026-06-26 10:38:59', b'0', 'admin', '2026-07-01 13:45:30', '直播一级导航', NULL, NULL, 0, 'live', '0', NULL, 0.60, '直播', NULL, NULL);
 INSERT INTO `li_menu` VALUES (2070336142943182850, 'admin', '2026-06-26 10:39:36', b'0', 'admin', '2026-07-01 13:42:12', '直播分组，有子菜单时不作为页面打开', 'promotions/live/live', NULL, 1, '/', '2070335987930095617', '/', 0.00, '直播管理', NULL, NULL);
 INSERT INTO `li_menu` VALUES (2070336618820526082, 'admin', '2026-06-26 10:41:30', b'0', 'admin', '2026-07-01 13:47:58', '直播管理页面，对应 views/live/list.vue', 'live/list', NULL, 2, 'live-list', '2070336142943182850', 'live-list', 0.00, '直播管理', NULL, NULL);
@@ -6940,47 +6940,41 @@ CREATE TABLE `li_message`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `li_notice_message`;
 CREATE TABLE `li_notice_message`  (
-  `id` bigint NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `id` bigint NOT NULL COMMENT '主键ID',
+  `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime(6) NULL DEFAULT NULL,
-  `delete_flag` bit(1) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `delete_flag` bit(1) NULL DEFAULT b'0',
+  `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `update_time` datetime(6) NULL DEFAULT NULL,
-  `notice_content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `notice_node` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `notice_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `notice_title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `variable` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `scene_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '业务场景编码，与 NoticeMessageNodeEnum.name 一致',
-  `email_status` varchar(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'CLOSE' COMMENT '邮箱渠道 OPEN/CLOSE',
-  `email_content` varchar(2000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '邮箱正文，空则与站内信同文',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+  `notice_node` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '模板应用场景描述 (如 订单发货通知)',
+  `notice_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '站内信标题',
+  `notice_content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '站内信正文 (可编辑，支持 #{variable} 替换)',
+  `notice_status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'OPEN' COMMENT '站内信开启状态 OPEN/CLOSE',
+  `variable` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '变量参数列表',
+  `scene_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '业务场景编码，与 NoticeMessageNodeEnum.name 一致',
+  `type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'MEMBER' COMMENT '受众类型: MEMBER(会员) / STORE(商户) / PLATFORM(平台)',
+  `sms_status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'CLOSE' COMMENT '短信开启状态 OPEN/CLOSE',
+  `sms_template_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '短信服务商模板CODE (如 SMS_191840050)',
+  `sms_content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '短信报备正文预览 (只读参考)',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_notice_scene_code`(`scene_code` ASC) USING BTREE,
+  INDEX `idx_notice_type`(`type` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '统一消息中心配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_notice_message
 -- ----------------------------
-INSERT INTO `li_notice_message` VALUES (1, NULL, '2021-07-14 19:22:03.000000', NULL, NULL, '2021-07-14 19:22:09.000000', '订单 #{商品名称}已经提交成功，请及时付款哦～', '订单提交成功通知', 'OPEN', '订单提交成功通知', 'goods', 'ORDER_CREATE_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (2, NULL, '2021-07-14 19:22:06.000000', NULL, NULL, '2021-07-14 19:22:11.000000', '订单#{商品名称}支付成功，我们将尽快为您安排发货哦~', '订单支付成功通知', 'OPEN', '订单支付成功通知', 'goods', 'ORDER_PAY_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (3, NULL, '2021-07-15 19:10:14.000000', NULL, NULL, '2021-07-15 19:10:17.000000', '订单#{商品名称}已发货，请注意物流进度哦~', '订单发货通知\n', 'OPEN', '订单发货通知', 'goods', 'ORDER_DELIVER', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (4, NULL, '2021-07-15 19:12:00.000000', NULL, NULL, '2021-07-15 19:12:02.000000', '订单#{商品名称}已完成，期待您分享商品评价与购物心得哦~', '订单完成通知', 'OPEN', '订单完成通知', 'goods', 'ORDER_COMPLETE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (5, NULL, '2021-07-15 19:14:01.000000', NULL, NULL, '2021-07-15 19:14:04.000000', '订单#{商品名称}已取消，取消原因为 #{取消原因}，请及时关注您的订单状态哦~', '订单取消成功通知', 'OPEN', '订单取消通知', 'goods,cancel_reason', 'ORDER_CANCEL_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (6, NULL, '2021-07-15 19:26:27.000000', NULL, NULL, '2021-07-15 19:26:34.000000', '商品#{商品名称}还没有收到您的评价呢，期待您与我们分享哦~', '订单评价提醒', 'OPEN', '订单评价提醒', 'goods', 'ORDER_EVALUATION', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (7, NULL, '2021-07-15 19:26:25.000000', NULL, NULL, '2021-07-15 19:26:37.000000', '恭喜，您的拼团#{商品名称}已成团，我们将尽快为您安排发货哦~', '拼团成功通知', 'OPEN', '拼团成功通知', 'goods', 'PINTUAN_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (8, NULL, '2021-07-15 19:31:45.000000', NULL, NULL, '2021-07-15 19:31:49.000000', '售后单 #{商品名称} 已经提交成功，需要商家审核，请耐心等待哦~', '售后提交成功通知', 'OPEN', '售后提交成功通知', 'goods', 'AFTER_SALE_CREATE_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (9, NULL, '2021-07-15 19:32:44.000000', NULL, NULL, '2021-07-15 19:32:49.000000', '售后单 #{商品名称} 已通过退货审核，请尽快安排将货物退还至商家哦~', '退货审核通过通知', 'OPEN', '退货审核通过通知', 'goods', 'RETURN_GOODS_PASS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (10, NULL, '2021-07-15 19:32:46.000000', NULL, NULL, '2021-07-15 19:32:52.000000', '售后单 #{商品名称} 已通过退款审核，将在1-3个工作日内自动退款~', '退款审核通过通知', 'OPEN', '退款审核通过通知', 'goods', 'RETURN_MONEY_PASS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (11, NULL, '2021-07-15 19:36:48.000000', NULL, NULL, '2021-07-15 19:36:50.000000', '很抱歉，售后单#{商品名称}未通过商家退货审核，原因是：#{拒绝原因}', '退货审核未通过通知', 'OPEN', '退货审核未通过通知', 'goods,refuse', 'RETURN_GOODS_REFUSE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (12, NULL, '2021-07-15 19:36:46.000000', NULL, NULL, '2021-07-15 19:36:52.000000', '很抱歉，售后单#{商品名称}未通过商家退款审核，原因是：#{拒绝原因}', '退款审核未通过通知', 'OPEN', '退款审核未通过通知', 'goods,refuse', 'RETURN_MONEY_REFUSE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (13, NULL, '2021-07-15 19:39:31.000000', NULL, NULL, '2021-07-15 19:39:34.000000', '很抱歉，您的退货物品{退单第一行商品名称}被商家拒收，原因是：#{拒绝原因}', '退货物品拒收通知', 'OPEN', '退货物品拒收通知', 'goods,refuse', 'AFTER_SALE_ROG_REFUSE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (14, NULL, '2021-07-15 19:39:39.000000', NULL, NULL, '2021-07-15 19:39:43.000000', '订单 #{商品名称} 商家已签收哦，请关注后续退款状态，将在1-3个工作日内自动退款~', '退货物品签收通知', 'OPEN', '退货物品签收通知', 'goods', 'AFTER_SALE_ROG_PASS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (15, NULL, '2021-07-15 19:44:38.000000', NULL, NULL, '2021-07-15 19:44:40.000000', '售后单 #{商品名称} 已经完成，请关注及时关注售后单状态~', '售后完成通知', 'OPEN', '售后完成通知', 'goods', 'AFTER_SALE_COMPLETE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (16, NULL, '2021-07-15 19:47:27.000000', NULL, NULL, '2021-07-15 19:47:31.000000', '您当前到账{获得积分}积分，消费#{消费积分} 积分，积分可以抵现金哦，真的很棒棒呢~', '积分变更通知', 'OPEN', '积分变更通知', 'income_points,expenditure_points', 'POINT_CHANGE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (17, NULL, '2021-07-15 19:53:10.000000', NULL, NULL, '2021-07-15 19:53:13.000000', '您的余额账户今日收入¥#{收入金额}，支出¥#{支出金额}，如遇异常变动，请及时联系我们哦~', '余额账户变更通知', 'OPEN', '余额账户变更通知', 'income,expenditure', 'WALLET_CHANGE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (18, NULL, '2021-07-15 19:57:01.000000', NULL, NULL, '2021-07-15 19:57:04.000000', '恭喜您，您的提处理成功，提现金额为¥#{收入金额}，请及时关注余额变动哦~', '余额提现成功通知', 'OPEN', '余额提现成功通知', 'income', 'WALLET_WITHDRAWAL_SUCCESS', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (19, NULL, '2021-07-21 18:58:10.000000', NULL, NULL, '2021-07-21 18:58:13.000000', '恭喜您，您的提现金额为¥#{金额}的申请已经提交审核，请及时关注审核动态哦~', '提现申请提交成功通知', 'OPEN', '提现申请提交成功通知', 'price', 'WALLET_WITHDRAWAL_CREATE', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (20, NULL, '2021-07-21 19:16:58.000000', NULL, NULL, '2021-07-21 19:17:02.000000', '很抱歉，您的提现金额为¥#{金额}的申请已被拒绝，如有问题请及时联系管理员哦~', '提现申请驳回通知', 'OPEN', '提现申请驳回通知', 'price', 'WALLET_WITHDRAWAL_AUDIT_ERROR', 'CLOSE', NULL);
-INSERT INTO `li_notice_message` VALUES (21, NULL, '2021-07-26 18:59:00.000000', NULL, NULL, '2021-07-26 18:59:03.000000', '恭喜您，您的提处理成功，提现金额为¥#{收入金额}，将在1-3个工作日内到账~', '微信提现成功通知', 'OPEN', '微信提现成功通知', 'income', 'WALLET_WITHDRAWAL_SUCCESS', 'CLOSE', NULL);
+INSERT INTO `li_notice_message` VALUES (3, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '订单发货通知', '订单发货通知', '您购买的商品【#{goods}】已发货，请注意查收物流信息哦~', 'OPEN', 'goods', 'ORDER_DELIVER', 'MEMBER', 'CLOSE', 'SMS_512652545', '【商城平台】尊敬的会员：您的订单 ${order_sn} 已发出，承运商：${express_name}，运单号：${logistics_no}。');
+INSERT INTO `li_notice_message` VALUES (4, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '订单完成通知', '订单完成通知', '您购买的商品【#{goods}】订单已完成，期待您分享商品评价与购物心得哦~', 'OPEN', 'goods', 'ORDER_COMPLETE', 'MEMBER', 'CLOSE', 'SMS_512652546', '【商城平台】尊敬的会员：您的订单 ${order_sn} 已完成，感谢您的选购与支持。');
+INSERT INTO `li_notice_message` VALUES (7, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '拼团成功通知', '拼团成功通知', '恭喜，您参与的【#{goods}】拼团已成功，我们将尽快为您安排发货哦~', 'OPEN', 'goods', 'PINTUAN_SUCCESS', 'MEMBER', 'CLOSE', 'SMS_512582449', '【商城平台】尊敬的会员：您的拼团 ${goods} 已成团，我们将尽快为您安排发货。');
+INSERT INTO `li_notice_message` VALUES (9, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '售后审核通知', '售后审核结果通知', '您的售后申请（商品：【#{goods}】）已审核，审核结果：#{audit_result}，请进入售后中心查看详情。', 'OPEN', 'goods,audit_result', 'AFTER_SALE_AUDIT', 'MEMBER', 'CLOSE', 'SMS_512537655', '【商城平台】尊敬的会员：您的售后申请已审核，请登录商城在售后中心查看审核结果。');
+INSERT INTO `li_notice_message` VALUES (16, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '积分变更通知', '积分变更通知', '您的积分账户发生变动：本次获得 #{income_points} 积分，消费 #{expenditure_points} 积分，积分可在商城抵扣使用哦~', 'OPEN', 'income_points,expenditure_points', 'POINT_CHANGE', 'MEMBER', 'CLOSE', NULL, '【商城平台】尊敬的会员：您的积分账户发生变动，到账 ${income_points} 积分，消费 ${expenditure_points} 积分。');
+INSERT INTO `li_notice_message` VALUES (17, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '余额账户变更通知', '余额账户变更通知', '您的余额账户发生变动：本次收入 ¥#{income}，支出 ¥#{expenditure}，请进入我的钱包查看详情。', 'OPEN', 'income,expenditure', 'WALLET_CHANGE', 'MEMBER', 'CLOSE', NULL, '【商城平台】尊敬的会员：您的余额账户发生变动，变动金额：${money} 元。');
+INSERT INTO `li_notice_message` VALUES (20, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '提现申请审核通知', '提现申请审核通知', '您的余额提现申请（金额：¥#{price}）已审核，审核结果：#{audit_result}，请进入我的钱包查看详情。', 'OPEN', 'price,audit_result', 'WALLET_WITHDRAWAL_AUDIT_ERROR', 'MEMBER', 'CLOSE', NULL, '【商城平台】尊敬的会员：您的余额提现申请已审核完成，请登录商城在个人中心查看详情。');
+INSERT INTO `li_notice_message` VALUES (101, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '店铺入驻结果', '店铺入驻结果通知', '恭喜您，您的店铺入驻申请已经审核通过，请登录商家后台进行店铺管理。', 'OPEN', 'store_name', 'STORE_AUDIT_RESULT', 'STORE', 'CLOSE', NULL, '【商城平台】尊敬的商家：您的店铺入驻申请审核结果已出，请登录商家后台查看。');
+INSERT INTO `li_notice_message` VALUES (102, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '订单付款成功通知', '商户订单付款提醒', '您有新的订单付款成功，订单号：#{order_sn}，请尽快安排发货。', 'OPEN', 'order_sn', 'STORE_ORDER_PAY_SUCCESS', 'STORE', 'CLOSE', NULL, '【商城平台】尊敬的商家：您的店铺有新订单付款成功（单号：${order_sn}），请尽快安排发货。');
+INSERT INTO `li_notice_message` VALUES (103, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '用户售后申请通知', '用户售后申请提醒', '买家对订单 #{order_sn} 发起了售后申请，请及时在商家后台进行审核处理。', 'OPEN', 'order_sn', 'STORE_AFTER_SALE_APPLY', 'STORE', 'CLOSE', NULL, '【商城平台】尊敬的商家：买家已对订单 ${order_sn} 发起售后申请，请登录商家后台及时处理。');
+INSERT INTO `li_notice_message` VALUES (201, NULL, '2026-11-02 17:11:56.000000', b'0', NULL, NULL, '新店铺入驻待审核通知', '新店铺入驻审核提醒', '', 'CLOSE', 'store_name', 'PLATFORM_STORE_AUDIT_NOTIFY', 'PLATFORM', 'CLOSE', NULL, '【商城平台】尊敬的管理员：有新的店铺申请入驻（店铺名称：${store_name}），请及时登录管理后台审核。');
 
 -- ----------------------------
 -- Table structure for li_notice_message_template
@@ -31650,7 +31644,7 @@ CREATE TABLE `li_timed_task`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of li_timed_task
