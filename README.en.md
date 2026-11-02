@@ -218,11 +218,16 @@ We welcome questions and contributions! Please refer to the [Product Documentati
 | ✅ Shopping Cards | ✅ Tencent Cloud Live Streaming |
 | ✅ Electronic Card/Key Products | ✅ Two-Tier Distribution System |
 | ✅ Scheduled Task Center | ✅ Appointment & Service Products |
-| ✅ Theme Color Configuration | ✅ Seller Shipment Refactoring |
+| ✅ Theme Color Configuration | ✅ No-Shipment Fulfillment Mode |
 | ✅ Multi-dimensional Analytics | ✅ Operations & Financial Reports |
+| ✅ Category Navigation Templates | ✅ Mobile Floor Decoration Suite |
+| ✅ PC Floor Decoration Refactoring | ✅ Unified Header Navigation |
+| ✅ Independent PC Store List | ✅ Sensitive Words Scenario Filtering |
 
 ### 🔜 Upcoming Features
 - 🔜 Store Settlement Summary & Ledger
 - 🔜 Payment Methods & Financial Analytics
 - 🔜 WeChat Channels Store Integration
 - 🔜 Douyin Store Integration
+- 🔜 WeChat Mini-Program Native Refactoring & Experience Alignment
+- 🔜 OpenAPI Platform & Developer Center
