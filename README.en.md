@@ -5,7 +5,7 @@
   <p>
     <a href="https://github.com/lilishop/docker"><img src="https://img.shields.io/github/stars/lilishop/docker.svg?style=social&logo=github" alt="GitHub Stars" /></a>
     <a href="https://gitee.com/beijing_hongye_huicheng/docker"><img src="https://gitee.com/beijing_hongye_huicheng/docker/badge/star.svg?theme=dark" alt="Gitee Stars" /></a>
-    <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License" /></a>
     <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-20.10+-blue.svg" alt="Docker" /></a>
     <a href="https://docs.docker.com/compose/"><img src="https://img.shields.io/badge/Docker%20Compose-2.x-brightgreen.svg" alt="Docker Compose" /></a>
   </p>
@@ -27,7 +27,7 @@
 **LILISHOP** is an open-source e-commerce system built with Spring Boot, Vue 3, and uni-app. It supports B2B2C multi-vendor marketplaces, WeChat Mini Programs, H5, Android/iOS Apps, live-streaming e-commerce, affiliate distribution, and flash sales.
 
 ### ✨ Why Choose Lilishop
-- 🟢 **True MIT License**: Free for commercial use and private secondary development without licensing concerns.
+- 🟢 **True Apache-2.0 License**: Free for commercial use and private secondary development without licensing concerns.
 - 🚀 **Out-of-the-Box Containerization**: Clean and lightweight Docker Compose middleware orchestration alongside multi-client local development launch scripts.
 - 🧩 **Full-Platform Production-Ready**: Complete operational and runtime environment covering Platform Admin, Seller Panel, PC Mall, Mobile H5, WeChat Mini Program, Mobile Apps, and IM Customer Service.
 
@@ -193,7 +193,7 @@ This repository focuses on **Container Orchestration, Middleware Configuration, 
 
 ## 7. License & Intellectual Property
 
-This project is licensed under the [MIT License](./LICENSE), copyright owned by **Beijing Hongye Huicheng Technology Co., Ltd. (北京宏业汇成科技有限公司)**. Free for personal and commercial use, research, and modification, provided the original copyright and license notice are preserved.
+This project is licensed under the [Apache-2.0 License](./LICENSE), copyright owned by **Beijing Hongye Huicheng Technology Co., Ltd. (北京宏业汇成科技有限公司)**. Free for personal and commercial use, research, and modification, provided the original copyright and license notice are preserved.
 
 ---
 

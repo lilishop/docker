@@ -5,7 +5,7 @@
   <p>
     <a href="https://github.com/lilishop/docker"><img src="https://img.shields.io/github/stars/lilishop/docker.svg?style=social&logo=github" alt="GitHub Stars" /></a>
     <a href="https://gitee.com/beijing_hongye_huicheng/docker"><img src="https://gitee.com/beijing_hongye_huicheng/docker/badge/star.svg?theme=dark" alt="Gitee Stars" /></a>
-    <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License" /></a>
     <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-20.10+-blue.svg" alt="Docker" /></a>
     <a href="https://docs.docker.com/compose/"><img src="https://img.shields.io/badge/Docker%20Compose-2.x-brightgreen.svg" alt="Docker Compose" /></a>
   </p>
@@ -27,7 +27,7 @@
 **LILISHOP** 是基于 Spring Boot / Vue 3 / uni-app 开发的开源商城系统，支持 B2B2C 多商户商城、微信小程序商城、H5 商城、APP 商城、直播电商、分销返佣、秒杀活动。
 
 ### ✨ 为什么选择 Lilishop
-- 🟢 **真 MIT 协议**：支持免费商用与私有化闭源二开，无版权后顾之忧。
+- 🟢 **真 Apache-2.0 协议**：支持免费商用与私有化闭源二开，无版权后顾之忧。
 - 🚀 **开箱即用容器化**：提供轻量精简的 Docker Compose 中间件编排与多端本地一键联调工具，大幅降低环境搭建与前后端联调门槛。
 - 🧩 **全端生产级完整闭环**：覆盖平台运营端、商家店铺端、PC 商城端、移动 H5、微信小程序、APP 与 IM 在线客服端的整套环境编排与数据库初始化。
 
@@ -195,7 +195,7 @@ docker
 
 ## 7. 开源与授权
 
-本项目遵循 [MIT](./LICENSE) 开源协议，版权归 **北京宏业汇成科技有限公司** 所有。允许个人及企业免费用于学习、研究、修改和商业用途（需保留原始版权和许可声明）。
+本项目遵循 [Apache-2.0](./LICENSE) 开源协议，版权归 **北京宏业汇成科技有限公司** 所有。允许个人及企业免费用于学习、研究、修改和商业用途（需保留原始版权和许可声明）。
 
 ---
 
