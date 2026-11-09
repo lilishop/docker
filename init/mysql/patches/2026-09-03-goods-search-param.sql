@@ -6,7 +6,7 @@
 -- 因此若将来迁移 li_goods_sku.goods_id 的类型，必须在同一次变更里迁移本列。
 -- 已运行库需手工执行本补丁（Docker initdb 只在空数据卷首次执行）：
 --   docker compose -f docker/docker-compose.yml exec -T mysql \
---     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/004_goods_search_param.sql
+--     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/2026-09-03-goods-search-param.sql
 CREATE TABLE IF NOT EXISTS `li_goods_search_param` (
   `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'ID',
   `goods_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '商品ID，与 li_goods_sku.goods_id 同型同排序规则',

@@ -5,7 +5,7 @@
 -- compose initdb 先跑 patches 后导 dump，表不存在时也 skip。
 -- 已运行库需手工执行本补丁（Docker initdb 只在空数据卷首次执行）：
 --   docker compose -f docker/docker-compose.yml exec -T mysql \
---     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/005_distribution_wallet_log_align.sql
+--     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/2026-09-07-distribution-wallet-log-align.sql
 SET NAMES utf8mb4;
 
 SET @need_alter := (

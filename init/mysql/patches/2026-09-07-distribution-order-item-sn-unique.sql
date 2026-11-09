@@ -4,7 +4,7 @@
 -- compose initdb 先跑 patches 后导 dump，表不存在时 skip。
 -- 已运行库需手工执行本补丁（Docker initdb 只在空数据卷首次执行）：
 --   docker compose -f docker/docker-compose.yml exec -T mysql \
---     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/007_distribution_order_item_sn_unique.sql
+--     mysql -uroot -plilishop lilishop < docker/init/mysql/patches/2026-09-07-distribution-order-item-sn-unique.sql
 SET NAMES utf8mb4;
 
 SET @has_table := (

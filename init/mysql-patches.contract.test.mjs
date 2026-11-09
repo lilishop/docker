@@ -3,14 +3,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const patchRunner = readFileSync(new URL('./mysql/999_apply_patches.sh', import.meta.url), 'utf8');
-const goodsSchedulePatchUrl = new URL('./mysql/patches/001_goods_schedule_fields.sql', import.meta.url);
-const bootstrapPatchUrl = new URL('./mysql/patches/002_bootstrap_schema_and_local_upload.sql', import.meta.url);
-const afterSaleRefundPatchUrl = new URL('./mysql/patches/003_after_sale_refund_schema.sql', import.meta.url);
-const goodsSearchParamPatchUrl = new URL('./mysql/patches/004_goods_search_param.sql', import.meta.url);
-const walletLogAlignPatchUrl = new URL('./mysql/patches/005_distribution_wallet_log_align.sql', import.meta.url);
-const gradeHistoryRatePatchUrl = new URL('./mysql/patches/006_distribution_grade_history_rate.sql', import.meta.url);
-const orderItemSnUniquePatchUrl = new URL('./mysql/patches/007_distribution_order_item_sn_unique.sql', import.meta.url);
-const gradeHistoryFlattenPatchUrl = new URL('./mysql/patches/008_distribution_grade_history_flatten.sql', import.meta.url);
+const goodsSchedulePatchUrl = new URL('./mysql/patches/2026-06-10-goods-schedule-fields.sql', import.meta.url);
+const bootstrapPatchUrl = new URL('./mysql/patches/2026-06-17-bootstrap-schema-and-local-upload.sql', import.meta.url);
+const afterSaleRefundPatchUrl = new URL('./mysql/patches/2026-06-17-after-sale-refund-schema.sql', import.meta.url);
+const goodsSearchParamPatchUrl = new URL('./mysql/patches/2026-09-03-goods-search-param.sql', import.meta.url);
+const walletLogAlignPatchUrl = new URL('./mysql/patches/2026-09-07-distribution-wallet-log-align.sql', import.meta.url);
+const gradeHistoryRatePatchUrl = new URL('./mysql/patches/2026-09-07-distribution-grade-history-rate.sql', import.meta.url);
+const orderItemSnUniquePatchUrl = new URL('./mysql/patches/2026-09-07-distribution-order-item-sn-unique.sql', import.meta.url);
+const gradeHistoryFlattenPatchUrl = new URL('./mysql/patches/2026-09-09-distribution-grade-history-flatten.sql', import.meta.url);
 
 function assertNoUnguardedDdlDml(sql, label) {
   const unguarded = sql.split(/\r?\n/).filter((line) =>
@@ -40,7 +40,7 @@ test('mysql goods schedule patch alters li_goods only when the table exists and 
   assert.match(goodsSchedulePatch, /AND NOT EXISTS \(/);
   assert.match(goodsSchedulePatch, /COLUMN_NAME = 'scheduled_upper_time'/);
   assert.match(goodsSchedulePatch, /ALTER TABLE `li_goods` ADD COLUMN `scheduled_upper_time`/);
-  assertNoUnguardedDdlDml(goodsSchedulePatch, '001_goods_schedule_fields.sql');
+  assertNoUnguardedDdlDml(goodsSchedulePatch, '2026-06-10-goods-schedule-fields.sql');
 });
 
 test('mysql bootstrap patch provides category parameter table and local upload setting', () => {
@@ -56,7 +56,7 @@ test('mysql bootstrap patch provides category parameter table and local upload s
   assert.match(bootstrapPatch, /"localFileUrlPrefix":"\/files"/);
   assert.match(bootstrapPatch, /TABLE_NAME = 'li_parameters'/);
   assert.match(bootstrapPatch, /TABLE_NAME = 'li_setting'/);
-  assertNoUnguardedDdlDml(bootstrapPatch, '002_bootstrap_schema_and_local_upload.sql');
+  assertNoUnguardedDdlDml(bootstrapPatch, '2026-06-17-bootstrap-schema-and-local-upload.sql');
 });
 
 test('mysql bootstrap patch provides after-sale refund schema used by seller confirm receipt', () => {
@@ -74,7 +74,7 @@ test('mysql bootstrap patch provides after-sale refund schema used by seller con
   assert.match(afterSaleRefundPatch, /AFTER_SALE_ROG_PASS/);
   assert.match(afterSaleRefundPatch, /AFTER_SALE_ROG_REFUSE/);
   assert.match(afterSaleRefundPatch, /skip li_notice_message update: table missing/);
-  assertNoUnguardedDdlDml(afterSaleRefundPatch, '003_after_sale_refund_schema.sql');
+  assertNoUnguardedDdlDml(afterSaleRefundPatch, '2026-06-17-after-sale-refund-schema.sql');
 });
 
 test('mysql goods search param patch provides inverted index table with sku-aligned goods_id', () => {
@@ -107,7 +107,7 @@ test('mysql wallet log align patch renames 9 legacy columns only when old names 
   assert.match(walletLogAlignPatch, /COLUMN_NAME = 'biz_type'/);
   assert.match(walletLogAlignPatch, /skip li_distribution_wallet_log\.log_type/);
   assert.doesNotMatch(walletLogAlignPatch, /RENAME COLUMN/);
-  assertNoUnguardedDdlDml(walletLogAlignPatch, '005_distribution_wallet_log_align.sql');
+  assertNoUnguardedDdlDml(walletLogAlignPatch, '2026-09-07-distribution-wallet-log-align.sql');
 });
 
 test('mysql grade history rate patch widens decimal(10,2) snapshot columns only when they exist', () => {
@@ -126,7 +126,7 @@ test('mysql grade history rate patch widens decimal(10,2) snapshot columns only 
   assert.match(gradeHistoryRatePatch, /skip li_distribution_grade_history\.invite_commission_rate/);
   assert.doesNotMatch(gradeHistoryRatePatch, /^\s*CREATE TABLE/m);
   assert.doesNotMatch(gradeHistoryRatePatch, /ADD COLUMN/);
-  assertNoUnguardedDdlDml(gradeHistoryRatePatch, '006_distribution_grade_history_rate.sql');
+  assertNoUnguardedDdlDml(gradeHistoryRatePatch, '2026-09-07-distribution-grade-history-rate.sql');
 });
 
 test('mysql distribution order item sn patch adds UNIQUE only when table exists and values are unique', () => {
@@ -145,7 +145,7 @@ test('mysql distribution order item sn patch adds UNIQUE only when table exists 
   assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.uk_do_order_item_sn/);
   assert.match(orderItemSnUniquePatch, /skip li_distribution_order\.idx_do_order_item_sn drop/);
   assert.doesNotMatch(orderItemSnUniquePatch, /DELETE FROM/);
-  assertNoUnguardedDdlDml(orderItemSnUniquePatch, '007_distribution_order_item_sn_unique.sql');
+  assertNoUnguardedDdlDml(orderItemSnUniquePatch, '2026-09-07-distribution-order-item-sn-unique.sql');
 });
 
 test('mysql grade history flatten patch changes and adds columns independently', () => {
@@ -190,5 +190,5 @@ test('mysql grade history flatten patch changes and adds columns independently',
   assert.doesNotMatch(gradeHistoryFlattenPatch, /DROP TABLE/);
   assert.doesNotMatch(gradeHistoryFlattenPatch, /^\s*CREATE TABLE/m);
   assert.doesNotMatch(gradeHistoryFlattenPatch, /RENAME COLUMN/);
-  assertNoUnguardedDdlDml(gradeHistoryFlattenPatch, '008_distribution_grade_history_flatten.sql');
+  assertNoUnguardedDdlDml(gradeHistoryFlattenPatch, '2026-09-09-distribution-grade-history-flatten.sql');
 });

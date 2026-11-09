@@ -11,7 +11,7 @@
 --   1. 备份
 --   2. 看行数并抽样 after_grade_id（本补丁会 SELECT COUNT / LIMIT 10；像雪花 ID 则 JOIN 转等级值）
 --   3. docker compose -f docker/docker-compose.yml exec -T mysql \
---        mysql -uroot -plilishop lilishop < docker/init/mysql/patches/008_distribution_grade_history_flatten.sql
+--        mysql -uroot -plilishop lilishop < docker/init/mysql/patches/2026-09-09-distribution-grade-history-flatten.sql
 --   4. SHOW COLUMNS FROM li_distribution_grade_history; 确认有 grade_id、upgrade_time
 --   5. 管理端补偿处理订单分销奖励（支付后入账曾因缺列整笔回滚）
 SET NAMES utf8mb4;
