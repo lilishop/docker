@@ -26,6 +26,8 @@ CREATE TABLE `li_notice_message`  (
   `sms_status` varchar(16) NOT NULL DEFAULT 'CLOSE' COMMENT '短信开启状态 OPEN/CLOSE',
   `sms_template_code` varchar(64) NULL DEFAULT NULL COMMENT '短信服务商模板CODE (如 SMS_191840050)',
   `sms_content` varchar(500) NULL DEFAULT NULL COMMENT '短信报备正文预览 (只读参考)',
+  `email_status` varchar(16) NOT NULL DEFAULT 'CLOSE' COMMENT '邮箱开启状态 OPEN/CLOSE',
+  `email_content` varchar(2000) NULL DEFAULT NULL COMMENT '邮箱正文，空则与站内信同文',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_notice_scene_code` (`scene_code`) USING BTREE,
   INDEX `idx_notice_type` (`type`) USING BTREE
